@@ -3,7 +3,8 @@
 - typescript,
 - vite,
 - eslint,
-- prettier.
+- prettier,
+- electron.
 
 # Начало работы
 
@@ -23,12 +24,6 @@ git clone https://github.com/fwmakc/ts-vite-project.git .
 Устанавливаем
 
 ```
-npm install
-```
-
-или
-
-```
 yarn
 ```
 
@@ -37,13 +32,15 @@ yarn
 В режиме разработки
 
 ```
-npm run dev
-```
-
-или
-
-```
 yarn dev
+```
+
+# Запуск под десктоп
+
+В режиме разработки
+
+```
+yarn electron:dev
 ```
 
 ## Билд под десктопные устройства
@@ -57,13 +54,13 @@ yarn build
 Собираем приложение под десктоп
 
 ```
-yarn make
+yarn electron:make
 ```
 
 Готовое приложение будет лежать в каталоге
 
 ```
-out/template-vite-ts-win32-x64/template-vite-ts.exe
+out/template-vite-ts-win32-x64
 ```
 
 ## Подготовка к сборке под мобильные устройства
