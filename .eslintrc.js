@@ -23,6 +23,7 @@ module.exports = {
   overrides: [{
     files: [
       'src/**/*.{js,ts,mts,cts,tsx}',
+      'tests/**/*.{js,ts,mts,cts,tsx}',
     ],
     rules: {
       // 'linebreak-style': ['error', 'unix'],

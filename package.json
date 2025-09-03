@@ -1,7 +1,7 @@
 {
   "name": "ts-vite-project",
-  "version": "0.0.1",
-  "description": "Template for projects based typescript, vite, eslint, prettier, electron",
+  "version": "0.0.2",
+  "description": "Template for projects based typescript, vite, vitest, eslint, prettier, electron",
   "keywords": [],
   "main": "main.js",
   "repository": "https://github.com/fwmakc/ts-vite-project.git",
@@ -12,6 +12,7 @@
     "build": "tsc && vite build --config vite/config.prod.mjs",
     "preview": "vite preview",
     "lint": "eslint \"src/**/*.{js,mjs,cjs,ts,mts,cts}\" --fix",
+    "test": "vitest --config ./vitest.config.js",
     "electron:dev": "electron .",
     "electron:make": "electron-forge make",
     "electron:start": "electron-forge start",
@@ -29,6 +30,8 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.8.1",
     "@electron-forge/plugin-fuses": "^7.8.1",
     "@electron/fuses": "^1.8.0",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@types/jsdom": "^21.1.7",
     "@types/node": "^24.1.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
@@ -38,12 +41,13 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "globals": "^16.3.0",
+    "jsdom": "^26.1.0",
     "prettier": "^2.3.2",
     "terser": "^5.39.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
-    "vite": "^7.1.2"
+    "vite": "^7.1.2",
+    "vitest": "^3.2.4"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
