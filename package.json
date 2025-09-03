@@ -1,6 +1,6 @@
 {
   "name": "ts-vite-project",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Template for projects based typescript, vite, vitest, eslint, prettier, electron",
   "keywords": [],
   "main": "main.js",
@@ -30,7 +30,6 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.8.1",
     "@electron-forge/plugin-fuses": "^7.8.1",
     "@electron/fuses": "^1.8.0",
-    "@testing-library/jest-dom": "^6.8.0",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^24.1.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",

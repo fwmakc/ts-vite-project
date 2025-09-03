@@ -194,12 +194,12 @@ src/counter.ts
 src/counter.test.ts
 ```
 
-Второй вариант - помещаем в папку **tests** и так же даем расширение **.test.ts**.
+Второй вариант - помещаем в папку **src/tests** и так же даем расширение **.test.ts**.
 
 Пример:
 
 ```
-tests/example.test.ts
+src/tests/example.test.ts
 ```
 
 Для запуска всех тестов используем команду
@@ -211,7 +211,7 @@ yarn test
 Чтобы запустить какой-либо определенный тест, указываем его в качестве аргумента:
 
 ```
-yarn test ./tests/example.test.ts
+yarn test ./src/tests/example.test.ts
 ```
 
 # Лицензия
