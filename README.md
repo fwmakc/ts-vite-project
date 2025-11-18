@@ -64,6 +64,16 @@ yarn electron:make
 out/template-vite-ts-win32-x64
 ```
 
+## Билд под MacOS
+
+* информация не проверена
+
+Подписать приложение:
+
+```
+npm run build --electron-mac-sign --product-id="your-product-id" --app-id="your-app-id" --name="Your-app-name" --version="version-number" --keystore-path=path/to/keystore-file.p12 --store-password=password
+```
+
 ## Подготовка к сборке под мобильные устройства
 
 Сборку делаем через capacitor. Полностью все происходит в несколько шагов.
