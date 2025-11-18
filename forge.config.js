@@ -9,7 +9,16 @@ module.exports = {
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {},
+      config: {
+        setupIcon: 'make/icon.ico',
+        loadingGif: 'make/install-spinner.gif',
+        createDesktopShortcut: true,
+        createStartMenuShortcut: true,
+        shortcutName: 'TS Vite Project',
+        noMsi: true,
+        remoteReleases: '',
+        anonymizeUser: false,
+      },
     },
     {
       name: '@electron-forge/maker-zip',

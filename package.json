@@ -1,5 +1,6 @@
 {
   "name": "ts-vite-project",
+  "productName": "TS Vite Project",
   "version": "0.1.0",
   "description": "Template for projects based typescript, vite, vitest, eslint, prettier, electron",
   "keywords": [],
