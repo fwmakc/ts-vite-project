@@ -1,15 +1,35 @@
 {
   "compilerOptions": {
-    "target": "es2022",
-    "module": "es2022",
-    "rootDir": "./src",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["node", "vitest/globals"],
+
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+
     "outDir": "./dist",
-    "esModuleInterop": true,
-    "moduleResolution": "Bundler",
+    "rootDir": "./src",
+    
     "strict": true,
     "declaration": true,
-    "types": ["vitest/globals"]
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "removeComments": true,
+    "strictNullChecks": true,
+    "noEmitOnError": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts",
+    "**/*.spec.ts"
+  ]
 }

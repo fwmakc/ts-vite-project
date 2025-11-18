@@ -8,7 +8,6 @@ describe('counter increments when clicked', () => {
 </body></html>`);
   const document = dom.window.document;
 
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const counter = document.querySelector<HTMLButtonElement>('#counter')!;
   setupCounter(counter);
 
@@ -25,5 +24,15 @@ describe('counter increments when clicked', () => {
     counter.click();
     counter.click();
     expect(counter.textContent).toBe('count is 3');
+  });
+});
+
+describe('Arithmetic test', () => {
+  it('1 + 1 equals 2', () => {
+    expect(1 + 1).toBe(2);
+  });
+
+  it('2 * 2 equals 4', () => {
+    expect(2 * 2).toBe(4);
   });
 });
