@@ -13,7 +13,7 @@
     "dev": "vite --config vite/config.dev.mjs",
     "preview": "vite preview",
     "lint": "eslint \"src/**/*.{js,mjs,cjs,ts,mts,cts}\" --fix",
-    "test": "vitest --config ./vitest.config.js",
+    "test": "vitest run --config ./vitest.config.js",
     "electron:dev": "electron .",
     "electron:make": "electron-forge make",
     "electron:start": "electron-forge start",

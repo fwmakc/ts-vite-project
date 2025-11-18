@@ -108,6 +108,12 @@ export default [
       node: nodePlugin,
     },
     rules: {
+      // Базовые правила TypeScript
+      ...ts.configs.recommended.rules,
+
+      // Prettier
+      'prettier/prettier': 'error',
+
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
     },
