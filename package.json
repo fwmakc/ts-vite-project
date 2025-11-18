@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "Template for projects based typescript, vite, vitest, eslint, prettier, electron",
   "keywords": [],
-  "main": "src/electron-index.ts",
+  "main": "electron/main.ts",
   "repository": "https://github.com/fwmakc/ts-vite-project.git",
   "author": "fwmakc <fwmakc@mail.ru>",
   "license": "MIT",
