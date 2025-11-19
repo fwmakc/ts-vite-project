@@ -13,7 +13,7 @@
     "compile": "tsc && vite build --config vite/config.prod.js",
     "dev": "vite --config vite/config.dev.js",
     "preview": "vite preview",
-    "lint": "eslint \"src/**/*.{js,mjs,cjs,ts,mts,cts}\" --fix",
+    "lint": "eslint . --fix",
     "test": "vitest run --config ./vitest.config.js",
     "electron:dev": "electron .",
     "electron:make": "electron-forge make",
