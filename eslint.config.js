@@ -125,7 +125,8 @@ export default [
       'node_modules/**',
       'dist/**',
       'build/**',
-      'coverage/**'
+      'coverage/**',
+      'electron/**'
     ],
   },
 ];

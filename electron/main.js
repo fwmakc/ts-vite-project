@@ -1,6 +1,8 @@
-import { app, BrowserWindow } from 'electron';
+const { app, BrowserWindow } = require('electron');
 
-function createWindow(): void {
+if (require('electron-squirrel-startup')) app.quit();
+
+function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
