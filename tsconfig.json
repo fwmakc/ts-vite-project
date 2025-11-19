@@ -8,7 +8,7 @@
     "moduleResolution": "bundler",
 
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "./",
     
     "strict": true,
     "declaration": true,
@@ -24,11 +24,13 @@
     "noEmitOnError": true
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "electron/**/*"
   ],
   "exclude": [
-    "node_modules",
     "dist",
+    "node_modules",
+    "out",
     "**/*.test.ts",
     "**/*.spec.ts"
   ]

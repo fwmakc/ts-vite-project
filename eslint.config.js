@@ -12,7 +12,7 @@ export default [
 
   // Основные TypeScript файлы
   {
-    files: ['src/**/*.ts'],
+    files: ['src/**/*.ts', 'electron/**/*.ts'],
     ignores: ['**/*.test.ts', '**/*.spec.ts'],
     languageOptions: {
       parser: tsParser,
@@ -125,8 +125,7 @@ export default [
       'node_modules/**',
       'dist/**',
       'build/**',
-      'coverage/**',
-      'electron/**'
+      'coverage/**'
     ],
   },
 ];
