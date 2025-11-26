@@ -1,6 +1,6 @@
-export async function readLicense(): Promise<string | undefined> {
+export async function readFile(filename: string): Promise<string | undefined> {
   try {
-    const response = await fetch('license.txt');
+    const response = await fetch(filename);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
