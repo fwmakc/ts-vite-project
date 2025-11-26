@@ -13,7 +13,7 @@ export default [
   // Основные TypeScript файлы
   {
     files: ['src/**/*.ts', 'electron/**/*.ts'],
-    ignores: ['**/*.test.ts', '**/*.spec.ts'],
+    ignores: ['**/*.case.ts', '**/*.test.ts', '**/*.spec.ts'],
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 2022,
@@ -89,7 +89,7 @@ export default [
 
   // Тестовые файлы - добавляем глобальные переменные Vitest
   {
-    files: ['**/*.test.ts', '**/*.spec.ts'],
+    files: ['**/*.case.ts', '**/*.test.ts', '**/*.spec.ts'],
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 2022,
@@ -122,10 +122,10 @@ export default [
   // Игнорируемые файлы
   {
     ignores: [
-      'node_modules/**',
       'dist/**',
       'build/**',
-      'coverage/**'
+      'node_modules/**',
+      'out/**',
     ],
   },
 ];
