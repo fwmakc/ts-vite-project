@@ -1,14 +1,19 @@
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
 
-export default {
+const config = {
   packagerConfig: {
-    icon: 'electron/icon.ico',
+    icon: 'electron/app.ico',
 
     asar: true,
     asarUnpack: [
       '**/*.node',
       'resources/**',
+    ],
+
+    extraResource: [
+      './electron',
+      './public',
     ],
   },
   rebuildConfig: {},
@@ -16,7 +21,9 @@ export default {
     {
       name: '@electron-forge/maker-squirrel',
       config: {
-        setupIcon: 'electron/icon.ico',
+        // frameworkVersion: 'net461',
+        iconUrl: 'file:///',
+        setupIcon: 'electron/app.ico',
         loadingGif: 'electron/install-spinner.gif',
         createDesktopShortcut: true,
         createStartMenuShortcut: true,
@@ -65,4 +72,6 @@ export default {
       [FuseV1Options.OnlyLoadAppFromAsar]: true,
     }),
   ],
-}
+};
+
+export default config;
