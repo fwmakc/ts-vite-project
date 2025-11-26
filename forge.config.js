@@ -4,16 +4,13 @@ import { FuseV1Options, FuseVersion } from '@electron/fuses';
 const config = {
   packagerConfig: {
     icon: 'electron/app.ico',
-
     asar: true,
     asarUnpack: [
       '**/*.node',
       'resources/**',
     ],
-
     extraResource: [
       './electron',
-      './public',
     ],
   },
   rebuildConfig: {},

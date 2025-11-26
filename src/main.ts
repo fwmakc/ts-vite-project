@@ -1,5 +1,6 @@
 import './assets/style.css';
 import { setupCounter } from './counter';
+import { readLicense } from './read';
 import typescriptLogo from '/typescript.svg';
 import viteLogo from '/vite.svg';
 
@@ -18,7 +19,15 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <p class="read-the-docs">
       Click on the Vite and TypeScript logos to learn more
     </p>
+    <div class="card" id="license"></div>
   </div>
 `;
 
 setupCounter(document.querySelector<HTMLButtonElement>('#counter')!);
+
+const licenseContent = await readLicense();
+const license = document.querySelector<HTMLButtonElement>('#license');
+
+if (license && licenseContent) {
+  license.innerHTML = licenseContent;
+}
