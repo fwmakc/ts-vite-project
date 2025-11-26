@@ -40,13 +40,15 @@ async function handleSquirrelEvent(): Promise<boolean> {
     case '--squirrel-updated':
       // Создаем ярлыки
       spawnUpdate(['--createShortcut', exeName]);
-      setTimeout(app.quit, 1000);
+      // setTimeout(app.quit, 1000);
+      app.quit();
       return true;
 
     case '--squirrel-uninstall':
       // Удаляем ярлыки
       spawnUpdate(['--removeShortcut', exeName]);
-      setTimeout(app.quit, 1000);
+      // setTimeout(app.quit, 1000);
+      app.quit();
       return true;
 
     case '--squirrel-obsolete':
@@ -69,7 +71,7 @@ handleSquirrelEvent()
   });
 
 function createWindow(): void {
-  const win = new BrowserWindow({
+  const window = new BrowserWindow({
     width: 800,
     height: 600,
     minWidth: 800,
@@ -80,7 +82,7 @@ function createWindow(): void {
     },
   });
 
-  win.loadFile('dist/index.html');
+  window.loadFile('dist/index.html');
 }
 
 app.whenReady().then(() => {

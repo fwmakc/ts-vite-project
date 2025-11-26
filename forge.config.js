@@ -3,22 +3,37 @@ import { FuseV1Options, FuseVersion } from '@electron/fuses';
 
 export default {
   packagerConfig: {
+    icon: 'electron/icon.ico',
+
     asar: true,
+    asarUnpack: [
+      '**/*.node',
+      'resources/**',
+    ],
   },
   rebuildConfig: {},
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
       config: {
-        setupIcon: 'make/icon.ico',
-        loadingGif: 'make/install-spinner.gif',
+        setupIcon: 'electron/icon.ico',
+        loadingGif: 'electron/install-spinner.gif',
         createDesktopShortcut: true,
         createStartMenuShortcut: true,
-        shortcutName: 'TS Vite Project',
+
+        perMachine: false,
         noMsi: true,
-        remoteReleases: '',
         anonymizeUser: false,
+        remoteReleases: '',
+        remoteToken: '',
       },
+    },
+    {
+      name: '@electron-forge/maker-dmg',
+      config: {
+        background: 'electron/background.png',
+        format: 'ULFO',
+      }
     },
     {
       name: '@electron-forge/maker-zip',

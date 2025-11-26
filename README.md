@@ -68,6 +68,79 @@ out/template-vite-ts-win32-x64
 
 * информация не проверена
 
+Добавить в **forge.config.js**:
+
+```
+  packagerConfig: {
+    name: 'YourApp',
+    executableName: 'YourApp',
+    appBundleId: 'com.yourcompany.yourapp',
+    appCategoryType: 'public.app-category.productivity',
+    osxSign: {
+      identity: 'Developer ID Application: Your Name (TEAM_ID)',
+      'hardened-runtime': true,
+      entitlements: 'entitlements.plist',
+      'entitlements-inherit': 'entitlements.plist',
+      'signature-flags': 'library'
+    },
+    osxNotarize: {
+      tool: 'notarytool',
+      appleId: process.env.APPLE_ID,
+      appleIdPassword: process.env.APPLE_PASSWORD,
+      teamId: process.env.APPLE_TEAM_ID
+    }
+  },
+```
+
+Упрощенная конфигурация (без подписи):
+
+```
+  packagerConfig: {
+    name: 'YourApp',
+    osxSign: {},
+    osxNotarize: {
+      tool: 'notarytool',
+    }
+  },
+```
+
+Сборка приложения:
+
+```
+# Только упаковать приложение (без установщиков)
+npm run package
+
+# Создать установщики (DMG, ZIP)
+npm run make
+
+# Собрать только для macOS
+npm run make -- --platform darwin
+
+# Собрать для конкретной архитектуры
+npm run make -- --platform darwin --arch x64
+npm run make -- --platform darwin --arch arm64
+npm run make -- --platform darwin --arch universal
+```
+
+Для подписи и нотификации cоздайте файл **entitlements.plist**:
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>com.apple.security.cs.allow-jit</key>
+    <true/>
+    <key>com.apple.security.cs.allow-unsigned-executable-memory</key>
+    <true/>
+    <key>com.apple.security.cs.debugger</key>
+    <true/>
+    <key>com.apple.security.automation.apple-events</key>
+    <true/>
+</dict>
+</plist>
+```
+
 Подписать приложение:
 
 ```
