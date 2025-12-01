@@ -19,7 +19,7 @@
     "electron:make": "electron-forge make",
     "electron:start": "electron-forge start",
     "electron:package": "electron-forge package",
-    "electron:build": "electron-builder"
+    "electron:build": "electron-builder --config electron-builder.config.js"
   },
   "devDependencies": {
     "@capacitor/android": "^7.4.4",

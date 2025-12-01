@@ -6,7 +6,6 @@ export default {
     icon: 'electron/app.ico',
     asar: true,
     asarUnpack: [
-      '**/*.node',
       'resources/**',
     ],
     extraResource: [
