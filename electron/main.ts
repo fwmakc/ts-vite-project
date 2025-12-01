@@ -1,4 +1,3 @@
-import { copyFileSync } from 'fs';
 import * as path from 'path';
 
 import { app, BrowserWindow } from 'electron';
@@ -21,30 +20,13 @@ async function handleSquirrelEvent(): Promise<boolean> {
   const exeName = path.basename(process.execPath);
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const copyIcon = function () {
+  const spawnCommand = function (args: string[]) {
     try {
-      const sourceIcon = path.resolve(appFolder, 'resources/electron/app.ico');
-      const targetIcon = path.resolve(rootAtomFolder, 'app.ico');
-      copyFileSync(sourceIcon, targetIcon);
-      console.log('Иконка успешно скопирована');
-    } catch (error) {
-      console.error('Ошибка при копировании иконки:', error);
-    }
-  };
-
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const spawnCommand = function (command: string, args: string[]) {
-    try {
-      return spawn(command, args, { detached: true });
+      return spawn(updateDotExe, args, { detached: true });
     } catch (error) {
       console.error(error);
       return null;
     }
-  };
-
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const spawnUpdate = function (args: string[]) {
-    return spawnCommand(updateDotExe, args);
   };
 
   const squirrelEvent = process.argv[1];
@@ -52,14 +34,13 @@ async function handleSquirrelEvent(): Promise<boolean> {
     case '--squirrel-install':
     case '--squirrel-updated':
       // Создаем ярлыки
-      spawnUpdate(['--createShortcut', exeName]);
-      copyIcon();
+      spawnCommand(['--createShortcut', exeName]);
       app.quit();
       return true;
 
     case '--squirrel-uninstall':
       // Удаляем ярлыки
-      spawnUpdate(['--removeShortcut', exeName]);
+      spawnCommand(['--removeShortcut', exeName]);
       app.quit();
       return true;
 

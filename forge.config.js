@@ -10,7 +10,7 @@ const config = {
       'resources/**',
     ],
     extraResource: [
-      './electron',
+      'electron/app.ico',
     ],
   },
   rebuildConfig: {},
@@ -21,7 +21,7 @@ const config = {
         // frameworkVersion: 'net461',
         iconUrl: 'file:///',
         setupIcon: 'electron/app.ico',
-        loadingGif: 'electron/install-spinner.gif',
+        loadingGif: 'electron/background.png',
         createDesktopShortcut: true,
         createStartMenuShortcut: true,
 
