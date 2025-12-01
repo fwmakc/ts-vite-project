@@ -1,7 +1,7 @@
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
 
-const config = {
+export default {
   packagerConfig: {
     icon: 'electron/app.ico',
     asar: true,
@@ -70,5 +70,3 @@ const config = {
     }),
   ],
 };
-
-export default config;

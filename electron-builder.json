@@ -1,0 +1,31 @@
+{
+  "appId": "your.id",
+  "files": [
+    "dist/**/*",
+    "electron/**/*"
+  ],
+  "directories": {
+    "buildResources": "assets",
+    "output": "out/electron-builder"
+  },
+  "mac": {
+    "category": "your.app.category.type"
+  },
+  "win": {
+    "target": [
+      "nsis"
+    ],
+    "icon": "electron/app.ico"
+  },
+  "nsis": {
+    "installerIcon": "electron/app.ico",
+    "uninstallerIcon": "electron/app.ico",
+    "uninstallDisplayName": "ts-vite-proj",
+    "license": "LICENSE",
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "runAfterFinish": true
+  }
+}

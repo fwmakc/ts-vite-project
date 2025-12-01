@@ -18,7 +18,8 @@
     "electron:dev": "electron .",
     "electron:make": "electron-forge make",
     "electron:start": "electron-forge start",
-    "electron:package": "electron-forge package"
+    "electron:package": "electron-forge package",
+    "electron:build": "electron-builder"
   },
   "devDependencies": {
     "@capacitor/android": "^7.4.4",
@@ -40,6 +41,7 @@
     "@typescript-eslint/eslint-plugin": "^8.47.0",
     "@typescript-eslint/parser": "^8.47.0",
     "electron": "^39.2.2",
+    "electron-builder": "^26.0.12",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
