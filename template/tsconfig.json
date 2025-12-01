@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["ES2022", "DOM"],
+    "lib": ["ES2022", "DOM", "Decorators"],
     "types": ["node", "vitest/globals"],
 
     "target": "ES2022",
@@ -29,10 +29,10 @@
     "electron/**/*"
   ],
   "exclude": [
-    "dist",
     "build",
-    "node_modules",
+    "dist",
     "out",
+    "node_modules",
     "**/*.case.ts",
     "**/*.test.ts",
     "**/*.spec.ts"

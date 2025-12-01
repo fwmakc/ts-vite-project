@@ -122,9 +122,9 @@ export default [
   // Игнорируемые файлы
   {
     ignores: [
+      'node_modules/**',
       'dist/**',
       'build/**',
-      'node_modules/**',
       'out/**',
     ],
   },
