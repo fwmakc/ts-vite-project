@@ -2,10 +2,48 @@ import * as path from 'path';
 
 import { app, BrowserWindow } from 'electron';
 
+// Глобальный обработчик необработанных ошибок
+// Завершаем процесс с кодом ошибки
+process.on('uncaughtException', error => {
+  console.error('Uncaught Exception:', error);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  process.exit(1);
+});
+
 // Обработка Squirrel-событий для установщика Windows
 const squirrelStartup = await import('electron-squirrel-startup');
 if (squirrelStartup.default) {
   app.quit();
+}
+
+function activateMainWindow(): void {
+  const mainWindow = BrowserWindow.getAllWindows()[0];
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore();
+    }
+    mainWindow.focus();
+    mainWindow.show();
+  }
+}
+
+function createWindow(): void {
+  const window = new BrowserWindow({
+    width: 800,
+    height: 600,
+    minWidth: 800,
+    minHeight: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: true,
+    },
+  });
+
+  window.loadFile('dist/index.html');
 }
 
 async function handleSquirrelEvent(): Promise<boolean> {
@@ -63,19 +101,24 @@ handleSquirrelEvent()
     // Игнорируем ошибки и продолжаем запуск приложения
   });
 
-function createWindow(): void {
-  const window = new BrowserWindow({
-    width: 800,
-    height: 600,
-    minWidth: 800,
-    minHeight: 600,
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: true,
-    },
+if (!app.requestSingleInstanceLock()) {
+  // Если не удалось получить блокировку, значит уже есть запущенный экземпляр
+  app.quit();
+} else {
+  app.on('second-instance', () => {
+    // Кто-то пытается запустить второй экземпляр
+    activateMainWindow();
   });
 
-  window.loadFile('dist/index.html');
+  app.on('open-file', event => {
+    event.preventDefault();
+    activateMainWindow();
+  });
+
+  app.on('open-url', event => {
+    event.preventDefault();
+    activateMainWindow();
+  });
 }
 
 app.whenReady().then(() => {
