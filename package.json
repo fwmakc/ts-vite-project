@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "productName": "TS Vite Project Template Creator",
   "description": "Template for projects based typescript, vite, vitest, eslint, prettier, electron, tauri",
+  "license": "MIT",
   "keywords": [
     "typescript",
     "electron",
@@ -25,16 +26,20 @@
     "prettier",
     "vitest"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fwmakc/ts-vite-project.git"
-  },
   "author": {
     "name": "Maxim Nikonov",
     "email": "fwmakc@mail.ru",
     "url": "https://github.com/fwmakc"
   },
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fwmakc/ts-vite-project.git"
+  },
+  "homepage": "https://github.com/fwmakc/ts-vite-project#readme",
+  "bugs": {
+    "email": "fwmakc@mail.ru",
+    "url": "https://github.com/fwmakc/ts-vite-project/issues"
+  },
   "files": [
     "dist",
     "template",

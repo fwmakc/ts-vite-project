@@ -7,9 +7,11 @@ import { question } from '../helpers/question.helper';
 export async function makeTargetFolder(targetDir: string): Promise<void> {
   // Проверяем, существует ли директория
   if (!isDirectoryEmpty(targetDir)) {
-    const overwrite = await question(
-      `Directory "${targetDir}" already exists. Overwrite? (y/N): `,
-    );
+    const overwrite = (
+      await question(
+        `Directory "${targetDir}" already exists. Overwrite? (y/N): `,
+      )
+    ).trim();
 
     if (overwrite.toLowerCase() !== 'y') {
       print(['❌ Operation cancelled']);

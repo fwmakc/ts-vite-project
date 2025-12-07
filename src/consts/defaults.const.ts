@@ -5,6 +5,8 @@ export const defaults: IPackage = {
   version: '0.1.0',
   productName: 'TS Vite Project',
   description: 'TypeScript Vite application',
-  repository: '',
+  license: 'MIT',
   author: '',
+  repository: '',
+  homepage: '',
 };

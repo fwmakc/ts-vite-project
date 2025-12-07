@@ -2,19 +2,44 @@ import { defaults } from '../consts/defaults.const';
 import { question } from '../helpers/question.helper';
 import type { IPackage } from '../interfaces/package.interface';
 
-export async function preparePackageValues(
-  projectNameFromArgs: string = '',
-): Promise<IPackage> {
-  let { name, version, productName, description, repository, author } =
-    defaults;
+export async function preparePackageValues(args: string[]): Promise<IPackage> {
+  let {
+    name,
+    version,
+    productName,
+    description,
+    license,
+    author,
+    repository,
+    bugs,
+    homepage,
+  } = defaults;
 
-  if (projectNameFromArgs) {
-    name = projectNameFromArgs;
+  if (args.length) {
+    productName = args
+      .map(i => `${i.slice(0, 1).toUpperCase()}${i.slice(1)}`)
+      .join(' ');
+
+    name = args.map(i => i.toLowerCase()).join('-');
   } else {
-    name = (await question(`Project name (${name}): `)) || name;
+    productName =
+      (await question(`Product name (${productName}): `)).trim() || productName;
 
+    name = productName
+      .split(' ')
+      .map(i => i.toLowerCase())
+      .join('-');
+
+    name = (await question(`Project name (${name}): `)).trim() || name;
+  }
+
+  const extended = (
+    await question(`Config extended project params? (y/N): `)
+  ).trim();
+
+  if (extended.toLowerCase() === 'y') {
     const userInputVersion =
-      (await question(`Version (${version}): `)) || version;
+      (await question(`Version (${version}): `)).trim() || version;
     const versionParts = userInputVersion.split('.');
 
     for (let i = versionParts.length; i < 3; i++) {
@@ -23,38 +48,46 @@ export async function preparePackageValues(
 
     version = versionParts.join('.');
 
-    productName =
-      (await question(`Product name (${productName}): `)) || productName;
-
     description =
-      (await question(`Description (${description}): `)) || description;
+      (await question(`Description (${description}): `)).trim() || description;
 
-    repository = (await question('Repository url: ')) || repository;
+    license = (await question(`License (${license}): `)).trim() || license;
 
-    const userInputAuthor = ((await question('Author: ')) || '').trim();
+    author = {};
 
-    if (userInputAuthor) {
-      const userInputEmail = ((await question('Email: ')) || '').trim();
+    author.name = ((await question('Author: ')) || '').trim();
+    author.email = ((await question('Email: ')) || '').trim();
 
-      const authors = [];
-      if (userInputAuthor) {
-        authors.push(userInputAuthor);
+    repository = {};
+
+    const defaultInputUrl = `https://github.com/${author.name}/${name}.git`;
+    const url =
+      (await question(`Repository url (${defaultInputUrl}): `)).trim() ||
+      defaultInputUrl;
+
+    if (url) {
+      repository.url = `git+${url}`;
+
+      bugs = {};
+      if (author.email) {
+        bugs.email = author.email;
       }
-      if (userInputEmail && userInputEmail !== userInputAuthor) {
-        authors.push(`<${userInputEmail}>`);
-      }
+      bugs.url = `${url}/issues`;
 
-      author = authors.join(' ');
+      homepage = `${url}#readme`;
     }
   }
 
   const packageValues: IPackage = {
-    name: name.trim(),
-    version: version.trim(),
-    productName: productName.trim(),
-    description: description.trim(),
-    repository: repository.trim(),
-    author: author.trim(),
+    name,
+    version,
+    productName,
+    description,
+    license,
+    author,
+    repository,
+    bugs,
+    homepage,
   };
 
   return packageValues;

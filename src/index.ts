@@ -18,9 +18,8 @@ async function main(): Promise<void> {
 
   // Парсим аргументы командной строки
   const args = process.argv.slice(2);
-  const projectNameFromArgs = String(args?.[0] || '').trim();
 
-  const packageValues = await preparePackageValues();
+  const packageValues = await preparePackageValues(args);
 
   const projectFolder = path.resolve(packageValues.name);
 
@@ -36,6 +35,15 @@ async function main(): Promise<void> {
 
     print(['', '✅ Project created successfully!']);
 
+    // Запрашиваем установку зависимостей
+    const executeSteps = (
+      await question('\nInstall dependencies? (y/N): ')
+    ).trim();
+
+    if (executeSteps.toLowerCase() === 'y') {
+      await installDependencies(projectFolder);
+    }
+
     // Переходим к Next steps
     print([
       '',
@@ -43,22 +51,9 @@ async function main(): Promise<void> {
       `📁 cd ${packageValues.name}`,
       '📦 npm install',
       '⭐ npm run dev',
+      '',
+      'Happy coding! 👋',
     ]);
-
-    if (projectNameFromArgs) {
-      await installDependencies(projectFolder, true);
-    } else {
-      // Запрашиваем выполнение Next steps
-      const executeSteps = await question(
-        '\nInstall dependencies automatically? (y/N): ',
-      );
-
-      if (executeSteps.toLowerCase() === 'y') {
-        await installDependencies(projectFolder);
-      }
-    }
-
-    print(['', 'Happy coding! 👋']);
   } catch (error) {
     console.error('❌ Error creating project:', error);
   } finally {
