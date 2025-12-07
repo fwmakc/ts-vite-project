@@ -1,9 +1,7 @@
-#!/usr/bin/env node
-
-const fs = require('fs');
-const path = require('path');
-const readline = require('readline');
-const { execSync } = require('child_process');
+import fs from 'fs';
+import path from 'path';
+import readline from 'readline';
+import { execSync } from 'child_process';
 
 // Задаем значения по-умолчанию
 const defaults = {
@@ -42,15 +40,13 @@ function copyRecursive(src, dest) {
   }
 }
 
-function detectPackageManager() {
+function detectPackageManager(): string {
   try {
-    // Проверяем, установлен ли yarn
     execSync('yarn --version', { stdio: 'ignore' });
     return 'yarn';
   } catch (error) {
-    // Если yarn не установлен, используем npm
-    return 'npm';
   }
+  return 'npm';
 }
 
 async function executeNextSteps(targetDir, silent = false) {
@@ -62,13 +58,13 @@ async function executeNextSteps(targetDir, silent = false) {
     console.log('📁 Changed to project directory');
 
     // 2. Автоматическое определение или выбор менеджера пакетов
-    const detectedManager = detectPackageManager();
+    const detectedManager: string = detectPackageManager();
     let selectedPackageManager = detectedManager;
     if (!silent) {
-      const packageManagerAnswer = await question(`Package manager (npm/yarn, default: ${detectedManager}): `) || detectedManager;
+      const packageManagerAnswer: string = (await question(`Package manager (npm/yarn, default: ${detectedManager}): `) || detectedManager || '').toLowerCase();
       const validPackageManagers = ['npm', 'yarn'];
-      selectedPackageManager = validPackageManagers.includes(packageManagerAnswer.toLowerCase()) 
-        ? packageManagerAnswer.toLowerCase() 
+      selectedPackageManager = validPackageManagers.includes(packageManagerAnswer)
+        ? packageManagerAnswer
         : detectedManager;
     }
     console.log(`📦 Using package manager: ${selectedPackageManager}`);
@@ -102,7 +98,7 @@ function isDirectoryEmpty(dirPath) {
   }
 }
 
-function question(prompt) {
+function question(prompt): Promise<string> {
   return new Promise((resolve) => {
     rl.question(prompt, resolve);
   });
