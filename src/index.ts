@@ -22,13 +22,14 @@ async function main(): Promise<void> {
   const packageValues = await preparePackageValues(args);
 
   const projectFolder = path.resolve(packageValues.name);
+  const sourceFolder = path.resolve(__dirname, '..');
 
   // Проверяем и создаем каталог проекта
   await makeTargetFolder(projectFolder);
 
   try {
     // Копируем файлы проекта
-    copyProject(projectFolder);
+    await copyProject(sourceFolder, projectFolder);
 
     // Обновляем package.json
     updatePackageJson(projectFolder, packageValues);
@@ -53,6 +54,7 @@ async function main(): Promise<void> {
       '⭐ npm run dev',
       '',
       'Happy coding! 👋',
+      '',
     ]);
   } catch (error) {
     console.error('❌ Error creating project:', error);

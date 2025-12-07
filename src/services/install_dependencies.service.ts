@@ -33,7 +33,7 @@ export async function installDependencies(targetFolder: string): Promise<void> {
     // 3. Устанавливаем зависимости
     print(['📦 Installing dependencies...']);
     execSync(`${selectedPackageManager} install`, { stdio: 'inherit' });
-    print(['✅ Dependencies installed']);
+    print(['', '✅ Dependencies installed']);
   } catch (error) {
     console.error('❌ Error executing next steps', error);
   }
