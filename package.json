@@ -45,13 +45,8 @@
     "template",
     ".gitignore",
     ".prettierignore",
-    "eslint.config.js",
-    "index.ts",
-    "jest.config.js",
     "LICENSE",
-    "prettier.config.js",
-    "README.md",
-    "tsconfig.json"
+    "README.md"
   ],
   "bin": {
     "create-ts-vite-project": "dist/index.js"
@@ -59,13 +54,11 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "npm run lint && npm run test && npm run compile && npm run minify",
-    "compile": "tsc",
-    "minify": "esbuild src/index.ts --bundle --platform=node --target=node18 --outfile=dist/index.min.js --minify",
+    "build": "npm run lint && npm run compile",
+    "compile": "esbuild src/index.ts --bundle --platform=node --target=node18 --outfile=dist/index.js --minify",
     "dev": "ts-node src/index.ts",
     "start": "node dist/index.js",
-    "lint": "eslint . --fix",
-    "test": "jest --config ./jest.config.js"
+    "lint": "eslint . --fix"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
