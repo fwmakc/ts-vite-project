@@ -1,6 +1,6 @@
 {
   "name": "create-ts-vite-project",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "productName": "TS Vite Project Template Creator",
   "description": "Template for projects based typescript, vite, vitest, eslint, prettier, electron, tauri",
   "license": "MIT",
@@ -45,17 +45,18 @@
     "template",
     ".gitignore",
     "LICENSE",
+    "index.js",
     "README.md"
   ],
   "bin": {
-    "create-ts-vite-project": "./dist/index.js"
+    "create-ts-vite-project": "index.js"
   },
-  "main": "dist/index.js",
+  "main": "dist/index.min.js",
   "scripts": {
     "build": "npm run lint && npm run compile",
-    "compile": "esbuild src/index.ts --bundle --platform=node --target=node18 --outfile=dist/index.js --minify",
+    "compile": "esbuild src/index.ts --bundle --platform=node --target=node18 --outfile=dist/index.min.js --minify",
     "dev": "ts-node src/index.ts",
-    "start": "node dist/index.js",
+    "start": "node dist/index.min.js",
     "lint": "eslint . --fix"
   },
   "devDependencies": {
