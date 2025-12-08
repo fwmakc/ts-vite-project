@@ -344,7 +344,16 @@ https://v2.tauri.app/start/prerequisites/
 yarn tauri:init
 ```
 
-> В поле **frontendDist** укажите значение **../dist**.
+По-умолчанию **Tauri** будет распакован в каталог **src-tauri**.
+
+Секция **build** должна иметь такие параметры:
+
+```
+  "frontendDist": "../dist",
+  "devUrl": "http://localhost:8080",
+  "beforeDevCommand": "yarn dev",
+  "beforeBuildCommand": "yarn build"
+```
 
 Запуск в режиме разработки:
 

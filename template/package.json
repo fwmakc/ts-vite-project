@@ -23,7 +23,7 @@
     "electron:build": "electron-builder --config electron-builder.config.js",
     "tauri:build": "tauri build",
     "tauri:dev": "tauri dev",
-    "tauri:init": "tauri init"
+    "tauri:init": "tauri init --force"
   },
   "devDependencies": {
     "@capacitor/android": "^7.4.4",
