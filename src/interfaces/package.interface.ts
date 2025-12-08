@@ -4,10 +4,9 @@ import type { IPackageRepository } from './package_repository.interface';
 
 export interface IPackage {
   name: string;
-  version: string;
   productName: string;
   description: string;
-  license: string;
+  version: string;
   author: IPackageAuthor | string;
   repository: IPackageRepository | string;
   bugs?: IPackageBugs | string;

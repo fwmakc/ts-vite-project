@@ -7,42 +7,50 @@ import { confirm } from './prompts/confirm.prompt';
 import { copyProject } from './services/copy_project.service';
 import { installDependencies } from './services/install_dependencies.service';
 import { makeTargetFolder } from './services/make_target_folder.service';
+import { preparePackageLibraries } from './services/prepare_package_libraries.service';
 import { preparePackageValues } from './services/prepare_package_values.service';
 
 async function main(): Promise<void> {
   print([
     '🚀 Creating TypeScript + Vite Project',
     '(will be installed in project name folder)',
+    '',
+    '⚠️  keys:',
+    'arrows - select',
+    '[enter] - confirm',
+    '[esc] - abort and exit',
+    '[space] - switch or clear',
+    '[tab] - edit default value',
   ]);
 
-  // Парсим аргументы командной строки
-  const args = process.argv.slice(2);
-
-  const packageValues = await preparePackageValues(args);
-
-  const projectFolder = path.resolve(packageValues.name);
-  const sourceFolder = path.resolve(__dirname, '..');
-
-  // Проверяем и создаем каталог проекта
-  await makeTargetFolder(projectFolder);
-
   try {
+    // Парсим аргументы командной строки
+    const args = process.argv.slice(2);
+
+    const packageValues = await preparePackageValues(args);
+    const packageLibraries = await preparePackageLibraries();
+
+    const projectFolder = path.resolve(packageValues.name);
+    const sourceFolder = path.resolve(__dirname, '..');
+
+    // Проверяем и создаем каталог проекта
+    await makeTargetFolder(projectFolder);
+
     // Копируем файлы проекта
-    await copyProject(sourceFolder, projectFolder);
+    await copyProject(sourceFolder, projectFolder, packageLibraries.libraries);
 
     // Обновляем package.json
-    updatePackageJson(projectFolder, packageValues);
+    updatePackageJson(projectFolder, packageValues, packageLibraries);
 
     print(['✅ Project created successfully!']);
 
     // Запрашиваем установку зависимостей
-    const executeSteps = await confirm('Install dependencies?');
+    const executeSteps = await confirm('Install dependencies?', true);
 
     if (executeSteps) {
       await installDependencies(projectFolder);
     }
 
-    // Переходим к Next steps
     print([
       'Next steps:',
       `📁 cd ${packageValues.name}`,

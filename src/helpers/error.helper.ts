@@ -5,5 +5,5 @@ export function error(message: string, error: unknown | null): void {
     console.error(error);
   }
 
-  process.exit(1);
+  process.exit();
 }

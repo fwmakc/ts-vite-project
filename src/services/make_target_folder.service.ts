@@ -9,6 +9,7 @@ export async function makeTargetFolder(targetDir: string): Promise<void> {
   if (!isDirectoryEmpty(targetDir)) {
     const overwrite = await confirm(
       `Directory "${targetDir}" already exists. Overwrite?`,
+      false,
     );
 
     if (!overwrite) {

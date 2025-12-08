@@ -1,5 +1,5 @@
 export default {
-  appId: 'com.example.myapp',
+  appId: 'com.example.ts-vite-project',
   icon: 'electron/app.ico',
   asar: true,
   asarUnpack: [

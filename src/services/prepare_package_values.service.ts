@@ -1,15 +1,15 @@
 import { defaults } from '../consts/defaults.const';
 import type { IPackage } from '../interfaces/package.interface';
 import { confirm } from '../prompts/confirm.prompt';
+import { list } from '../prompts/list.prompt';
 import { question } from '../prompts/question.prompt';
 
 export async function preparePackageValues(args: string[]): Promise<IPackage> {
   let {
     name,
-    version,
     productName,
     description,
-    license,
+    version,
     author,
     repository,
     bugs,
@@ -23,44 +23,42 @@ export async function preparePackageValues(args: string[]): Promise<IPackage> {
 
     name = args.map(i => i.toLowerCase()).join('-');
   } else {
-    productName = (await question('Product name', productName)).trim();
+    productName = (
+      await question('Product name (required)', productName, true)
+    ).trim();
 
     name = productName
       .split(' ')
       .map(i => i.toLowerCase())
       .join('-');
 
-    name = (await question('Project name', name)).trim();
+    name = (await question('Project (required)', name, true)).trim();
   }
 
-  const extended = await confirm('Config extended project params?');
+  const extended = await confirm('Config extended project params?', true);
 
   if (extended) {
-    const userInputVersion = (await question('Version', version)).trim();
-    const versionParts = userInputVersion.split('.');
+    description = (
+      await question('Description (required)', description, true)
+    ).trim();
 
-    for (let i = versionParts.length; i < 3; i++) {
-      versionParts.push('0');
+    const userInputVersion = await list('Version', version);
+
+    for (let i = userInputVersion.length; i < 3; i++) {
+      userInputVersion.push('0');
     }
 
-    version = versionParts.join('.');
-
-    description =
-      (await question('Description', description)).trim() || description;
-
-    license = (await question('License', license)).trim() || license;
+    version = userInputVersion.join('.');
 
     author = {};
 
-    author.name = (await question('Author')).trim();
-    author.email = (await question('Email')).trim();
+    author.name = (await question('Author (required)', '', true)).trim();
+    author.email = (await question('Email (required)', '', true)).trim();
 
     repository = {};
 
     const defaultInputUrl = `https://github.com/${author.name}/${name}.git`;
-    const url =
-      (await question('Repository url', defaultInputUrl)).trim() ||
-      defaultInputUrl;
+    const url = (await question('Repository url', defaultInputUrl)).trim();
 
     if (url) {
       repository.url = `git+${url}`;
@@ -77,10 +75,9 @@ export async function preparePackageValues(args: string[]): Promise<IPackage> {
 
   const packageValues: IPackage = {
     name,
-    version,
     productName,
     description,
-    license,
+    version,
     author,
     repository,
     bugs,

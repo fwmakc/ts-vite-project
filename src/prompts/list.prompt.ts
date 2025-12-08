@@ -2,19 +2,18 @@ import prompts from 'prompts';
 
 import { onState } from './on_state.prompt';
 
-export async function confirm(
+export async function list(
   message: string,
-  initial: boolean,
-): Promise<string> {
+  initial: string = '',
+): Promise<string[]> {
   const response = await prompts({
-    type: 'toggle',
+    type: 'list',
     name: 'value',
     message,
     initial,
-    active: 'yes',
-    inactive: 'no',
+    separator: '.',
     onState,
   });
 
-  return response.value;
+  return response.value || '';
 }
