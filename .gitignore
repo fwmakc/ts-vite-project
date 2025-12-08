@@ -56,3 +56,4 @@ jest-cache/
 # Optional
 out/
 android/
+src-tauri/
