@@ -3,7 +3,6 @@ import path from 'path';
 import { error } from './helpers/error.helper';
 import { print } from './helpers/print.helper';
 import { updatePackageJson } from './helpers/update_package_json.helper';
-import { confirm } from './prompts/confirm.prompt';
 import { copyProject } from './services/copy_project.service';
 import { installDependencies } from './services/install_dependencies.service';
 import { makeTargetFolder } from './services/make_target_folder.service';
@@ -45,11 +44,7 @@ async function main(): Promise<void> {
     print(['✅ Project created successfully!']);
 
     // Запрашиваем установку зависимостей
-    const executeSteps = await confirm('Install dependencies?', true);
-
-    if (executeSteps) {
-      await installDependencies(projectFolder);
-    }
+    await installDependencies(projectFolder);
 
     print([
       'Next steps:',
