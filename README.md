@@ -1,6 +1,6 @@
 # Шаблон для приложений
 
-Шаблон поддерживает мультиплатформенную разработку приложений под web, Windows / MacOS / Linux / Android / IOS.
+Шаблон поддерживает мультиплатформенную разработку приложений под Web / Windows / MacOS / Linux / Android / IOS.
 
 - TypeScript, Vite,
 - сборка под desktop с помощью Electron или Tauri,
