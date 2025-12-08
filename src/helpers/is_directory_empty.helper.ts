@@ -1,5 +1,7 @@
 import { existsSync, readdirSync, statSync } from 'fs';
 
+import { error } from './error.helper';
+
 export function isDirectoryEmpty(dirPath: string): boolean {
   try {
     if (!existsSync(dirPath)) {
@@ -8,14 +10,14 @@ export function isDirectoryEmpty(dirPath: string): boolean {
 
     const stats = statSync(dirPath);
     if (!stats.isDirectory()) {
-      console.error(`❌ Path is not a directory: ${dirPath}`);
+      error(`Path is not a directory: ${dirPath}`, null);
       return false;
     }
 
     const files = readdirSync(dirPath);
     return files.length === 0;
-  } catch (error) {
-    console.error('❌ Error checking directory', error);
+  } catch (err) {
+    error('Error checking directory', err);
     return false;
   }
 }

@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { rl } from './consts/rl.const';
+import { error } from './helpers/error.helper';
 import { print } from './helpers/print.helper';
 import { updatePackageJson } from './helpers/update_package_json.helper';
 import { confirm } from './prompts/confirm.prompt';
@@ -51,10 +51,8 @@ async function main(): Promise<void> {
       '',
       'Happy coding! 👋',
     ]);
-  } catch (error) {
-    console.error('❌ Error creating project:', error);
-  } finally {
-    rl.close();
+  } catch (err) {
+    error('Error creating project', err);
   }
 }
 

@@ -1,5 +1,6 @@
 import { mkdirSync, rmSync } from 'fs';
 
+import { error } from '../helpers/error.helper';
 import { isDirectoryEmpty } from '../helpers/is_directory_empty.helper';
 import { confirm } from '../prompts/confirm.prompt';
 
@@ -11,8 +12,7 @@ export async function makeTargetFolder(targetDir: string): Promise<void> {
     );
 
     if (!overwrite) {
-      console.error('❌ Operation cancelled');
-      return;
+      error('Operation cancelled', null);
     }
 
     // Удаляем существующую директорию
@@ -22,8 +22,7 @@ export async function makeTargetFolder(targetDir: string): Promise<void> {
   try {
     // Создаем директорию
     mkdirSync(targetDir, { recursive: true });
-  } catch (error) {
-    console.error('❌ Error executing next steps', error);
-    return;
+  } catch (err) {
+    error('Error executing next steps', err);
   }
 }
