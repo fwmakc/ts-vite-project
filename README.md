@@ -3,7 +3,7 @@
 Шаблон поддерживает мультиплатформенную разработку приложений под web, Windows / MacOS / Linux / Android / IOS.
 
 - TypeScript, Vite,
-- сборка под desktop с помощью Electron,
+- сборка под desktop с помощью Electron или Tauri,
 - сборка под mobile с помощью Capacitor,
 - автопроверки и форматирование ESLint, Prettier,
 - автотесты Vitest,
@@ -329,6 +329,32 @@ apksigner verify android/app/build/outputs/apk/release/app-release.apk
 ```
 
 Если APK подписан правильно, вы не увидите никаких ошибок.
+
+# Tauri
+
+Настроить **Tauri** сложнее, чем **Electron**.
+
+Мы рекомендуем воспользоваться актуальной документацией:
+
+https://v2.tauri.app/start/prerequisites/
+
+Предварительная инициализация:
+
+```
+yarn tauri:init
+```
+
+Запуск в режиме разработки:
+
+```
+yarn tauri:dev
+```
+
+Сборка:
+
+```
+yarn tauri:build
+```
 
 # Тестирование
 

@@ -20,7 +20,10 @@
     "electron:make": "electron-forge make",
     "electron:start": "electron-forge start",
     "electron:package": "electron-forge package",
-    "electron:build": "electron-builder --config electron-builder.config.js"
+    "electron:build": "electron-builder --config electron-builder.config.js",
+    "tauri:build": "tauri build",
+    "tauri:dev": "tauri dev",
+    "tauri:init": "tauri init"
   },
   "devDependencies": {
     "@capacitor/android": "^7.4.4",
