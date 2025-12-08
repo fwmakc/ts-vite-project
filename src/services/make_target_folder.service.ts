@@ -1,20 +1,17 @@
 import { mkdirSync, rmSync } from 'fs';
 
 import { isDirectoryEmpty } from '../helpers/is_directory_empty.helper';
-import { print } from '../helpers/print.helper';
-import { question } from '../helpers/question.helper';
+import { confirm } from '../prompts/confirm.prompt';
 
 export async function makeTargetFolder(targetDir: string): Promise<void> {
   // Проверяем, существует ли директория
   if (!isDirectoryEmpty(targetDir)) {
-    const overwrite = (
-      await question(
-        `Directory "${targetDir}" already exists. Overwrite? (y/N): `,
-      )
-    ).trim();
+    const overwrite = await confirm(
+      `Directory "${targetDir}" already exists. Overwrite?`,
+    );
 
-    if (overwrite.toLowerCase() !== 'y') {
-      print(['❌ Operation cancelled']);
+    if (!overwrite) {
+      console.error('❌ Operation cancelled');
       return;
     }
 

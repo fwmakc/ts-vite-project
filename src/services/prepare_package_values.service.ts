@@ -1,6 +1,7 @@
 import { defaults } from '../consts/defaults.const';
-import { question } from '../helpers/question.helper';
 import type { IPackage } from '../interfaces/package.interface';
+import { confirm } from '../prompts/confirm.prompt';
+import { question } from '../prompts/question.prompt';
 
 export async function preparePackageValues(args: string[]): Promise<IPackage> {
   let {
@@ -22,24 +23,20 @@ export async function preparePackageValues(args: string[]): Promise<IPackage> {
 
     name = args.map(i => i.toLowerCase()).join('-');
   } else {
-    productName =
-      (await question(`Product name (${productName}): `)).trim() || productName;
+    productName = (await question('Product name', productName)).trim();
 
     name = productName
       .split(' ')
       .map(i => i.toLowerCase())
       .join('-');
 
-    name = (await question(`Project name (${name}): `)).trim() || name;
+    name = (await question('Project name', name)).trim();
   }
 
-  const extended = (
-    await question(`Config extended project params? (y/N): `)
-  ).trim();
+  const extended = await confirm('Config extended project params?');
 
-  if (extended.toLowerCase() === 'y') {
-    const userInputVersion =
-      (await question(`Version (${version}): `)).trim() || version;
+  if (extended) {
+    const userInputVersion = (await question('Version', version)).trim();
     const versionParts = userInputVersion.split('.');
 
     for (let i = versionParts.length; i < 3; i++) {
@@ -49,20 +46,20 @@ export async function preparePackageValues(args: string[]): Promise<IPackage> {
     version = versionParts.join('.');
 
     description =
-      (await question(`Description (${description}): `)).trim() || description;
+      (await question('Description', description)).trim() || description;
 
-    license = (await question(`License (${license}): `)).trim() || license;
+    license = (await question('License', license)).trim() || license;
 
     author = {};
 
-    author.name = ((await question('Author: ')) || '').trim();
-    author.email = ((await question('Email: ')) || '').trim();
+    author.name = (await question('Author')).trim();
+    author.email = (await question('Email')).trim();
 
     repository = {};
 
     const defaultInputUrl = `https://github.com/${author.name}/${name}.git`;
     const url =
-      (await question(`Repository url (${defaultInputUrl}): `)).trim() ||
+      (await question('Repository url', defaultInputUrl)).trim() ||
       defaultInputUrl;
 
     if (url) {

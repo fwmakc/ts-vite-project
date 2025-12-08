@@ -1,8 +1,8 @@
 import { execSync } from 'child_process';
 
-import { detectPackageManager } from '../helpers/detect_package_manager.helper';
+import { detectPackageManagers } from '../helpers/detect_package_managers.helper';
 import { print } from '../helpers/print.helper';
-import { question } from '../helpers/question.helper';
+import { select } from '../prompts/select.prompt';
 
 export async function installDependencies(targetFolder: string): Promise<void> {
   try {
@@ -10,30 +10,27 @@ export async function installDependencies(targetFolder: string): Promise<void> {
     process.chdir(targetFolder);
 
     // 2. Автоматическое определение или выбор менеджера пакетов
-    const detectedManager: string = detectPackageManager();
-    let selectedPackageManager = detectedManager;
+    const packageManagers: string[] = detectPackageManagers();
 
-    const packageManagerAnswer =
-      (
-        await question(
-          `Package manager (npm/yarn, default: ${detectedManager}): `,
-        )
-      )
-        .trim()
-        .toLowerCase() || '';
+    let selectedPackageManager = packageManagers[0];
 
-    const validPackageManagers = ['npm', 'yarn'];
+    if (packageManagers.length > 1) {
+      const packageManagerAnswer = await select(
+        'Package manager',
+        packageManagers,
+      );
 
-    selectedPackageManager = validPackageManagers.includes(packageManagerAnswer)
-      ? packageManagerAnswer
-      : detectedManager;
+      selectedPackageManager = packageManagerAnswer;
+    }
 
-    print([`📦 Using package manager: ${selectedPackageManager}`]);
+    print([
+      `📦 Using package manager: ${selectedPackageManager}`,
+      '📦 Installing dependencies...',
+    ]);
 
     // 3. Устанавливаем зависимости
-    print(['📦 Installing dependencies...']);
     execSync(`${selectedPackageManager} install`, { stdio: 'inherit' });
-    print(['', '✅ Dependencies installed']);
+    print(['✅ Dependencies installed']);
   } catch (error) {
     console.error('❌ Error executing next steps', error);
   }

@@ -2,8 +2,8 @@ import path from 'path';
 
 import { rl } from './consts/rl.const';
 import { print } from './helpers/print.helper';
-import { question } from './helpers/question.helper';
 import { updatePackageJson } from './helpers/update_package_json.helper';
+import { confirm } from './prompts/confirm.prompt';
 import { copyProject } from './services/copy_project.service';
 import { installDependencies } from './services/install_dependencies.service';
 import { makeTargetFolder } from './services/make_target_folder.service';
@@ -13,7 +13,6 @@ async function main(): Promise<void> {
   print([
     '🚀 Creating TypeScript + Vite Project',
     '(will be installed in project name folder)',
-    '',
   ]);
 
   // Парсим аргументы командной строки
@@ -34,27 +33,23 @@ async function main(): Promise<void> {
     // Обновляем package.json
     updatePackageJson(projectFolder, packageValues);
 
-    print(['', '✅ Project created successfully!']);
+    print(['✅ Project created successfully!']);
 
     // Запрашиваем установку зависимостей
-    const executeSteps = (
-      await question('\nInstall dependencies? (y/N): ')
-    ).trim();
+    const executeSteps = await confirm('Install dependencies?');
 
-    if (executeSteps.toLowerCase() === 'y') {
+    if (executeSteps) {
       await installDependencies(projectFolder);
     }
 
     // Переходим к Next steps
     print([
-      '',
       'Next steps:',
       `📁 cd ${packageValues.name}`,
       '📦 npm install',
       '⭐ npm run dev',
       '',
       'Happy coding! 👋',
-      '',
     ]);
   } catch (error) {
     console.error('❌ Error creating project:', error);
