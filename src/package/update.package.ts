@@ -24,8 +24,9 @@ export function updatePackage(
   if (fields.version) packageJson.version = fields.version;
   if (fields.productName) packageJson.productName = fields.productName;
   if (fields.description) packageJson.description = fields.description;
-  if (fields.repository) packageJson.repository = fields.repository;
   if (fields.author) packageJson.author = fields.author;
+  if (fields.repository) packageJson.repository = fields.repository;
+  if (fields.homepage) packageJson.homepage = fields.homepage;
 
   if (libraries.main) packageJson.main = libraries.main;
 
