@@ -30,7 +30,6 @@
   ],
   "exclude": [
     "build",
-    "coverage",
     "dist",
     "dist-ssr",
     "platforms",

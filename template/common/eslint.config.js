@@ -124,6 +124,9 @@ export default [
     ignores: [
       'build/**',
       'dist/**',
+      'dist-ssr/**',
+      'platforms/**',
+      'src-tauri/**',
       'node_modules/**',
     ],
   },
