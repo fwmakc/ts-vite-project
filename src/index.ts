@@ -23,10 +23,7 @@ async function main(): Promise<void> {
   ]);
 
   try {
-    // Парсим аргументы командной строки
-    const args = process.argv.slice(2);
-
-    const packageValues = await valuesPackage(args);
+    const packageValues = await valuesPackage();
     const packageLibraries = await librariesPackage();
 
     const projectFolder = path.resolve(packageValues.name);

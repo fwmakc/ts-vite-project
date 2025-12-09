@@ -10,7 +10,7 @@
 - модули ECMAScript (вместо CommonJS),
 - стандарт ES2022.
 
-# Начало работы
+# Быстрый запуск
 
 Выполняем
 
@@ -19,30 +19,9 @@ yarn create ts-vite-project
 # npm create ts-vite-project
 ```
 
-После объявления можно указать название проекта, например:
+И следуем указаниям в консоли.
 
-```
-yarn create ts-vite-project my project
-```
-
-Название проекта будет автоматически преобразовано:
-
-```
-name: "my-project",
-productName: "My Project"
-```
-
-Проект будет установлен в папку с названием проекта.
-
-В данном примере:
-
-```
-./my-project
-```
-
-# Быстрый запуск
-
-В режиме разработки:
+Запуск в режиме разработки:
 
 ```
 yarn dev
@@ -72,7 +51,7 @@ yarn preview
 # npm run preview
 ```
 
-# Запуск под десктоп
+# Запуск под десктопные устройства
 
 В режиме разработки
 
@@ -153,29 +132,26 @@ build/electron-forge
 
 ## Билд для MacOS
 
-* информация не проверена
+Сборка производится только на устройствах Mac с установленной средой разработки XCode.
 
-Добавить в **forge.config.js**:
+> следующая информация не проверена
+
+Добавить в **forge.config.js**, в секцию **packagerConfig**:
 
 ```
-  packagerConfig: {
-    name: 'YourApp',
-    executableName: 'YourApp',
-    appBundleId: 'com.yourcompany.yourapp',
-    appCategoryType: 'public.app-category.productivity',
-    osxSign: {
-      identity: 'Developer ID Application: Your Name (TEAM_ID)',
-      'hardened-runtime': true,
-      entitlements: 'entitlements.plist',
-      'entitlements-inherit': 'entitlements.plist',
-      'signature-flags': 'library'
-    },
-    osxNotarize: {
-      tool: 'notarytool',
-      appleId: process.env.APPLE_ID,
-      appleIdPassword: process.env.APPLE_PASSWORD,
-      teamId: process.env.APPLE_TEAM_ID
-    }
+  appCategoryType: 'public.app-category.productivity',
+  osxSign: {
+    identity: 'Developer ID Application: Your Name (TEAM_ID)',
+    'hardened-runtime': true,
+    entitlements: 'entitlements.plist',
+    'entitlements-inherit': 'entitlements.plist',
+    'signature-flags': 'library',
+  },
+  osxNotarize: {
+    tool: 'notarytool',
+    appleId: process.env.APPLE_ID,
+    appleIdPassword: process.env.APPLE_PASSWORD,
+    teamId: process.env.APPLE_TEAM_ID,
   },
 ```
 
@@ -183,11 +159,10 @@ build/electron-forge
 
 ```
   packagerConfig: {
-    name: 'YourApp',
     osxSign: {},
     osxNotarize: {
       tool: 'notarytool',
-    }
+    },
   },
 ```
 
@@ -327,6 +302,10 @@ apksigner verify build/capacitor/android/app/build/outputs/apk/release/app-relea
 ```
 
 Если APK подписан правильно, вы не увидите никаких ошибок.
+
+## Сборка для IOS
+
+Сборка производится только на устройствах Mac с установленной средой разработки XCode.
 
 # Tauri
 

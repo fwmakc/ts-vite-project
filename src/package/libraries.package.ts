@@ -6,7 +6,7 @@ export async function librariesPackage(): Promise<ILibraries> {
   const options = ['electron', '  builder', '  forge', 'capacitor', 'tauri'];
 
   const libraries = await multiselect(
-    'Select extended project libraries?',
+    'Select extended project libraries',
     options,
     true,
   );
