@@ -4,7 +4,7 @@ import { confirm } from '../prompts/confirm.prompt';
 import { list } from '../prompts/list.prompt';
 import { question } from '../prompts/question.prompt';
 
-export async function preparePackageValues(args: string[]): Promise<IPackage> {
+export async function valuesPackage(args: string[]): Promise<IPackage> {
   let {
     name,
     productName,
@@ -61,6 +61,7 @@ export async function preparePackageValues(args: string[]): Promise<IPackage> {
     const url = (await question('Repository url', defaultInputUrl)).trim();
 
     if (url) {
+      repository.type = 'git';
       repository.url = `git+${url}`;
 
       bugs = {};

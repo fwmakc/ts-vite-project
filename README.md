@@ -113,7 +113,7 @@ yarn electron:build
 Готовое приложение будет лежать в каталоге
 
 ```
-out/electron-builder
+build/electron-builder
 ```
 
 ## Electron Forge
@@ -148,10 +148,10 @@ yarn electron:make
 Готовое приложение будет лежать в каталоге
 
 ```
-out/make/squirrel.windows
+build/electron-forge
 ```
 
-## Билд под MacOS
+## Билд для MacOS
 
 * информация не проверена
 
@@ -234,9 +234,9 @@ npm run make -- --platform darwin --arch universal
 npm run build --electron-mac-sign --product-id="your-product-id" --app-id="your-app-id" --name="Your-app-name" --version="version-number" --keystore-path=path/to/keystore-file.p12 --store-password=password
 ```
 
-## Подготовка к сборке под мобильные устройства
+## Подготовка к сборке для Android
 
-Сборку делаем через capacitor. Полностью все происходит в несколько шагов.
+Сборку делаем через **Capacitor**.
 
 Для настройки отредактируйте файл
 
@@ -244,85 +244,66 @@ npm run build --electron-mac-sign --product-id="your-product-id" --app-id="your-
 capacitor.config.ts
 ```
 
-Добавляем мобильное устройство. Это нужно сделать один раз после развертывания проекта.
+Добавляем мобильное устройство
 
 ```
-yarn cap add android
+yarn capacitor:android
+yarn capacitor:ios
 ```
 
-Созданный каталог android содержит множество настроек приложения, которые хотелось бы сохранить в репозитории. Но он также содержит много временных файлов и копии проекта и поэтому получается слишком большим.
-
-Мы создали другой каталог app, где вы можете хранить все настройки и ресурсы для сборки.
-
-Перед сборкой вам просто нужно скопировать его содержимое
+Приложение создается в каталоге
 
 ```
-cp -rf app/android/* android/app/src/main
-```
-
-или
-
-```
-xcopy app\android\* android\app\src\main /E /H /C /I /Y
+build/capacitor/android
 ```
 
 Выполняем предварительную сборку
 
 ```
-yarn build
+yarn capacitor:make
 ```
 
-Копируем собранный проект для следующего этапа
+## Сборка для Android
 
-```
-yarn cap copy
-```
+Для дальнейшей сборки под Android лучше всего работать в контейнере nodejs из проекта https://github.com/isengine/server.git
 
-## Билд под мобильные устройства
+Иначе Вам придется установить JDK, Android SDK и другие библиотеки, которые уже включены в контейнер выше.
 
-Для дальнейшей сборки под android лучше всего работать в контейнере nodejs из проекта https://github.com/isengine/server.git
+Мы рекомендуем воспользоваться актуальной документацией:
 
-Перейдем в каталог
+https://www.oracle.com/java/technologies/downloads/
+https://developer.android.com/tools/releases/platform-tools?hl=ru
 
-```
-cd android
-```
+Остальные действия те же, что и в предыдущем пункте.
 
 Билд в режиме дебаг:
 
 ```
-./gradlew assembleDebug
+yarn capacitor:dev
 ```
 
 Готовое приложение будет лежать в каталоге
 
 ```
-android/app/build/outputs/apk/debug/app-debug.apk
+build/capacitor/android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
 Билд в продакшн:
 
 ```
-./gradlew assembleRelease
+yarn capacitor:build
 ```
 
 Готовое приложение теперь будет лежать в каталоге
 
 ```
-android/app/build/outputs/apk/release/app-release-unsigned.apk
-```
-
-Дальнейшие действия лучше выполнять из корневого каталога проекта
-
-```
-cd ..
+build/capacitor/android/app/build/outputs/apk/release/app-release-unsigned.apk
 ```
 
 Создаем ключ для подписи
 
 ```
 keytool -genkey -v -keystore MY_RELEASE_KEY.jks -keyalg RSA -keysize 2048 -validity 10000 -alias MY_KEY_ALIAS
-
 ```
 
 Запишите созданные пароли и alias, так как они понадобятся вам в дальнейшем.
@@ -330,19 +311,19 @@ keytool -genkey -v -keystore MY_RELEASE_KEY.jks -keyalg RSA -keysize 2048 -valid
 Создаем копию приложения
 
 ```
-cp android/app/build/outputs/apk/release/app-release-unsigned.apk android/app/build/outputs/apk/release/app-release.apk
+cp build/capacitor/android/app/build/outputs/apk/release/app-release-unsigned.apk build/capacitor/android/app/build/outputs/apk/release/app-release.apk
 ```
 
 Подписываем приложение
 
 ```
-apksigner sign --ks MY_RELEASE_KEY.jks --ks-key-alias MY_KEY_ALIAS --ks-pass pass:YOUR_KEYSTORE_PASSWORD --key-pass pass:YOUR_KEY_PASSWORD android/app/build/outputs/apk/release/app-release.apk
+apksigner sign --ks MY_RELEASE_KEY.jks --ks-key-alias MY_KEY_ALIAS --ks-pass pass:YOUR_KEYSTORE_PASSWORD --key-pass pass:YOUR_KEY_PASSWORD build/capacitor/android/app/build/outputs/apk/release/app-release.apk
 ```
 
 Можно проверить подпись
 
 ```
-apksigner verify android/app/build/outputs/apk/release/app-release.apk
+apksigner verify build/capacitor/android/app/build/outputs/apk/release/app-release.apk
 ```
 
 Если APK подписан правильно, вы не увидите никаких ошибок.
