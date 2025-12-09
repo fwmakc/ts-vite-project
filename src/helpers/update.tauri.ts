@@ -22,8 +22,11 @@ export function updateTauri(
   tauriConfig.productName = fields.name;
   tauriConfig.version = fields.version;
 
-  const authorName = (fields.author as IPackageAuthor)?.name || fields.author;
-  const author = String(authorName || '').replace(/[\W_]+/giu, '-');
+  const author = String(
+    (fields.author as IPackageAuthor)?.name || fields.author || '',
+  )
+    .replaceAll(' ', '')
+    .replace(/[\W_]+/giu, '-');
   const name = String(fields.name || '').replace(/[\W_]+/giu, '-');
 
   tauriConfig.identifier = `com.${author}.${name}`;

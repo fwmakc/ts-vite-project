@@ -1,6 +1,8 @@
 import packageJson from './package.json' with { type: 'json' };
 
-const author = packageJson.author?.name || packageJson.author;
+const author = String(packageJson.author?.name || packageJson.author || '')
+  .toLowerCase()
+  .replace(/[\W_]+/giu, '_');
 const name  = packageJson.name.replace(/[\W_]+/giu, '_');
 
 export default {

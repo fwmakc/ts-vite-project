@@ -1,9 +1,7 @@
 import './assets/style.css';
+import typescriptLogo from './assets/typescript.svg';
+import viteLogo from './assets/vite.svg';
 import { setupCounter } from './counter';
-// import { createFile } from './create';
-// import { readFile } from './read';
-import typescriptLogo from '/typescript.svg';
-import viteLogo from '/vite.svg';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
@@ -25,20 +23,3 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 `;
 
 setupCounter(document.querySelector<HTMLButtonElement>('#counter')!);
-
-/*
-const licenseContent = await readFile('license.txt');
-const license = document.querySelector<HTMLButtonElement>('#license');
-
-if (license && licenseContent) {
-  license.innerHTML = licenseContent;
-}
-
-const licenseText = `MIT License
-
-Copyright (c) 2024 My Electron App
-
-Permission is hereby granted, free of charge...`;
-
-createFile(`${Date.now()}.txt`, licenseText);
-*/
