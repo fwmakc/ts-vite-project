@@ -7,7 +7,9 @@
   "keywords": [],
   "author": "",
   "repository": "",
+  "bugs": "",
   "homepage": "",
+  "main": "",
   "scripts": {
     "build": "npm run lint && npm run test && npm run compile",
     "compile": "tsc && vite build --config vite/config.prod.js",
