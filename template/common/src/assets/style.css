@@ -66,6 +66,26 @@ h1 {
   color: #888;
 }
 
+.row {
+  width: 100%;
+  display: flex;
+}
+
+.col {
+  flex: 1 1 0;
+  padding: 10px;
+}
+
+.file_content {
+  border: 1px solid #888;
+  white-space: pre-wrap;
+  padding: 10px;
+  text-align: left;
+  width: calc(100% - 20px);
+  height: 100px;
+  overflow: auto;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
