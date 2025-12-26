@@ -23,7 +23,7 @@ export default function (): void {
     <div class="col">
       <div id="WriteFileByBrowserApi">
         <h3>WriteFileByBrowserApi</h3>
-        <textarea class="file_content">ваше содержимое файла</textarea>
+        <textarea class="file_content full-width">ваше содержимое файла</textarea>
         <input type="button" class="button" value="Сохранить">
         <div class="status"></div>
       </div>
@@ -42,7 +42,7 @@ export default function (): void {
     <div class="col">
       <div id="WriteFileByBrowser">
         <h3>WriteFileByBrowser</h3>
-        <textarea class="file_content">ваше содержимое файла</textarea>
+        <textarea class="file_content full-width">ваше содержимое файла</textarea>
         <input type="button" class="button" value="Сохранить">
         <div class="status"></div>
       </div>
@@ -51,28 +51,19 @@ export default function (): void {
 
   <div class="row">
     <div class="col">
-      <div id="ReadFileByFetchTarget">
-        <h3>ReadFileByFetchTarget ./</h3>
+      <div id="ReadFileByFetchTargetDot">
+        <h3>ReadFileByFetchTargetDot</h3>
         <div class="file_content">здесь будет содержимое файла</div>
-        <input type="text" class="input" value="./files/example.txt">
+        <input type="text" class="input full-width" value="./files/example.txt">
         <input type="button" class="button" value="Открыть">
       </div>
     </div>
 
     <div class="col">
-      <div id="ReadFileByFetchTarget">
-        <h3>ReadFileByFetchTarget /</h3>
+      <div id="ReadFileByFetchTargetSlash">
+        <h3>ReadFileByFetchTargetSlash</h3>
         <div class="file_content">здесь будет содержимое файла</div>
-        <input type="text" class="input" value="/files/example.txt">
-        <input type="button" class="button" value="Открыть">
-      </div>
-    </div>
-
-    <div class="col">
-      <div id="ReadFileByFetchTarget">
-        <h3>ReadFileByFetchTarget C:</h3>
-        <div class="file_content">здесь будет содержимое файла</div>
-        <input type="text" class="input" value="C:/GOG Games/files/example.txt">
+        <input type="text" class="input full-width" value="/files/example.txt">
         <input type="button" class="button" value="Открыть">
       </div>
     </div>
@@ -83,7 +74,7 @@ export default function (): void {
       <div id="ReadFileByNodeTarget">
         <h3>ReadFileByNodeTarget</h3>
         <div class="file_content">здесь будет содержимое файла</div>
-        <input type="text" class="input" value="/files/example.txt">
+        <input type="text" class="input full-width" value="/files/example.txt">
         <input type="button" class="button" value="Открыть">
       </div>
     </div>
@@ -91,7 +82,7 @@ export default function (): void {
     <div class="col">
       <div id="WriteFileByNodeTarget">
         <h3>WriteFileByNodeTarget</h3>
-        <textarea class="file_content">ваше содержимое файла</textarea>
+        <textarea class="file_content full-width">ваше содержимое файла</textarea>
         <input type="button" class="button" value="Сохранить">
         <div class="status"></div>
       </div>
@@ -103,7 +94,7 @@ export default function (): void {
       <div id="ReadFileByTauriTarget">
         <h3>ReadFileByTauriTarget</h3>
         <div class="file_content">здесь будет содержимое файла</div>
-        <input type="text" class="input" value="">
+        <input type="text" class="input full-width" value="">
         <input type="button" class="button" value="Открыть">
       </div>
     </div>
@@ -111,7 +102,7 @@ export default function (): void {
     <div class="col">
       <div id="WriteFileByTauriTarget">
         <h3>WriteFileByTauriTarget</h3>
-        <textarea class="file_content">ваше содержимое файла</textarea>
+        <textarea class="file_content full-width">ваше содержимое файла</textarea>
         <input type="button" class="button" value="Сохранить">
         <div class="status"></div>
       </div>
@@ -134,11 +125,25 @@ export default function (): void {
 
   readFileByFetchTarget(
     document.querySelector<HTMLDivElement>(
-      '#ReadFileByFetchTarget .file_content',
+      '#ReadFileByFetchTargetDot .file_content',
     )!,
-    document.querySelector<HTMLInputElement>('#ReadFileByFetchTarget .input')!,
+    document.querySelector<HTMLInputElement>(
+      '#ReadFileByFetchTargetDot .input',
+    )!,
     document.querySelector<HTMLButtonElement>(
-      '#ReadFileByFetchTarget .button',
+      '#ReadFileByFetchTargetDot .button',
+    )!,
+  );
+
+  readFileByFetchTarget(
+    document.querySelector<HTMLDivElement>(
+      '#ReadFileByFetchTargetSlash .file_content',
+    )!,
+    document.querySelector<HTMLInputElement>(
+      '#ReadFileByFetchTargetSlash .input',
+    )!,
+    document.querySelector<HTMLButtonElement>(
+      '#ReadFileByFetchTargetSlash .button',
     )!,
   );
 

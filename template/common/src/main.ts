@@ -7,7 +7,7 @@ import MainInfoComponent from './components/main_info/main_info.component';
 console.log('🚀 Application is launched');
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
+  <div class="column">
     <div id="main-info-component" class="card"></div>
     <div id="counter-component" class="card"></div>
     <div id="app-info-component" class="card"></div>

@@ -43,6 +43,7 @@ export class WebApiDir implements Dir {
   }
 
   async selectDialog(defaultDir?: string): Promise<void> {
-    this.path = await selectDirDialog(defaultDir);
+    const dir = await selectDirDialog(defaultDir);
+    this.path = dir.name;
   }
 }

@@ -28,7 +28,9 @@ export function convertFileTypesToWebApi(
     const filter: WebApiFilterType = {
       description: fileType.description as string,
       accept: {
-        [fileType.mime || '*/*']: fileType.extensions,
+        [fileType.mime || '*/*']: fileType.extensions.map(
+          extension => `.${extension}`,
+        ),
       },
     };
 

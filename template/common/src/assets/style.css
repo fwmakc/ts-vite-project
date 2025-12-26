@@ -25,8 +25,6 @@ a {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -37,9 +35,9 @@ h1 {
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  padding: 0;
+  margin: 0;
   text-align: center;
 }
 
@@ -59,21 +57,33 @@ h1 {
 }
 
 .card {
-  padding: 2em;
+  padding: 1rem;
 }
 
-.read-the-docs {
+.color-gray {
   color: #888;
 }
 
+.column,
 .row {
   width: 100%;
   display: flex;
+  place-content: center;
+}
+
+.column {
+  flex-direction: column;
 }
 
 .col {
   flex: 1 1 0;
   padding: 10px;
+  width: 0;
+  word-wrap: break-word;
+}
+
+.full-width {
+  width: 100%;
 }
 
 .file_content {
@@ -84,6 +94,17 @@ h1 {
   width: calc(100% - 20px);
   height: 100px;
   overflow: auto;
+}
+
+.input {
+  padding: 0;
+  margin: 0px;
+  padding-block: 8px;
+  padding-inline: 0px;
+  border: 1px solid #888;
+  border-radius: 2px;
+  line-height: 1rem;
+  height: auto;
 }
 
 button {
