@@ -21,11 +21,9 @@ export async function writeFileByWebApi(
       const file = new WebApiFile();
 
       if (fileHandle.value) {
-        console.log('-- fileHandle.value', fileHandle.value);
         file.set(fileHandle.value);
       } else {
-        const fileName = `new_file_${Date.now()}.txt`;
-        await file.saveDialog(fileName, fileTypes);
+        await file.saveDialog(undefined, fileTypes);
         const handle = file.get();
         fileHandle.value = handle!;
       }

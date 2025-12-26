@@ -5,26 +5,26 @@ import { createDir } from './dir/create.dir';
 import { removeDir } from './dir/remove.dir';
 import { renameDir } from './dir/rename.dir';
 
-export class NodeDir implements Dir {
-  path: string = '';
+export class NodeDir implements Dir<string, string> {
+  currentDir?: string;
 
-  constructor(path?: string) {
-    if (path) {
-      this.set(path);
+  constructor(dirPath?: string) {
+    if (dirPath) {
+      this.set(dirPath);
     }
   }
 
-  get(): string {
-    return this.path;
+  get(): string | undefined {
+    return this.currentDir;
   }
 
-  set(path: string): void {
-    this.path = path;
+  set(dirPath: string): void {
+    this.currentDir = dirPath;
   }
 
-  async create(path: string): Promise<void> {
-    await createDir(path);
-    this.path = path;
+  async create(newDirPath: string): Promise<void> {
+    await createDir(newDirPath);
+    this.currentDir = newDirPath;
   }
 
   async list(_options?: ListOptions): Promise<string[]> {
@@ -32,14 +32,14 @@ export class NodeDir implements Dir {
   }
 
   async remove(): Promise<void> {
-    await removeDir(this.path);
-    this.path = '';
+    await removeDir(this.currentDir!);
+    this.currentDir = '';
   }
 
-  async rename(newPath: string): Promise<void> {
-    await renameDir(this.path, newPath);
-    this.path = newPath;
+  async rename(newDirPath: string): Promise<void> {
+    await renameDir(this.currentDir!, newDirPath);
+    this.currentDir = newDirPath;
   }
 
-  async selectDialog(): Promise<void> {}
+  async selectDialog(_defaultDir?: string): Promise<void> {}
 }

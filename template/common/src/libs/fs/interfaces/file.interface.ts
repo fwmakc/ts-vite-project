@@ -1,22 +1,22 @@
 import type { FileTypes } from './file_types.interface';
 import type { ListItem } from './list.interface';
 
-export interface File<Descriptor, Content> {
-  currentFile: Descriptor;
+export interface File<FileDescriptor, DirDescriptor, Content> {
+  currentFile?: FileDescriptor;
 
-  get(): Descriptor;
-  set(file: Descriptor): void;
+  get(): FileDescriptor | undefined;
+  set(file: FileDescriptor): void;
 
-  copy(newFilePath: string): this | Promise<this>;
-  create(filePath: string): void;
+  copy(newFile: FileDescriptor): this | Promise<this>;
+  create(newFile: FileDescriptor): void;
   info(): ListItem | Promise<ListItem>;
   read(): Content | Promise<Content>;
   readBytes(): Uint8Array | Promise<Uint8Array>;
-  rename(newFilePath: string): void;
+  rename(newFile: FileDescriptor): void;
   remove(): void;
   write(content: Content): void;
   writeBytes(content: Uint8Array): void;
 
-  saveDialog(defaultDir?: string, fileTypes?: FileTypes): void;
-  openDialog(defaultDir?: string, fileTypes?: FileTypes): void;
+  saveDialog(defaultDir?: DirDescriptor, fileTypes?: FileTypes): void;
+  openDialog(defaultDir?: DirDescriptor, fileTypes?: FileTypes): void;
 }

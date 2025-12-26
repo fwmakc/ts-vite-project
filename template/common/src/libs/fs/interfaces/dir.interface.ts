@@ -1,15 +1,15 @@
 import type { ListOptions } from './list.interface';
 
-export interface Dir {
-  path: string;
+export interface Dir<DirDescriptor, FileDescriptor> {
+  currentDir?: DirDescriptor;
 
-  get(): string;
-  set(path: string): void;
+  get(): DirDescriptor | undefined;
+  set(dir: DirDescriptor): void;
 
-  create(path: string): void;
-  list(options?: ListOptions): string[] | Promise<string[]>;
+  create(newDir: DirDescriptor): void;
+  list(options?: ListOptions): FileDescriptor[] | Promise<FileDescriptor[]>;
   remove(): void;
-  rename(newPath: string): void;
+  rename(newDir: DirDescriptor): void;
 
-  selectDialog(defaultDir?: string): void;
+  selectDialog(defaultDir?: DirDescriptor): void;
 }

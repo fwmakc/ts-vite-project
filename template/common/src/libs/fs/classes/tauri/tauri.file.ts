@@ -13,7 +13,7 @@ import { renameFile } from './file/rename.file';
 import { writeFile } from './file/write.file';
 import { writeBytesFile } from './file/write_bytes.file';
 
-export class TauriFile implements File<string, string> {
+export class TauriFile implements File<string, string, string> {
   currentFile: string = '';
 
   constructor(file?: string) {
@@ -35,8 +35,8 @@ export class TauriFile implements File<string, string> {
     return new TauriFile(newFilePath) as this;
   }
 
-  async create(filePath: string): Promise<void> {
-    this.currentFile = filePath;
+  async create(newFilePath: string): Promise<void> {
+    this.currentFile = newFilePath;
     await this.write('');
   }
 

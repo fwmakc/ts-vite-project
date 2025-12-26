@@ -24,9 +24,6 @@ export async function readFileByWebApi(
       const content = await file.read();
       const handle = file.get();
 
-      const f = await file.info();
-      console.log(':', f);
-
       container.textContent = content || '';
       fileHandle.value = handle!;
 

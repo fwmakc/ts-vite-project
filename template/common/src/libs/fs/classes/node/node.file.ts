@@ -1,4 +1,5 @@
 import type { File } from '../../interfaces/file.interface';
+import type { FileTypes } from '../../interfaces/file_types.interface';
 import type { ListItem } from '../../interfaces/list.interface';
 
 import { copyFile } from './file/copy.file';
@@ -10,7 +11,7 @@ import { renameFile } from './file/rename.file';
 import { writeFile } from './file/write.file';
 import { writeBytesFile } from './file/write_bytes.file';
 
-export class NodeFile implements File<string, string> {
+export class NodeFile implements File<string, string, string> {
   currentFile: string = '';
 
   constructor(file?: string) {
@@ -32,8 +33,8 @@ export class NodeFile implements File<string, string> {
     return new NodeFile(newFilePath) as this;
   }
 
-  async create(filePath: string): Promise<void> {
-    this.currentFile = filePath;
+  async create(newFilePath: string): Promise<void> {
+    this.currentFile = newFilePath;
     await this.write('');
   }
 
@@ -67,7 +68,13 @@ export class NodeFile implements File<string, string> {
     await writeBytesFile(this.currentFile, content);
   }
 
-  async saveDialog(): Promise<void> {}
+  async saveDialog(
+    _defaultDir?: string,
+    _fileTypes?: FileTypes,
+  ): Promise<void> {}
 
-  async openDialog(): Promise<void> {}
+  async openDialog(
+    _defaultDir?: string,
+    _fileTypes?: FileTypes,
+  ): Promise<void> {}
 }

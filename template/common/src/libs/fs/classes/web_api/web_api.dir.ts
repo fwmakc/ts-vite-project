@@ -2,48 +2,44 @@ import type { Dir } from '../../interfaces/dir.interface';
 import type { ListOptions } from '../../interfaces/list.interface';
 
 import { selectDirDialog } from './dialog/select_dir.dialog';
-import { createDir } from './dir/create.dir';
-import { removeDir } from './dir/remove.dir';
-import { renameDir } from './dir/rename.dir';
 
-export class WebApiDir implements Dir {
-  path: string = '';
+export class WebApiDir implements Dir<
+  FileSystemDirectoryHandle,
+  FileSystemFileHandle
+> {
+  currentDir?: FileSystemDirectoryHandle;
 
-  constructor(path?: string) {
-    if (path) {
-      this.set(path);
+  constructor(dir?: FileSystemDirectoryHandle) {
+    if (dir) {
+      this.set(dir);
     }
   }
 
-  get(): string {
-    return this.path;
+  get(): FileSystemDirectoryHandle | undefined {
+    return this.currentDir;
   }
 
-  set(path: string): void {
-    this.path = path;
+  set(dir: FileSystemDirectoryHandle): void {
+    this.currentDir = dir;
   }
 
-  async create(path: string): Promise<void> {
-    await createDir(path);
-    this.path = path;
+  async create(newDir: FileSystemDirectoryHandle): Promise<void> {
+    this.currentDir = newDir;
   }
 
-  async list(_options?: ListOptions): Promise<string[]> {
+  async list(_options?: ListOptions): Promise<FileSystemFileHandle[]> {
     return await [];
   }
 
   async remove(): Promise<void> {
-    await removeDir(this.path);
-    this.path = '';
+    this.currentDir = undefined;
   }
 
-  async rename(newPath: string): Promise<void> {
-    await renameDir(this.path, newPath);
-    this.path = newPath;
+  async rename(newDir: FileSystemDirectoryHandle): Promise<void> {
+    this.currentDir = newDir;
   }
 
-  async selectDialog(defaultDir?: string): Promise<void> {
-    const dir = await selectDirDialog(defaultDir);
-    this.path = dir.name;
+  async selectDialog(defaultDir?: FileSystemDirectoryHandle): Promise<void> {
+    this.currentDir = await selectDirDialog(defaultDir);
   }
 }

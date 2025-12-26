@@ -12,8 +12,12 @@ import { renameFile } from './file/rename.file';
 import { writeFile } from './file/write.file';
 import { writeBytesFile } from './file/write_bytes.file';
 
-export class WebApiFile implements File<FileSystemFileHandle | null, string> {
-  currentFile: FileSystemFileHandle | null = null;
+export class WebApiFile implements File<
+  FileSystemFileHandle,
+  FileSystemDirectoryHandle,
+  string
+> {
+  currentFile?: FileSystemFileHandle = undefined;
 
   constructor(file?: FileSystemFileHandle) {
     if (file) {
@@ -21,37 +25,37 @@ export class WebApiFile implements File<FileSystemFileHandle | null, string> {
     }
   }
 
-  get(): FileSystemFileHandle | null {
+  get(): FileSystemFileHandle | undefined {
     return this.currentFile;
   }
 
-  set(file: FileSystemFileHandle | null): void {
+  set(file: FileSystemFileHandle): void {
     this.currentFile = file;
   }
 
-  async copy(newFilePath: string): Promise<this> {
+  async copy(newFile: FileSystemFileHandle): Promise<this> {
     const content = await this.readBytes();
     const copiedFile = new WebApiFile() as this;
-    await copiedFile.saveDialog(newFilePath);
+    copiedFile.set(newFile);
     await copiedFile.writeBytes(content);
     return copiedFile;
   }
 
-  async create(filePath: string): Promise<void> {
-    await this.saveDialog(filePath);
+  async create(newFile: FileSystemFileHandle): Promise<void> {
+    await this.set(newFile);
     await this.write('');
   }
 
   async info(): Promise<ListItem> {
-    return await getInfoFile(this.currentFile);
+    return await getInfoFile(this.currentFile!);
   }
 
   async read(): Promise<string> {
-    return await readFile(this.currentFile);
+    return await readFile(this.currentFile!);
   }
 
   async readBytes(): Promise<Uint8Array> {
-    return await readBytesFile(this.currentFile);
+    return await readBytesFile(this.currentFile!);
   }
 
   async remove(): Promise<void> {
@@ -60,31 +64,32 @@ export class WebApiFile implements File<FileSystemFileHandle | null, string> {
     }
     const currentDir = await selectDirDialog();
     await currentDir?.removeEntry(this.currentFile.name);
-    this.currentFile = null;
+    this.currentFile = undefined;
   }
 
-  async rename(newFilePath: string): Promise<void> {
-    const currentDir = await selectDirDialog();
-    this.currentFile = await renameFile(
-      this.currentFile,
-      currentDir,
-      newFilePath,
-    );
+  async rename(newFile: FileSystemFileHandle): Promise<void> {
+    this.currentFile = await renameFile(this.currentFile!, newFile);
   }
 
   async write(content: string): Promise<void> {
-    await writeFile(this.currentFile, content);
+    await writeFile(this.currentFile!, content);
   }
 
   async writeBytes(content: Uint8Array): Promise<void> {
-    await writeBytesFile(this.currentFile, content);
+    await writeBytesFile(this.currentFile!, content);
   }
 
-  async saveDialog(defaultDir?: string, fileTypes?: FileTypes): Promise<void> {
+  async saveDialog(
+    defaultDir?: FileSystemDirectoryHandle,
+    fileTypes?: FileTypes,
+  ): Promise<void> {
     this.currentFile = await saveFileDialog(defaultDir, fileTypes);
   }
 
-  async openDialog(defaultDir?: string, fileTypes?: FileTypes): Promise<void> {
+  async openDialog(
+    defaultDir?: FileSystemDirectoryHandle,
+    fileTypes?: FileTypes,
+  ): Promise<void> {
     this.currentFile = await openFileDialog(defaultDir, fileTypes);
   }
 }
