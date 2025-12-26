@@ -3,7 +3,7 @@ import type { FileTypes } from '../../../interfaces/file_types.interface';
 import { convertFileTypesToWebApi } from './helpers/convert_file_types_to_web_api';
 
 export async function saveFileDialog(
-  defaultDir?: FileSystemDirectoryHandle | null,
+  defaultDir?: string | null,
   fileTypes?: FileTypes,
 ): Promise<FileSystemFileHandle> {
   let types;
@@ -12,8 +12,10 @@ export async function saveFileDialog(
     types = convertFileTypesToWebApi(fileTypes);
   }
 
-  return (await (window as any).showSaveFilePicker({
+  const file = (await (window as any).showSaveFilePicker({
     startIn: defaultDir || undefined,
     types,
   })) as FileSystemFileHandle;
+
+  return file;
 }

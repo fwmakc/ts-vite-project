@@ -1,12 +1,15 @@
-import { readFile, ReadFileByTauri } from '../../../libs/file-interface';
-import { fileCurrent } from '../consts/file_current.const';
-import { fileTypes } from '../consts/file_types.const';
-
 export async function readFileByTauriTarget(
   container: HTMLDivElement,
   input: HTMLInputElement,
   button: HTMLButtonElement,
 ): Promise<void> {
+  console.log({
+    container,
+    input,
+    button,
+  });
+
+  /*
   button.addEventListener('click', async function () {
     fileCurrent.value = input.value;
     const fileName = fileCurrent.value;
@@ -25,4 +28,5 @@ export async function readFileByTauriTarget(
       container.textContent = `Error: ${(e as Error)?.message || 'unknown'}`;
     }
   });
+  */
 }

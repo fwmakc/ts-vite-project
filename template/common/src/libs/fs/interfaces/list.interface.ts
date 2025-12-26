@@ -7,7 +7,8 @@ export interface ListOptions {
 
 export interface ListItem {
   name?: string;
-  ext?: string;
+  fileName?: string;
+  fileExtension?: string;
   meta?: string;
   type?: 'dir' | 'file' | 'symlink';
   path?: string;

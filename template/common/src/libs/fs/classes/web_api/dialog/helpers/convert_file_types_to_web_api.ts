@@ -17,11 +17,11 @@ export function convertFileTypesToWebApi(
   const filters: WebApiFilterType[] = [];
 
   fileTypes.forEach(fileType => {
-    if (!fileType || !Array.isArray(fileType)) {
-      return;
-    }
-
-    if (!fileType?.extensions || !Array.isArray(fileType.extensions)) {
+    if (
+      !fileType ||
+      !fileType?.extensions ||
+      !Array.isArray(fileType.extensions)
+    ) {
       return;
     }
 

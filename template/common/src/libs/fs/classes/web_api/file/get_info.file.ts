@@ -7,23 +7,26 @@ export async function getInfoFile(
     return {};
   }
 
-  const fileInfo = await fileHandle?.getFile();
+  const fileInfo = await fileHandle.getFile();
 
-  console.log('-- fileInfo', fileInfo);
+  let fileName = '';
+  let fileExtension = '';
 
-  // let type: ListItem['type'];
-  // if (fileHandle.isFile) {
-  //   type = 'file';
-  // }
-  // if (fileHandle.isDirectory) {
-  //   type = 'dir';
-  // }
-  // if (fileHandle.isSymlink) {
-  //   type = 'symlink';
-  // }
+  const fileNames = fileInfo.name?.split('.');
+
+  if (fileNames[0] === '' && fileNames.length === 2) {
+    fileName = `.${fileNames[0]}`;
+  } else {
+    fileExtension = fileNames.pop() || '';
+    fileName = fileNames.join('.');
+  }
 
   return {
     name: fileInfo.name,
+    fileName,
+    fileExtension,
+    meta: fileInfo.type,
+    type: 'file',
     size: fileInfo.size,
     modifiedAt: new Date(fileInfo.lastModified),
   };

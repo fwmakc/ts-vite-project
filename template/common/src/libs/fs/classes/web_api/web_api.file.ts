@@ -14,7 +14,6 @@ import { writeBytesFile } from './file/write_bytes.file';
 
 export class WebApiFile implements File<FileSystemFileHandle | null, string> {
   currentFile: FileSystemFileHandle | null = null;
-  currentDir: FileSystemDirectoryHandle | null = null;
 
   constructor(file?: FileSystemFileHandle) {
     if (file) {
@@ -59,41 +58,33 @@ export class WebApiFile implements File<FileSystemFileHandle | null, string> {
     if (!this.currentFile) {
       return;
     }
-    await this.setCurrentDir();
-    await this.currentDir?.removeEntry(this.currentFile.name);
+    const currentDir = await selectDirDialog();
+    await currentDir?.removeEntry(this.currentFile.name);
     this.currentFile = null;
   }
 
   async rename(newFilePath: string): Promise<void> {
-    await this.setCurrentDir();
+    const currentDir = await selectDirDialog();
     this.currentFile = await renameFile(
       this.currentFile,
-      this.currentDir,
+      currentDir,
       newFilePath,
     );
   }
 
   async write(content: string): Promise<void> {
-    await this.setCurrentDir();
     await writeFile(this.currentFile, content);
   }
 
   async writeBytes(content: Uint8Array): Promise<void> {
-    await this.setCurrentDir();
     await writeBytesFile(this.currentFile, content);
   }
 
   async saveDialog(defaultDir?: string, fileTypes?: FileTypes): Promise<void> {
-    await this.setCurrentDir(defaultDir);
-    this.currentFile = await saveFileDialog(this.currentDir, fileTypes);
+    this.currentFile = await saveFileDialog(defaultDir, fileTypes);
   }
 
   async openDialog(defaultDir?: string, fileTypes?: FileTypes): Promise<void> {
-    await this.setCurrentDir(defaultDir);
-    this.currentFile = await openFileDialog(this.currentDir, fileTypes);
-  }
-
-  private async setCurrentDir(path?: string): Promise<void> {
-    if (!this.currentDir) this.currentDir = await selectDirDialog(path);
+    this.currentFile = await openFileDialog(defaultDir, fileTypes);
   }
 }

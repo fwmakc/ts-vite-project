@@ -1,19 +1,19 @@
 import { readFileByBrowser } from './helpers/read_file_by_browser.helper';
-import { readFileByBrowserApi } from './helpers/read_file_by_browser_api.helper';
 import { readFileByFetchTarget } from './helpers/read_file_by_fetch_target.helper';
 import { readFileByNodeTarget } from './helpers/read_file_by_node_target.helper';
 import { readFileByTauriTarget } from './helpers/read_file_by_tauri_target.helper';
+import { readFileByWebApi } from './helpers/read_file_by_web_api.helper';
 import { writeFileByBrowser } from './helpers/write_file_by_browser.helper';
-import { writeFileByBrowserApi } from './helpers/write_file_by_browser_api.helper';
 import { writeFileByNodeTarget } from './helpers/write_file_by_node_target.helper';
 import { writeFileByTauriTarget } from './helpers/write_file_by_tauri_target.helper';
+import { writeFileByWebApi } from './helpers/write_file_by_web_api.helper';
 
 export default function (): void {
   document.querySelector<HTMLDivElement>('#app #file-component')!.innerHTML = `
   <div class="row">
     <div class="col">
-      <div id="ReadFileByBrowserApi">
-        <h3>ReadFileByBrowserApi</h3>
+      <div id="ReadFileByWebApi">
+        <h3>ReadFileByWebApi</h3>
         <div class="file_content">здесь будет содержимое файла</div>
         <input type="button" class="button" value="Открыть">
         <div class="status"></div>
@@ -21,8 +21,8 @@ export default function (): void {
     </div>
 
     <div class="col">
-      <div id="WriteFileByBrowserApi">
-        <h3>WriteFileByBrowserApi</h3>
+      <div id="WriteFileByWebApi">
+        <h3>WriteFileByWebApi</h3>
         <textarea class="file_content full-width">ваше содержимое файла</textarea>
         <input type="button" class="button" value="Сохранить">
         <div class="status"></div>
@@ -115,12 +115,10 @@ export default function (): void {
     document.querySelector<HTMLButtonElement>('#ReadFileByBrowser .button')!,
   );
 
-  readFileByBrowserApi(
-    document.querySelector<HTMLDivElement>(
-      '#ReadFileByBrowserApi .file_content',
-    )!,
-    document.querySelector<HTMLButtonElement>('#ReadFileByBrowserApi .button')!,
-    document.querySelector<HTMLDivElement>('#ReadFileByBrowserApi .status')!,
+  readFileByWebApi(
+    document.querySelector<HTMLDivElement>('#ReadFileByWebApi .file_content')!,
+    document.querySelector<HTMLButtonElement>('#ReadFileByWebApi .button')!,
+    document.querySelector<HTMLDivElement>('#ReadFileByWebApi .status')!,
   );
 
   readFileByFetchTarget(
@@ -173,14 +171,12 @@ export default function (): void {
     document.querySelector<HTMLDivElement>('#WriteFileByBrowser .status')!,
   );
 
-  writeFileByBrowserApi(
+  writeFileByWebApi(
     document.querySelector<HTMLTextAreaElement>(
-      '#WriteFileByBrowserApi .file_content',
+      '#WriteFileByWebApi .file_content',
     )!,
-    document.querySelector<HTMLButtonElement>(
-      '#WriteFileByBrowserApi .button',
-    )!,
-    document.querySelector<HTMLDivElement>('#WriteFileByBrowserApi .status')!,
+    document.querySelector<HTMLButtonElement>('#WriteFileByWebApi .button')!,
+    document.querySelector<HTMLDivElement>('#WriteFileByWebApi .status')!,
   );
 
   writeFileByNodeTarget(

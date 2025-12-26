@@ -3,7 +3,7 @@ import type { FileTypes } from '../../../interfaces/file_types.interface';
 import { convertFileTypesToWebApi } from './helpers/convert_file_types_to_web_api';
 
 export async function openFileDialog(
-  defaultDir?: FileSystemDirectoryHandle | null,
+  defaultDir?: string | null,
   fileTypes?: FileTypes,
 ): Promise<FileSystemFileHandle> {
   let types;
@@ -12,9 +12,13 @@ export async function openFileDialog(
     types = convertFileTypesToWebApi(fileTypes);
   }
 
-  return (await (window as any).showOpenFilePicker({
-    startIn: defaultDir || undefined,
-    multiple: false,
-    types,
-  })) as FileSystemFileHandle;
+  const file = (
+    await (window as any).showOpenFilePicker({
+      startIn: defaultDir || undefined,
+      multiple: false,
+      types,
+    })
+  )?.[0] as FileSystemFileHandle;
+
+  return file;
 }

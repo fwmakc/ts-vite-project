@@ -15,7 +15,7 @@ export class ReadFileByBrowserApi implements FileReader {
     }
 
     if (fileHandle) {
-      const file = await fileHandle.getFile();
+      const file = await (fileHandle as any)?.[0].getFile();
       content = await file.text();
     }
 

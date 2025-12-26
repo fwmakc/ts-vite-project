@@ -1,12 +1,15 @@
-import { writeFile, WriteFileByTauri } from '../../../libs/file-interface';
-import { fileCurrent } from '../consts/file_current.const';
-import { fileTypes } from '../consts/file_types.const';
-
 export async function writeFileByTauriTarget(
   container: HTMLTextAreaElement,
   button: HTMLButtonElement,
   status: HTMLDivElement,
 ): Promise<void> {
+  console.log({
+    container,
+    button,
+    status,
+  });
+
+  /*
   button.addEventListener('click', async function () {
     status.textContent = 'Идет сохранение...';
 
@@ -28,4 +31,5 @@ export async function writeFileByTauriTarget(
       status.textContent = `Error: ${(e as Error)?.message || 'unknown'}`;
     }
   });
+  */
 }
