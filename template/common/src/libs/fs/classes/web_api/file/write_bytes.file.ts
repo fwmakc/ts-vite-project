@@ -11,15 +11,14 @@ export async function writeBytesFile(
   const writable = await fileHandle.createWritable();
 
   try {
-    if (content.length <= chunkSize) {
-      await writable.write(content);
-    } else {
-      let offset = 0;
-      while (offset < content.length) {
-        const chunk = content.slice(offset, offset + chunkSize);
-        await writable.write(chunk);
-        offset += chunkSize;
-      }
+    const safeContent = new Uint8Array(content.buffer.slice(0));
+
+    for (let offset = 0; offset < safeContent.length; offset += chunkSize) {
+      const chunk = safeContent.slice(
+        offset,
+        Math.min(offset + chunkSize, safeContent.length),
+      );
+      await writable.write(chunk);
     }
   } finally {
     await writable.close();

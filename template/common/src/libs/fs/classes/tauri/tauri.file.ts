@@ -30,9 +30,9 @@ export class TauriFile implements File<string, string> {
     this.currentFile = file;
   }
 
-  async copy(newFilePath: string): Promise<TauriFile> {
+  async copy(newFilePath: string): Promise<this> {
     await copyFile(this.currentFile, newFilePath);
-    return new TauriFile(newFilePath);
+    return new TauriFile(newFilePath) as this;
   }
 
   async create(filePath: string): Promise<void> {

@@ -7,17 +7,15 @@ export interface File<Descriptor, Content> {
   get(): Descriptor;
   set(file: Descriptor): void;
 
-  copy(
-    newFilePath: string,
-  ): File<Descriptor, Content> | Promise<File<Descriptor, Content>>;
+  copy(newFilePath: string): this | Promise<this>;
   create(filePath: string): void;
   info(): ListItem | Promise<ListItem>;
   read(): Content | Promise<Content>;
-  readBytes(): ArrayBufferLike | Promise<ArrayBufferLike>;
+  readBytes(): Uint8Array | Promise<Uint8Array>;
   rename(newFilePath: string): void;
   remove(): void;
   write(content: Content): void;
-  writeBytes(content: ArrayBufferLike): void;
+  writeBytes(content: Uint8Array): void;
 
   saveDialog(defaultDir?: string, fileTypes?: FileTypes): void;
   openDialog(defaultDir?: string, fileTypes?: FileTypes): void;

@@ -27,9 +27,9 @@ export class NodeFile implements File<string, string> {
     this.currentFile = file;
   }
 
-  async copy(newFilePath: string): Promise<NodeFile> {
+  async copy(newFilePath: string): Promise<this> {
     await copyFile(this.currentFile, newFilePath);
-    return new NodeFile(newFilePath);
+    return new NodeFile(newFilePath) as this;
   }
 
   async create(filePath: string): Promise<void> {

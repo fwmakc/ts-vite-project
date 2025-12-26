@@ -30,9 +30,9 @@ export class WebApiFile implements File<FileSystemFileHandle | null, string> {
     this.currentFile = file;
   }
 
-  async copy(newFilePath: string): Promise<WebApiFile> {
+  async copy(newFilePath: string): Promise<this> {
     const content = await this.readBytes();
-    const copiedFile = new WebApiFile();
+    const copiedFile = new WebApiFile() as this;
     await copiedFile.saveDialog(newFilePath);
     await copiedFile.writeBytes(content);
     return copiedFile;
