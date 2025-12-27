@@ -1,3 +1,4 @@
-export const fileHandle: { value: FileSystemFileHandle | undefined } = {
-  value: undefined,
-};
+export const fileHandle: { value: FileSystemFileHandle | string | undefined } =
+  {
+    value: undefined,
+  };

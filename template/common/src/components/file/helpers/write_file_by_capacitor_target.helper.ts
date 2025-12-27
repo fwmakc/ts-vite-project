@@ -1,7 +1,7 @@
-import { TauriFile } from '../../../libs/fs';
+import { CapacitorFile } from '../../../libs/fs';
 import { fileHandle } from '../consts/file_handle.const';
 
-export async function writeFileByTauriTarget(
+export async function writeFileByCapacitorTarget(
   container: HTMLTextAreaElement,
   button: HTMLButtonElement,
   status: HTMLDivElement,
@@ -14,7 +14,7 @@ export async function writeFileByTauriTarget(
     const content = container.value || '';
 
     try {
-      const file = new TauriFile(fileName);
+      const file = new CapacitorFile(fileName);
 
       await file.write(content);
 

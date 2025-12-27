@@ -1,32 +1,26 @@
+import { TauriFile } from '../../../libs/fs';
+import { fileHandle } from '../consts/file_handle.const';
+
 export async function readFileByTauriTarget(
   container: HTMLDivElement,
   input: HTMLInputElement,
   button: HTMLButtonElement,
 ): Promise<void> {
-  console.log({
-    container,
-    input,
-    button,
-  });
-
-  /*
   button.addEventListener('click', async function () {
-    fileCurrent.value = input.value;
-    const fileName = fileCurrent.value;
-    const fileReader = new ReadFileByTauri();
+    container.textContent = 'Идет загрузка...';
+
+    const fileName = input.value;
 
     try {
-      const response = await readFile(fileReader, { fileName, fileTypes });
+      const file = new TauriFile(fileName);
 
-      container.textContent = response.content || '';
+      const content = await file.read();
+      const handle = file.get();
 
-      if (response.fileName) {
-        fileCurrent.value = response.fileName;
-        input.value = response.fileName;
-      }
+      container.textContent = content || '';
+      fileHandle.value = handle!;
     } catch (e) {
       container.textContent = `Error: ${(e as Error)?.message || 'unknown'}`;
     }
   });
-  */
 }

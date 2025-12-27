@@ -1,7 +1,7 @@
-import { NodeFile } from '../../../libs/fs';
+import { CapacitorFile } from '../../../libs/fs';
 import { fileHandle } from '../consts/file_handle.const';
 
-export async function readFileByNodeTarget(
+export async function readFileByCapacitorTarget(
   container: HTMLDivElement,
   input: HTMLInputElement,
   button: HTMLButtonElement,
@@ -12,7 +12,7 @@ export async function readFileByNodeTarget(
     const fileName = input.value;
 
     try {
-      const file = new NodeFile(fileName);
+      const file = new CapacitorFile(fileName);
 
       const content = await file.read();
       const handle = file.get();

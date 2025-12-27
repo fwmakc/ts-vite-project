@@ -1,8 +1,9 @@
-import { writeFile as write } from 'fs-extra';
+// import { writeFile as write } from 'fs-extra';
 
 export async function writeBytesFile(
   fileName: string,
   content: Uint8Array,
 ): Promise<void> {
+  const { writeFile: write } = await import('fs-extra');
   return await write(fileName, content);
 }

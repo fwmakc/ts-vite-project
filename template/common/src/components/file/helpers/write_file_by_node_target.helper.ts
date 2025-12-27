@@ -1,4 +1,5 @@
-import { writeFile, WriteFileByNode } from '../../../libs/file-interface';
+import { NodeFile } from '../../../libs/fs';
+import { fileHandle } from '../consts/file_handle.const';
 
 export async function writeFileByNodeTarget(
   container: HTMLTextAreaElement,
@@ -8,13 +9,15 @@ export async function writeFileByNodeTarget(
   button.addEventListener('click', async function () {
     status.textContent = 'Идет сохранение...';
 
-    const fileName = `new_file_${Date.now()}.txt`;
+    const fileName =
+      (fileHandle.value as string) || `new_file_${Date.now()}.txt`;
     const content = container.value || '';
 
-    const fileWriter = new WriteFileByNode();
-
     try {
-      await writeFile(fileWriter, { fileName, content });
+      const file = new NodeFile(fileName);
+
+      await file.write(content);
+
       status.textContent = '';
     } catch (e) {
       status.textContent = `Error: ${(e as Error)?.message || 'unknown'}`;

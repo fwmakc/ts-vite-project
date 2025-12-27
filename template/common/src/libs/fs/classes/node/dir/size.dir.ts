@@ -1,6 +1,8 @@
-import fs from 'fs-extra';
+// import fs from 'fs-extra';
 
 export async function sizeDir(dirPath: string): Promise<number> {
+  const fs = await import('fs-extra');
+
   const files = await fs.readdir(dirPath);
   let totalSize = 0;
 

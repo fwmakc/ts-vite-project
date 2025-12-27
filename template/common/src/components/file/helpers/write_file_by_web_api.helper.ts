@@ -21,7 +21,7 @@ export async function writeFileByWebApi(
       const file = new WebApiFile();
 
       if (fileHandle.value) {
-        file.set(fileHandle.value);
+        file.set(fileHandle.value as FileSystemFileHandle);
       } else {
         await file.saveDialog(undefined, fileTypes);
         const handle = file.get();
@@ -31,7 +31,7 @@ export async function writeFileByWebApi(
       const content = container.value || '';
       await file.write(content);
 
-      status.textContent = `Сохраненный файл: ${fileHandle.value?.name || ''}`;
+      status.textContent = `Сохраненный файл: ${(fileHandle.value as FileSystemFileHandle)?.name || ''}`;
     } catch (e) {
       status.textContent = `Error: ${(e as Error)?.message || 'unknown'}`;
     }
