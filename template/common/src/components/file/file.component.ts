@@ -54,8 +54,8 @@ export default function (): void {
       <div id="ReadFileByCapacitorTarget">
         <h3>ReadFileByCapacitorTarget</h3>
         <div class="file_content">здесь будет содержимое файла</div>
+        <input type="text" class="input full-width" value="./files/example.txt">
         <input type="button" class="button" value="Открыть">
-        <div class="status"></div>
       </div>
     </div>
     <div class="col">
@@ -73,7 +73,7 @@ export default function (): void {
       <div id="ReadFileByNodeTarget">
         <h3>ReadFileByNodeTarget</h3>
         <div class="file_content">здесь будет содержимое файла</div>
-        <input type="text" class="input full-width" value="/files/example.txt">
+        <input type="text" class="input full-width" value="./files/example.txt">
         <input type="button" class="button" value="Открыть">
       </div>
     </div>
@@ -92,7 +92,7 @@ export default function (): void {
       <div id="ReadFileByTauriTarget">
         <h3>ReadFileByTauriTarget</h3>
         <div class="file_content">здесь будет содержимое файла</div>
-        <input type="text" class="input full-width" value="">
+        <input type="text" class="input full-width" value="./files/example.txt">
         <input type="button" class="button" value="Открыть">
       </div>
     </div>
