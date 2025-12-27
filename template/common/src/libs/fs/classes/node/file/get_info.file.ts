@@ -1,5 +1,4 @@
-import { extname, basename, dirname } from '@tauri-apps/api/path';
-import { stat } from '@tauri-apps/plugin-fs';
+import { stat } from 'fs-extra';
 
 import type { ListItem } from '../../../interfaces/list.interface';
 
@@ -7,22 +6,15 @@ export async function getInfoFile(fileName: string): Promise<ListItem> {
   const fileInfo = await stat(fileName);
 
   let type: ListItem['type'];
-  if (fileInfo.isFile) {
+  if (fileInfo.isFile()) {
     type = 'file';
   }
-  if (fileInfo.isDirectory) {
+  if (fileInfo.isDirectory()) {
     type = 'dir';
   }
-  if (fileInfo.isSymlink) {
+  if (fileInfo.isSymbolicLink()) {
     type = 'symlink';
   }
-
-  const i = {
-    extname: await extname(fileName),
-    basename: await basename(fileName),
-    dirname: await dirname(fileName),
-  };
-  console.log(i);
 
   return {
     path: fileName,

@@ -1,6 +1,6 @@
-import { copyFile as copy } from 'fs-extra';
+import { copy } from 'fs-extra';
 
-export async function copyFile(
+export async function copyDir(
   oldFilePath: string,
   newFilePath: string,
 ): Promise<void> {

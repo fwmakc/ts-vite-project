@@ -1,5 +1,5 @@
-import { remove } from '@tauri-apps/plugin-fs';
+import { unlink } from 'fs-extra';
 
 export async function removeFile(fileName: string): Promise<void> {
-  await remove(fileName);
+  await unlink(fileName);
 }

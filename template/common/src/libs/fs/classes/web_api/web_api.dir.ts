@@ -23,6 +23,10 @@ export class WebApiDir implements Dir<
     this.currentDir = dir;
   }
 
+  async copy(newDir: FileSystemDirectoryHandle): Promise<this> {
+    return new WebApiDir(newDir) as this;
+  }
+
   async create(newDir: FileSystemDirectoryHandle): Promise<void> {
     this.currentDir = newDir;
   }
@@ -37,6 +41,10 @@ export class WebApiDir implements Dir<
 
   async rename(newDir: FileSystemDirectoryHandle): Promise<void> {
     this.currentDir = newDir;
+  }
+
+  async size(): Promise<number> {
+    return 0;
   }
 
   async selectDialog(defaultDir?: FileSystemDirectoryHandle): Promise<void> {

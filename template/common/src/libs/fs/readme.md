@@ -1,0 +1,5 @@
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "fs-extra": "^11.3.3",
+    ...
+  }

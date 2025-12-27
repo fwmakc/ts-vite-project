@@ -1,8 +1,8 @@
-import { writeTextFile } from '@tauri-apps/plugin-fs';
+import { writeFile as write } from 'fs-extra';
 
 export async function writeFile(
   fileName: string,
   content: string,
 ): Promise<void> {
-  await writeTextFile(fileName, content);
+  await write(fileName, content, 'utf-8');
 }

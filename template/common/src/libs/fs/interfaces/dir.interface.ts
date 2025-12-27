@@ -6,10 +6,12 @@ export interface Dir<DirDescriptor, FileDescriptor> {
   get(): DirDescriptor | undefined;
   set(dir: DirDescriptor): void;
 
+  copy(newDir: DirDescriptor): this | Promise<this>;
   create(newDir: DirDescriptor): void;
   list(options?: ListOptions): FileDescriptor[] | Promise<FileDescriptor[]>;
   remove(): void;
   rename(newDir: DirDescriptor): void;
+  size(): number | Promise<number>;
 
   selectDialog(defaultDir?: DirDescriptor): void;
 }

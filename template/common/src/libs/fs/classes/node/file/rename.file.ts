@@ -1,4 +1,4 @@
-import { rename } from '@tauri-apps/plugin-fs';
+import { rename } from 'fs-extra';
 
 export async function renameFile(
   oldFilePath: string,

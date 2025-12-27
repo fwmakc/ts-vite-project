@@ -1,5 +1,5 @@
-import { readFile } from '@tauri-apps/plugin-fs';
+import { readFile as read } from 'fs-extra';
 
 export async function readBytesFile(fileName: string): Promise<Uint8Array> {
-  return await readFile(fileName);
+  return await read(fileName);
 }

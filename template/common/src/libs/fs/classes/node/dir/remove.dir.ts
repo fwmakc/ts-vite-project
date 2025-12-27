@@ -1,5 +1,5 @@
-import { remove } from '@tauri-apps/plugin-fs';
+import { rm } from 'fs-extra';
 
 export async function removeDir(dirPath: string): Promise<void> {
-  await remove(dirPath, { recursive: true });
+  await rm(dirPath, { recursive: true });
 }
