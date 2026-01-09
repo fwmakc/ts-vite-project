@@ -6,12 +6,12 @@ export async function copyFile(
 ): Promise<void> {
   const data = await Filesystem.readFile({
     path: oldFilePath,
-    directory: Directory.ExternalStorage,
+    directory: Directory.Documents,
   });
 
   await Filesystem.writeFile({
     path: newFilePath,
     data: data.data,
-    directory: Directory.ExternalStorage,
+    directory: Directory.Documents,
   });
 }

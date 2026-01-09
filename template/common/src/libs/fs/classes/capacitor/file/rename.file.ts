@@ -7,6 +7,6 @@ export async function renameFile(
   await Filesystem.rename({
     from: oldFilePath,
     to: newFilePath,
-    directory: Directory.ExternalStorage,
+    directory: Directory.Documents,
   });
 }

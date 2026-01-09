@@ -7,7 +7,7 @@ export async function writeFile(
   await Filesystem.writeFile({
     path: fileName,
     data: content,
-    directory: Directory.ExternalStorage,
+    directory: Directory.Documents,
     encoding: Encoding.UTF8,
   });
 }

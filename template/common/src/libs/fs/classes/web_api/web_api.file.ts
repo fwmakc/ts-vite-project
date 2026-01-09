@@ -14,14 +14,17 @@ import { writeBytesFile } from './file/write_bytes.file';
 
 export class WebApiFile implements File<
   FileSystemFileHandle,
-  FileSystemDirectoryHandle,
-  string
+  FileSystemDirectoryHandle
 > {
   currentFile?: FileSystemFileHandle = undefined;
+  currentDir?: FileSystemDirectoryHandle = undefined;
 
-  constructor(file?: FileSystemFileHandle) {
+  constructor(file?: FileSystemFileHandle, dir?: FileSystemDirectoryHandle) {
     if (file) {
-      this.set(file);
+      this.currentFile = file;
+    }
+    if (dir) {
+      this.currentDir = dir;
     }
   }
 
@@ -29,21 +32,20 @@ export class WebApiFile implements File<
     return this.currentFile;
   }
 
-  set(file: FileSystemFileHandle): void {
+  set(file: FileSystemFileHandle, dir: FileSystemDirectoryHandle): void {
     this.currentFile = file;
+    this.currentDir = dir;
+  }
+
+  async clear(): Promise<void> {
+    await this.write('');
   }
 
   async copy(newFile: FileSystemFileHandle): Promise<this> {
     const content = await this.readBytes();
-    const copiedFile = new WebApiFile() as this;
-    copiedFile.set(newFile);
+    const copiedFile = new WebApiFile(newFile, this.currentDir) as this;
     await copiedFile.writeBytes(content);
     return copiedFile;
-  }
-
-  async create(newFile: FileSystemFileHandle): Promise<void> {
-    await this.set(newFile);
-    await this.write('');
   }
 
   async info(): Promise<ListItem> {
@@ -62,7 +64,7 @@ export class WebApiFile implements File<
     if (!this.currentFile) {
       return;
     }
-    const currentDir = await selectDirDialog();
+    const currentDir = await selectDirDialog(this.currentDir);
     await currentDir?.removeEntry(this.currentFile.name);
     this.currentFile = undefined;
   }
@@ -79,17 +81,11 @@ export class WebApiFile implements File<
     await writeBytesFile(this.currentFile!, content);
   }
 
-  async saveDialog(
-    defaultDir?: FileSystemDirectoryHandle,
-    fileTypes?: FileTypes,
-  ): Promise<void> {
-    this.currentFile = await saveFileDialog(defaultDir, fileTypes);
+  async openDialog(fileTypes?: FileTypes): Promise<FileSystemFileHandle> {
+    return await openFileDialog(this.currentDir, fileTypes);
   }
 
-  async openDialog(
-    defaultDir?: FileSystemDirectoryHandle,
-    fileTypes?: FileTypes,
-  ): Promise<void> {
-    this.currentFile = await openFileDialog(defaultDir, fileTypes);
+  async saveDialog(fileTypes?: FileTypes): Promise<FileSystemFileHandle> {
+    return await saveFileDialog(this.currentDir, fileTypes);
   }
 }

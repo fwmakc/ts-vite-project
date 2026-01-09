@@ -9,7 +9,7 @@ export async function writeBytesFile(
   await Filesystem.writeFile({
     path: fileName,
     data: base64,
-    directory: Directory.Data,
+    directory: Directory.Documents,
   });
 }
 

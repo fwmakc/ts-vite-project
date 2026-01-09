@@ -5,7 +5,7 @@ import type { ListItem } from '../../../interfaces/list.interface';
 export async function getInfoFile(fileName: string): Promise<ListItem> {
   const fileInfo = await Filesystem.stat({
     path: fileName,
-    directory: Directory.ExternalStorage,
+    directory: Directory.Documents,
   });
 
   let type: ListItem['type'];

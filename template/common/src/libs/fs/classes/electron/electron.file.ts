@@ -11,7 +11,7 @@ import { renameFile } from './file/rename.file';
 import { writeFile } from './file/write.file';
 import { writeBytesFile } from './file/write_bytes.file';
 
-export class CapacitorFile implements File<string, string, string> {
+export class ElectronFile implements File<string, string, string> {
   currentFile: string = '';
 
   constructor(file?: string) {
@@ -30,7 +30,7 @@ export class CapacitorFile implements File<string, string, string> {
 
   async copy(newFilePath: string): Promise<this> {
     await copyFile(this.currentFile, newFilePath);
-    return new CapacitorFile(newFilePath) as this;
+    return new ElectronFile(newFilePath) as this;
   }
 
   async create(newFilePath: string): Promise<void> {
@@ -42,8 +42,8 @@ export class CapacitorFile implements File<string, string, string> {
     return await getInfoFile(this.currentFile);
   }
 
-  async read(dir?: string): Promise<string> {
-    return await readFile(this.currentFile, dir);
+  async read(): Promise<string> {
+    return await readFile(this.currentFile);
   }
 
   async readBytes(): Promise<Uint8Array> {
