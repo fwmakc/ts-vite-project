@@ -47,7 +47,7 @@ export class WebApiDir implements Dir<
     return 0;
   }
 
-  async selectDialog(): Promise<FileSystemDirectoryHandle> {
-    return await selectDirDialog(this.currentDir);
+  async selectDialog(defaultDir?: FileSystemDirectoryHandle): Promise<void> {
+    this.currentDir = await selectDirDialog(defaultDir);
   }
 }

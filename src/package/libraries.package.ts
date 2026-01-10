@@ -20,7 +20,7 @@ export async function librariesPackage(): Promise<ILibraries> {
     scripts['capacitor:android'] = 'cap add android';
     scripts['capacitor:ios'] = 'cap add ios';
     scripts['capacitor:make'] =
-      'cap copy && capacitor-assets generate --android --ios --assetPath public --androidProject build/capacitor/android --iosProject build/capacitor/ios/App';
+      'cap copy && cap sync && cap update && capacitor-assets generate --android --ios --assetPath public --androidProject build/capacitor/android --iosProject build/capacitor/ios/App';
     scripts['capacitor:debug'] =
       'cd build/capacitor/android && gradlew assembleDebug';
     scripts['capacitor:release'] =
@@ -36,6 +36,7 @@ export async function librariesPackage(): Promise<ILibraries> {
     devDependencies['@capacitor/assets'] = '^3.0.5';
     devDependencies['@capacitor/cli'] = '^7.4.4';
     devDependencies['@capacitor/core'] = '^7.4.4';
+    devDependencies['@capacitor/filesystem'] = '^8.0.0';
     devDependencies['@capacitor/ios'] = '^7.4.4';
   }
 
@@ -46,7 +47,6 @@ export async function librariesPackage(): Promise<ILibraries> {
       'cross-env VITE_BUILD_TARGET=electron VITE_RUNTIME_PLATFORM=desktop npm run compile';
     scripts['electron:preview'] = 'npm run electron:compile && electron .';
 
-    devDependencies['@electron-forge/cli'] = '^7.10.2';
     devDependencies['@types/electron-squirrel-startup'] = '^1.0.2';
     devDependencies['electron'] = '^39.2.2';
 
@@ -64,7 +64,6 @@ export async function librariesPackage(): Promise<ILibraries> {
       scripts['electron:make'] =
         'npm run electron:compile && electron-forge make';
 
-      devDependencies['@electron/fuses'] = '^1.8.0';
       devDependencies['@electron-forge/cli'] = '^7.10.2';
       devDependencies['@electron-forge/maker-deb'] = '^7.10.2';
       devDependencies['@electron-forge/maker-dmg'] = '^7.10.2';
@@ -73,6 +72,7 @@ export async function librariesPackage(): Promise<ILibraries> {
       devDependencies['@electron-forge/maker-zip'] = '^7.10.2';
       devDependencies['@electron-forge/plugin-auto-unpack-natives'] = '^7.10.2';
       devDependencies['@electron-forge/plugin-fuses'] = '^7.10.2';
+      devDependencies['@electron/fuses'] = '^1.8.0';
     }
   }
 
@@ -85,8 +85,8 @@ export async function librariesPackage(): Promise<ILibraries> {
     scripts['tauri:build'] = 'tauri build --config tauri.config.json';
 
     devDependencies['@tauri-apps/cli'] = '^2.9.5';
-    dependencies['@tauri-apps/plugin-dialog'] = '~2';
-    dependencies['@tauri-apps/plugin-fs'] = '~2';
+    devDependencies['@tauri-apps/plugin-dialog'] = '~2';
+    devDependencies['@tauri-apps/plugin-fs'] = '~2';
   }
 
   return {

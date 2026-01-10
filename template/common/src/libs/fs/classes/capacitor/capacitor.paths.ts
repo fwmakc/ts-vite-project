@@ -2,18 +2,24 @@ import { Directory } from '@capacitor/filesystem';
 
 import type { DefaultPaths } from '../../interfaces/default_paths.interface';
 
-export class CapacitorPaths implements DefaultPaths {
-  app?: unknown;
-  cache?: unknown;
-  data?: unknown;
-  documents?: unknown;
-  home?: unknown;
+export class CapacitorPaths implements DefaultPaths<Directory> {
+  async app(): Promise<Directory> {
+    return Directory.External;
+  }
 
-  constructor() {
-    this.app = Directory.External;
-    this.cache = Directory.Cache;
-    this.data = Directory.Data;
-    this.documents = Directory.Documents;
-    this.home = Directory.ExternalStorage;
+  async cache(): Promise<Directory> {
+    return Directory.Cache;
+  }
+
+  async data(): Promise<Directory> {
+    return Directory.Data;
+  }
+
+  async documents(): Promise<Directory> {
+    return Directory.Documents;
+  }
+
+  async home(): Promise<Directory> {
+    return Directory.ExternalStorage;
   }
 }

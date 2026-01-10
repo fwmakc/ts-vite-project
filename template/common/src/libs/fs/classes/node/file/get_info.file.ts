@@ -1,9 +1,6 @@
-// import { stat } from 'fs-extra';
-
 import type { ListItem } from '../../../interfaces/list.interface';
 
 export async function getInfoFile(fileName: string): Promise<ListItem> {
-  // const { stat } = await import('fs-extra');
   const { stat } = await import('fs/promises');
 
   const fileInfo = await stat(fileName);

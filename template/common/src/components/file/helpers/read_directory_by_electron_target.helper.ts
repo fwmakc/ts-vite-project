@@ -1,5 +1,4 @@
-// import { app } from 'electron';
-// import { app } from '@electron/remote';
+import { ElectronPaths } from '../../../libs/fs';
 
 export async function readDirectoryByElectronTarget(
   container: HTMLDivElement,
@@ -8,62 +7,25 @@ export async function readDirectoryByElectronTarget(
   button.addEventListener('click', async function () {
     container.textContent = 'Идет загрузка...';
 
-    console.log('Renderer script loaded');
-
-    console.log((window as any).electronAPI); // Должен быть объект
-    console.log(typeof (window as any).electronAPI.getApp); // Должно быть 'function'
-
-    if (!(window as any).electronAPI) {
-      console.error('electronAPI is not available');
-      return;
-    }
-
     try {
       const textContent: string[] = [];
 
-      const appPath = await (window as any).electronAPI.getPath('appPath');
-      textContent.push(`appPath:[${appPath}]`);
+      const paths = new ElectronPaths();
 
-      const home = await (window as any).electronAPI.getPath('home');
-      textContent.push(`home:[${home}]`);
+      const app = await paths.app();
+      textContent.push(`app:[${app}]`);
 
-      const appData = await (window as any).electronAPI.getPath('appData');
-      textContent.push(`appData:[${appData}]`);
+      const cache = await paths.cache();
+      textContent.push(`cache:[${cache}]`);
 
-      const assets = await (window as any).electronAPI.getPath('assets');
-      textContent.push(`assets:[${assets}]`);
+      const data = await paths.data();
+      textContent.push(`data:[${data}]`);
 
-      const userData = await (window as any).electronAPI.getPath('userData');
-      textContent.push(`userData:[${userData}]`);
-
-      const sessionData = await (window as any).electronAPI.getPath(
-        'sessionData',
-      );
-      textContent.push(`sessionData:[${sessionData}]`);
-
-      const temp = await (window as any).electronAPI.getPath('temp');
-      textContent.push(`temp:[${temp}]`);
-
-      const exe = await (window as any).electronAPI.getPath('exe');
-      textContent.push(`exe:[${exe}]`);
-
-      const module = await (window as any).electronAPI.getPath('module');
-      textContent.push(`module:[${module}]`);
-
-      const desktop = await (window as any).electronAPI.getPath('desktop');
-      textContent.push(`desktop:[${desktop}]`);
-
-      const documents = await (window as any).electronAPI.getPath('documents');
+      const documents = await paths.documents();
       textContent.push(`documents:[${documents}]`);
 
-      const downloads = await (window as any).electronAPI.getPath('downloads');
-      textContent.push(`downloads:[${downloads}]`);
-
-      const recent = await (window as any).electronAPI.getPath('recent');
-      textContent.push(`recent:[${recent}]`);
-
-      const logs = await (window as any).electronAPI.getPath('logs');
-      textContent.push(`logs:[${logs}]`);
+      const home = await paths.home();
+      textContent.push(`home:[${home}]`);
 
       container.textContent = textContent.join('\n');
     } catch (e) {

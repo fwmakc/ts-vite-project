@@ -52,5 +52,9 @@ export class NodeDir implements Dir<string, string> {
     return await sizeDir(this.currentDir!);
   }
 
-  async selectDialog(_defaultDir?: string): Promise<void> {}
+  async selectDialog(defaultDir?: string): Promise<void> {
+    if (defaultDir) {
+      this.currentDir = defaultDir;
+    }
+  }
 }

@@ -1,15 +1,17 @@
-import { Filesystem, Directory } from '@capacitor/filesystem';
+import type { Directory } from '@capacitor/filesystem';
+import { Filesystem } from '@capacitor/filesystem';
 
 export async function writeBytesFile(
   fileName: string,
   content: Uint8Array,
+  directory?: Directory,
 ): Promise<void> {
   const base64 = arrayBufferToBase64(content);
 
   await Filesystem.writeFile({
     path: fileName,
     data: base64,
-    directory: Directory.Documents,
+    directory,
   });
 }
 

@@ -1,9 +1,9 @@
-export interface DefaultPaths {
-  app?: unknown;
-  cache?: unknown;
-  data?: unknown;
-  documents?: unknown;
-  home?: unknown;
+export interface DefaultPaths<DirDescriptor> {
+  app(): DirDescriptor | Promise<DirDescriptor>;
+  cache(): DirDescriptor | Promise<DirDescriptor>;
+  data(): DirDescriptor | Promise<DirDescriptor>;
+  documents(): DirDescriptor | Promise<DirDescriptor>;
+  home(): DirDescriptor | Promise<DirDescriptor>;
 }
 
 /*

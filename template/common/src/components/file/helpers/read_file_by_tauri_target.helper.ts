@@ -1,4 +1,4 @@
-import { TauriFile } from '../../../libs/fs';
+import { TauriFile, TauriPaths } from '../../../libs/fs';
 import { fileHandle } from '../consts/file_handle.const';
 
 export async function readFileByTauriTarget(
@@ -12,7 +12,10 @@ export async function readFileByTauriTarget(
     const fileName = input.value;
 
     try {
-      const file = new TauriFile(fileName);
+      const paths = new TauriPaths();
+      const defaultDir = await paths.documents();
+
+      const file = new TauriFile(fileName, defaultDir);
 
       const content = await file.read();
       const handle = file.get();

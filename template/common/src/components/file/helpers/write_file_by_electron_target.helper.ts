@@ -1,7 +1,7 @@
-import { NodeFile } from '../../../libs/fs';
+import { ElectronFile, ElectronPaths } from '../../../libs/fs';
 import { fileHandle } from '../consts/file_handle.const';
 
-export async function writeFileByNodeTarget(
+export async function writeFileByElectronTarget(
   container: HTMLTextAreaElement,
   button: HTMLButtonElement,
   status: HTMLDivElement,
@@ -14,7 +14,10 @@ export async function writeFileByNodeTarget(
     const content = container.value || '';
 
     try {
-      const file = new NodeFile(fileName);
+      const paths = new ElectronPaths();
+      const defaultDir = await paths.documents();
+
+      const file = new ElectronFile(fileName, defaultDir);
 
       await file.write(content);
 

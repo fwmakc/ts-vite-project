@@ -1,26 +1,23 @@
-import * as path from 'path';
-
 import type { DefaultPaths } from '../../interfaces/default_paths.interface';
 
-export class ElectronPaths implements DefaultPaths {
-  app?: unknown;
-  cache?: unknown;
-  data?: unknown;
-  documents?: unknown;
-  home?: unknown;
-
-  constructor() {
-    this.set();
+export class ElectronPaths implements DefaultPaths<string> {
+  async app(): Promise<string> {
+    return await (window as any).electronPathsAPI?.app();
   }
 
-  async set(): Promise<void> {
-    this.app = await (window as any).electronAPI?.getPath('assets');
+  async cache(): Promise<string> {
+    return await (window as any).electronPathsAPI?.cache();
+  }
 
-    const userData = await (window as any).electronAPI?.getPath('userData');
-    this.cache = path.join(userData, 'cache');
-    this.data = path.join(userData, 'data');
+  async data(): Promise<string> {
+    return await (window as any).electronPathsAPI?.data();
+  }
 
-    this.documents = await (window as any).electronAPI?.getPath('documents');
-    this.home = await (window as any).electronAPI?.getPath('home');
+  async documents(): Promise<string> {
+    return await (window as any).electronPathsAPI?.documents();
+  }
+
+  async home(): Promise<string> {
+    return await (window as any).electronPathsAPI?.home();
   }
 }

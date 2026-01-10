@@ -1,7 +1,7 @@
 import type { FileOptions } from '../../interfaces/file_options.interface';
 import type { FileReader } from '../../interfaces/file_reader.interface';
 
-export class ReadFileByNode implements FileReader {
+export class ReadFileByElectron implements FileReader {
   async read({ fileName }: FileOptions): Promise<FileOptions> {
     const path = await import('path');
     const { readFile } = await import('fs/promises');

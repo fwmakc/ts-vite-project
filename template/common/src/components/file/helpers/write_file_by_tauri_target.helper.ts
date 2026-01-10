@@ -1,4 +1,4 @@
-import { TauriFile } from '../../../libs/fs';
+import { TauriFile, TauriPaths } from '../../../libs/fs';
 import { fileHandle } from '../consts/file_handle.const';
 
 export async function writeFileByTauriTarget(
@@ -14,7 +14,10 @@ export async function writeFileByTauriTarget(
     const content = container.value || '';
 
     try {
-      const file = new TauriFile(fileName);
+      const paths = new TauriPaths();
+      const defaultDir = await paths.documents();
+
+      const file = new TauriFile(fileName, defaultDir);
 
       await file.write(content);
 

@@ -20,21 +20,20 @@ export class WebApiFile implements File<
   currentDir?: FileSystemDirectoryHandle = undefined;
 
   constructor(file?: FileSystemFileHandle, dir?: FileSystemDirectoryHandle) {
-    if (file) {
-      this.currentFile = file;
-    }
-    if (dir) {
-      this.currentDir = dir;
-    }
+    this.set(file, dir);
   }
 
   get(): FileSystemFileHandle | undefined {
     return this.currentFile;
   }
 
-  set(file: FileSystemFileHandle, dir: FileSystemDirectoryHandle): void {
-    this.currentFile = file;
-    this.currentDir = dir;
+  set(file?: FileSystemFileHandle, dir?: FileSystemDirectoryHandle): void {
+    if (file) {
+      this.currentFile = file;
+    }
+    if (dir) {
+      this.currentDir = dir;
+    }
   }
 
   async clear(): Promise<void> {
@@ -46,6 +45,11 @@ export class WebApiFile implements File<
     const copiedFile = new WebApiFile(newFile, this.currentDir) as this;
     await copiedFile.writeBytes(content);
     return copiedFile;
+  }
+
+  async create(newFile: FileSystemFileHandle): Promise<void> {
+    this.currentFile = newFile;
+    await this.write('');
   }
 
   async info(): Promise<ListItem> {
@@ -81,11 +85,11 @@ export class WebApiFile implements File<
     await writeBytesFile(this.currentFile!, content);
   }
 
-  async openDialog(fileTypes?: FileTypes): Promise<FileSystemFileHandle> {
-    return await openFileDialog(this.currentDir, fileTypes);
-  }
-
   async saveDialog(fileTypes?: FileTypes): Promise<FileSystemFileHandle> {
     return await saveFileDialog(this.currentDir, fileTypes);
+  }
+
+  async openDialog(fileTypes?: FileTypes): Promise<FileSystemFileHandle> {
+    return await openFileDialog(this.currentDir, fileTypes);
   }
 }

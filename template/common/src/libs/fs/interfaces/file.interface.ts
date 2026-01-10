@@ -6,10 +6,11 @@ export interface File<FileDescriptor, DirDescriptor> {
   currentDir?: DirDescriptor;
 
   get(): FileDescriptor | undefined;
-  set(file: FileDescriptor, dir: DirDescriptor): void;
+  set(file?: FileDescriptor, dir?: DirDescriptor): void;
 
   clear(): void;
   copy(newFile: FileDescriptor): this | Promise<this>;
+  create(newFile: FileDescriptor): void;
   info(): ListItem | Promise<ListItem>;
   read(): string | Promise<string>;
   readBytes(): Uint8Array | Promise<Uint8Array>;

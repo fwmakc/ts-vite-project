@@ -14,6 +14,9 @@ const config: CapacitorConfig = {
   webDir: 'dist',
   android: {
     path: 'build/capacitor/android',
+    includePlugins: [
+      '@capacitor/filesystem',
+    ],
   },
   ios: {
     path: 'build/capacitor/ios',
@@ -31,6 +34,35 @@ const config: CapacitorConfig = {
       spinnerColor: '#999999',
       splashFullScreen: true,
       splashImmersive: true,
+    },
+    Filesystem: {
+      /*
+      overwrite: true,
+      logEnabled: true,
+      android: {
+        // Разрешить доступ к внешнему хранилищу
+        allowExternalStorage: true,
+        // Путь во внешнем хранилище
+        externalStoragePath: 'Android/data/com.example.app/files',
+        // Альтернативный путь для публичных файлов
+        publicStoragePath: 'Documents/MyApp',
+        // Разрешить доступ к Downloads, Pictures и т.д.
+        accessibleDirectories: [
+          'DOWNLOADS',
+          'PICTURES',
+          'DOCUMENTS',
+          'MOVIES',
+          'MUSIC'
+        ],
+        // Автоматически запрашивать permissions
+        requestPermissions: true,
+      },
+      ios: {
+        sharedContainerIdentifier: 'group.com.example.app',
+        directory: 'DOCUMENTS',
+        iCloudContainer: false,
+      },
+      */
     },
   },
 };

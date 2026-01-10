@@ -4,12 +4,12 @@ import type { FileTypes } from './interfaces/file_types.interface';
 import type { FileWriter } from './interfaces/file_writer.interface';
 import { ReadFileByBrowser } from './read/classes/read_file_by_browser';
 import { ReadFileByBrowserApi } from './read/classes/read_file_by_browser_api';
+import { ReadFileByElectron } from './read/classes/read_file_by_electron';
 import { ReadFileByFetch } from './read/classes/read_file_by_fetch';
-import { ReadFileByNode } from './read/classes/read_file_by_node';
 import { readFile } from './read/function/read_file';
 import { WriteFileByBrowser } from './write/classes/write_file_by_browser';
 import { WriteFileByBrowserApi } from './write/classes/write_file_by_browser_api';
-import { WriteFileByNode } from './write/classes/write_file_by_node';
+import { WriteFileByElectron } from './write/classes/write_file_by_electron';
 import { writeFile } from './write/function/write_file';
 
 export {
@@ -20,10 +20,10 @@ export {
   ReadFileByBrowser,
   ReadFileByBrowserApi,
   ReadFileByFetch,
-  ReadFileByNode,
+  ReadFileByElectron,
   readFile,
   WriteFileByBrowser,
   WriteFileByBrowserApi,
-  WriteFileByNode,
+  WriteFileByElectron,
   writeFile,
 };

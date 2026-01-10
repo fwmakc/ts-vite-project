@@ -2,6 +2,13 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
     base: './',
+
+    // исключить Node.js модули из сборки
+    target: 'node18',
+    rollupOptions: {
+      external: ['fs', 'fs/promises', 'path', 'os']
+    },
+
     logLevel: 'warning',
     build: {
         minify: 'terser',
@@ -15,7 +22,7 @@ export default defineConfig({
             }
         }
     },
-    server: {
-        port: 8080
-    },
+    // server: {
+    //     port: 8080
+    // },
 });

@@ -1,3 +1,5 @@
+import type { Directory } from '@capacitor/filesystem';
+
 import type { File } from '../../interfaces/file.interface';
 import type { FileTypes } from '../../interfaces/file_types.interface';
 import type { ListItem } from '../../interfaces/list.interface';
@@ -11,25 +13,33 @@ import { renameFile } from './file/rename.file';
 import { writeFile } from './file/write.file';
 import { writeBytesFile } from './file/write_bytes.file';
 
-export class CapacitorFile implements File<string, string, string> {
-  currentFile: string = '';
+export class CapacitorFile implements File<string, Directory> {
+  currentFile?: string;
+  currentDir?: Directory;
 
-  constructor(file?: string) {
-    if (file) {
-      this.set(file);
-    }
+  constructor(file?: string, dir?: Directory) {
+    this.set(file, dir);
   }
 
-  get(): string {
+  get(): string | undefined {
     return this.currentFile;
   }
 
-  set(file: string): void {
-    this.currentFile = file;
+  set(file?: string, dir?: Directory): void {
+    if (file) {
+      this.currentFile = file;
+    }
+    if (dir) {
+      this.currentDir = dir;
+    }
+  }
+
+  async clear(): Promise<void> {
+    await this.write('');
   }
 
   async copy(newFilePath: string): Promise<this> {
-    await copyFile(this.currentFile, newFilePath);
+    await copyFile(this.currentFile!, newFilePath, this.currentDir);
     return new CapacitorFile(newFilePath) as this;
   }
 
@@ -39,42 +49,40 @@ export class CapacitorFile implements File<string, string, string> {
   }
 
   async info(): Promise<ListItem> {
-    return await getInfoFile(this.currentFile);
+    return await getInfoFile(this.currentFile!, this.currentDir);
   }
 
-  async read(dir?: string): Promise<string> {
-    return await readFile(this.currentFile, dir);
+  async read(): Promise<string> {
+    return await readFile(this.currentFile!, this.currentDir);
   }
 
   async readBytes(): Promise<Uint8Array> {
-    return await readBytesFile(this.currentFile);
+    return await readBytesFile(this.currentFile!, this.currentDir);
   }
 
   async remove(): Promise<void> {
-    await removeFile(this.currentFile);
+    await removeFile(this.currentFile!, this.currentDir);
     this.currentFile = '';
   }
 
   async rename(newFilePath: string): Promise<void> {
-    await renameFile(this.currentFile, newFilePath);
+    await renameFile(this.currentFile!, newFilePath, this.currentDir);
     this.currentFile = newFilePath;
   }
 
   async write(content: string): Promise<void> {
-    await writeFile(this.currentFile, content);
+    await writeFile(this.currentFile!, content, this.currentDir);
   }
 
   async writeBytes(content: Uint8Array): Promise<void> {
-    await writeBytesFile(this.currentFile, content);
+    await writeBytesFile(this.currentFile!, content, this.currentDir);
   }
 
-  async saveDialog(
-    _defaultDir?: string,
-    _fileTypes?: FileTypes,
-  ): Promise<void> {}
+  async saveDialog(_fileTypes?: FileTypes): Promise<string> {
+    return '';
+  }
 
-  async openDialog(
-    _defaultDir?: string,
-    _fileTypes?: FileTypes,
-  ): Promise<void> {}
+  async openDialog(_fileTypes?: FileTypes): Promise<string> {
+    return '';
+  }
 }

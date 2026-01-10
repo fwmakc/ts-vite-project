@@ -1,22 +1,23 @@
-import { CapacitorFile } from '../../../libs/fs';
+import { CapacitorFile, CapacitorPaths } from '../../../libs/fs';
 import { fileHandle } from '../consts/file_handle.const';
 
 export async function readFileByCapacitorTarget(
   container: HTMLDivElement,
   input: HTMLInputElement,
-  dir: HTMLInputElement,
   button: HTMLButtonElement,
 ): Promise<void> {
   button.addEventListener('click', async function () {
     container.textContent = 'Идет загрузка...';
 
     const fileName = input.value;
-    const dirName = dir.value;
 
     try {
-      const file = new CapacitorFile(fileName);
+      const paths = new CapacitorPaths();
+      const defaultDir = await paths.documents();
 
-      const content = await file.read(dirName || undefined);
+      const file = new CapacitorFile(fileName, defaultDir);
+
+      const content = await file.read();
       const handle = file.get();
 
       container.textContent = content || '';

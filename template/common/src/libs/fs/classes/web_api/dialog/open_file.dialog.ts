@@ -14,7 +14,7 @@ export async function openFileDialog(
 
   const file = (
     await (window as any).showOpenFilePicker({
-      startIn: defaultDir || undefined,
+      startIn: defaultDir,
       multiple: false,
       types,
     })

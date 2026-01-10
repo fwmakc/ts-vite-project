@@ -1,4 +1,4 @@
-import { WebApiFile } from '../../../libs/fs';
+import { WebApiFile, WebApiPaths } from '../../../libs/fs';
 import { fileHandle } from '../consts/file_handle.const';
 
 export async function writeFileByWebApi(
@@ -18,15 +18,17 @@ export async function writeFileByWebApi(
     ];
 
     try {
-      const file = new WebApiFile();
+      const paths = new WebApiPaths();
+      const defaultDir = await paths.documents();
 
-      if (fileHandle.value) {
-        file.set(fileHandle.value as FileSystemFileHandle);
-      } else {
-        await file.saveDialog(undefined, fileTypes);
-        const handle = file.get();
+      const file = new WebApiFile(undefined, defaultDir);
+
+      if (!fileHandle.value) {
+        const handle = await file.saveDialog(fileTypes);
         fileHandle.value = handle!;
       }
+
+      file.set(fileHandle.value as FileSystemFileHandle);
 
       const content = container.value || '';
       await file.write(content);

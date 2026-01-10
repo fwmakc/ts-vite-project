@@ -1,4 +1,4 @@
-import { CapacitorFile } from '../../../libs/fs';
+import { CapacitorFile, CapacitorPaths } from '../../../libs/fs';
 import { fileHandle } from '../consts/file_handle.const';
 
 export async function writeFileByCapacitorTarget(
@@ -14,7 +14,10 @@ export async function writeFileByCapacitorTarget(
     const content = container.value || '';
 
     try {
-      const file = new CapacitorFile(fileName);
+      const paths = new CapacitorPaths();
+      const defaultDir = await paths.documents();
+
+      const file = new CapacitorFile(fileName, defaultDir);
 
       await file.write(content);
 

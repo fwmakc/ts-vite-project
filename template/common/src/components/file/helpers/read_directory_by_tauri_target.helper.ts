@@ -1,15 +1,4 @@
-import {
-  appCacheDir,
-  appConfigDir,
-  appDataDir,
-  appLocalDataDir,
-  cacheDir,
-  dataDir,
-  documentDir,
-  homeDir,
-  localDataDir,
-  resourceDir,
-} from '@tauri-apps/api/path';
+import { TauriPaths } from '../../../libs/fs';
 
 export async function readDirectoryByTauriTarget(
   container: HTMLDivElement,
@@ -21,35 +10,22 @@ export async function readDirectoryByTauriTarget(
     try {
       const textContent: string[] = [];
 
-      const cache = await cacheDir();
+      const paths = new TauriPaths();
+
+      const app = await paths.app();
+      textContent.push(`app:[${app}]`);
+
+      const cache = await paths.cache();
       textContent.push(`cache:[${cache}]`);
 
-      const data = await dataDir();
+      const data = await paths.data();
       textContent.push(`data:[${data}]`);
 
-      const document = await documentDir();
-      textContent.push(`document:[${document}]`);
+      const documents = await paths.documents();
+      textContent.push(`documents:[${documents}]`);
 
-      const home = await homeDir();
+      const home = await paths.home();
       textContent.push(`home:[${home}]`);
-
-      const localData = await localDataDir();
-      textContent.push(`localData:[${localData}]`);
-
-      const resource = await resourceDir();
-      textContent.push(`resource:[${resource}]`);
-
-      const appConfig = await appConfigDir();
-      textContent.push(`appConfig:[${appConfig}]`);
-
-      const appData = await appDataDir();
-      textContent.push(`appData:[${appData}]`);
-
-      const appLocalData = await appLocalDataDir();
-      textContent.push(`appLocalData:[${appLocalData}]`);
-
-      const appCache = await appCacheDir();
-      textContent.push(`appCache:[${appCache}]`);
 
       container.textContent = textContent.join('\n');
     } catch (e) {

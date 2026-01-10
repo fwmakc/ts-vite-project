@@ -1,6 +1,11 @@
 import * as path from 'path';
+import { fileURLToPath } from 'url';
 
+// import { app, BrowserWindow, ipcMain } from 'electron';
 import { app, BrowserWindow } from 'electron';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Глобальный обработчик необработанных ошибок
 // Завершаем процесс с кодом ошибки
@@ -38,12 +43,16 @@ function createWindow(): void {
     minWidth: 800,
     minHeight: 600,
     webPreferences: {
-      nodeIntegration: true,
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: false,
       contextIsolation: true,
     },
   });
 
   window.loadFile('dist/index.html');
+  // window.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
+
+  // window.webContents.openDevTools();
 }
 
 async function handleSquirrelEvent(): Promise<boolean> {
@@ -122,6 +131,13 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 app.whenReady().then(() => {
+  // ipcMain.handle('get-path', (_event, pathName) => {
+  //   if (pathName === 'appPath') {
+  //     return app.getAppPath();
+  //   }
+  //   return app.getPath(pathName);
+  // });
+
   createWindow();
 
   app.on('activate', () => {

@@ -1,35 +1,22 @@
-// import { APP } from '../../libs/app-info';
+import { APP } from '../../libs/app-info';
 
 import { readDirectoryByCapacitorTarget } from './helpers/read_directory_by_capacitor_target.helper';
 import { readDirectoryByElectronTarget } from './helpers/read_directory_by_electron_target.helper';
 import { readDirectoryByTauriTarget } from './helpers/read_directory_by_tauri_target.helper';
-import { readDirectoryContentByCapacitorTarget } from './helpers/read_directory_content_by_capacitor_target.helper';
 import { readFileByBrowser } from './helpers/read_file_by_browser.helper';
 import { readFileByCapacitorTarget } from './helpers/read_file_by_capacitor_target.helper';
+import { readFileByElectronTarget } from './helpers/read_file_by_electron_target.helper';
 import { readFileByFetchTarget } from './helpers/read_file_by_fetch_target.helper';
-import { readFileByNodeTarget } from './helpers/read_file_by_node_target.helper';
 import { readFileByTauriTarget } from './helpers/read_file_by_tauri_target.helper';
 import { readFileByWebApi } from './helpers/read_file_by_web_api.helper';
 import { writeFileByBrowser } from './helpers/write_file_by_browser.helper';
 import { writeFileByCapacitorTarget } from './helpers/write_file_by_capacitor_target.helper';
-import { writeFileByNodeTarget } from './helpers/write_file_by_node_target.helper';
+import { writeFileByElectronTarget } from './helpers/write_file_by_electron_target.helper';
 import { writeFileByTauriTarget } from './helpers/write_file_by_tauri_target.helper';
 import { writeFileByWebApi } from './helpers/write_file_by_web_api.helper';
 
 export default function (): void {
   document.querySelector<HTMLDivElement>('#app #file-component')!.innerHTML = `
-  <div class="row">
-    <div class="col">
-      <div id="ReadDirectoryContentByCapacitorTarget">
-        <h3>ReadDirectoryContentByCapacitorTarget</h3>
-        <div class="file_content">здесь будет содержимое файла</div>
-        <input type="text" class="input full-width file" value="">
-        <input type="text" class="input full-width dir" value="external">
-        <input type="button" class="button" value="Открыть">
-      </div>
-    </div>
-  </div>
-
   <div class="row">
     <div class="col">
       <div id="ReadDirectoryByCapacitorTarget">
@@ -97,7 +84,6 @@ export default function (): void {
         <h3>ReadFileByCapacitorTarget</h3>
         <div class="file_content">здесь будет содержимое файла</div>
         <input type="text" class="input full-width file" value="assets/public/files/example.txt">
-        <input type="text" class="input full-width dir" value="data">
         <input type="button" class="button" value="Открыть">
       </div>
     </div>
@@ -113,16 +99,16 @@ export default function (): void {
 
   <div class="row">
     <div class="col">
-      <div id="ReadFileByNodeTarget">
-        <h3>ReadFileByNodeTarget</h3>
+      <div id="ReadFileByElectronTarget">
+        <h3>ReadFileByElectronTarget</h3>
         <div class="file_content">здесь будет содержимое файла</div>
         <input type="text" class="input full-width" value="./files/example.txt">
         <input type="button" class="button" value="Открыть">
       </div>
     </div>
     <div class="col">
-      <div id="WriteFileByNodeTarget">
-        <h3>WriteFileByNodeTarget</h3>
+      <div id="WriteFileByElectronTarget">
+        <h3>WriteFileByElectronTarget</h3>
         <textarea class="file_content full-width">ваше содержимое файла</textarea>
         <input type="button" class="button" value="Сохранить">
         <div class="status"></div>
@@ -171,55 +157,38 @@ export default function (): void {
 
   // Directory
 
-  // if (APP.isCapacitor) {
-  readDirectoryContentByCapacitorTarget(
-    document.querySelector<HTMLDivElement>(
-      '#ReadDirectoryContentByCapacitorTarget .file_content',
-    )!,
-    document.querySelector<HTMLInputElement>(
-      '#ReadDirectoryContentByCapacitorTarget .input.file',
-    )!,
-    document.querySelector<HTMLInputElement>(
-      '#ReadDirectoryContentByCapacitorTarget .input.dir',
-    )!,
-    document.querySelector<HTMLButtonElement>(
-      '#ReadDirectoryContentByCapacitorTarget .button',
-    )!,
-  );
-  // }
+  if (APP.isCapacitor) {
+    readDirectoryByCapacitorTarget(
+      document.querySelector<HTMLDivElement>(
+        '#ReadDirectoryByCapacitorTarget .file_content',
+      )!,
+      document.querySelector<HTMLButtonElement>(
+        '#ReadDirectoryByCapacitorTarget .button',
+      )!,
+    );
+  }
 
-  // if (APP.isCapacitor) {
-  readDirectoryByCapacitorTarget(
-    document.querySelector<HTMLDivElement>(
-      '#ReadDirectoryByCapacitorTarget .file_content',
-    )!,
-    document.querySelector<HTMLButtonElement>(
-      '#ReadDirectoryByCapacitorTarget .button',
-    )!,
-  );
-  // }
+  if (APP.isElectron) {
+    readDirectoryByElectronTarget(
+      document.querySelector<HTMLDivElement>(
+        '#ReadDirectoryByElectronTarget .file_content',
+      )!,
+      document.querySelector<HTMLButtonElement>(
+        '#ReadDirectoryByElectronTarget .button',
+      )!,
+    );
+  }
 
-  // if (APP.isElectron) {
-  readDirectoryByElectronTarget(
-    document.querySelector<HTMLDivElement>(
-      '#ReadDirectoryByElectronTarget .file_content',
-    )!,
-    document.querySelector<HTMLButtonElement>(
-      '#ReadDirectoryByElectronTarget .button',
-    )!,
-  );
-  // }
-
-  // if (APP.isTauri) {
-  readDirectoryByTauriTarget(
-    document.querySelector<HTMLDivElement>(
-      '#ReadDirectoryByTauriTarget .file_content',
-    )!,
-    document.querySelector<HTMLButtonElement>(
-      '#ReadDirectoryByTauriTarget .button',
-    )!,
-  );
-  // }
+  if (APP.isTauri) {
+    readDirectoryByTauriTarget(
+      document.querySelector<HTMLDivElement>(
+        '#ReadDirectoryByTauriTarget .file_content',
+      )!,
+      document.querySelector<HTMLButtonElement>(
+        '#ReadDirectoryByTauriTarget .button',
+      )!,
+    );
+  }
 
   // Fetch
 
@@ -271,9 +240,6 @@ export default function (): void {
     document.querySelector<HTMLInputElement>(
       '#ReadFileByCapacitorTarget .input.file',
     )!,
-    document.querySelector<HTMLInputElement>(
-      '#ReadFileByCapacitorTarget .input.dir',
-    )!,
     document.querySelector<HTMLButtonElement>(
       '#ReadFileByCapacitorTarget .button',
     )!,
@@ -291,24 +257,30 @@ export default function (): void {
     )!,
   );
 
-  // Node
+  // Electron
 
-  readFileByNodeTarget(
+  readFileByElectronTarget(
     document.querySelector<HTMLDivElement>(
-      '#ReadFileByNodeTarget .file_content',
+      '#ReadFileByElectronTarget .file_content',
     )!,
-    document.querySelector<HTMLInputElement>('#ReadFileByNodeTarget .input')!,
-    document.querySelector<HTMLButtonElement>('#ReadFileByNodeTarget .button')!,
-  );
-
-  writeFileByNodeTarget(
-    document.querySelector<HTMLTextAreaElement>(
-      '#WriteFileByNodeTarget .file_content',
+    document.querySelector<HTMLInputElement>(
+      '#ReadFileByElectronTarget .input',
     )!,
     document.querySelector<HTMLButtonElement>(
-      '#WriteFileByNodeTarget .button',
+      '#ReadFileByElectronTarget .button',
     )!,
-    document.querySelector<HTMLDivElement>('#WriteFileByNodeTarget .status')!,
+  );
+
+  writeFileByElectronTarget(
+    document.querySelector<HTMLTextAreaElement>(
+      '#WriteFileByElectronTarget .file_content',
+    )!,
+    document.querySelector<HTMLButtonElement>(
+      '#WriteFileByElectronTarget .button',
+    )!,
+    document.querySelector<HTMLDivElement>(
+      '#WriteFileByElectronTarget .status',
+    )!,
   );
 
   // Tauri

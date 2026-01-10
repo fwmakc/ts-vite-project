@@ -1,4 +1,4 @@
-import { Directory, Filesystem } from '@capacitor/filesystem';
+import { CapacitorPaths } from '../../../libs/fs';
 
 export async function readDirectoryByCapacitorTarget(
   container: HTMLDivElement,
@@ -10,59 +10,22 @@ export async function readDirectoryByCapacitorTarget(
     try {
       const textContent: string[] = [];
 
-      const Cache = await Filesystem.getUri({
-        directory: Directory.Cache,
-        path: 'test.txt',
-      });
-      textContent.push(`Cache:[${Cache.uri}]`);
+      const paths = new CapacitorPaths();
 
-      const Data = await Filesystem.getUri({
-        directory: Directory.Data,
-        path: 'test.txt',
-      });
-      textContent.push(`Data:[${Data.uri}]`);
+      const app = await paths.app();
+      textContent.push(`app:[${app}]`);
 
-      const Documents = await Filesystem.getUri({
-        directory: Directory.Documents,
-        path: 'test.txt',
-      });
-      textContent.push(`Documents:[${Documents.uri}]`);
+      const cache = await paths.cache();
+      textContent.push(`cache:[${cache}]`);
 
-      const Library = await Filesystem.getUri({
-        directory: Directory.Library,
-        path: 'test.txt',
-      });
-      textContent.push(`Library:[${Library.uri}]`);
+      const data = await paths.data();
+      textContent.push(`data:[${data}]`);
 
-      const LibraryNoCloud = await Filesystem.getUri({
-        directory: Directory.LibraryNoCloud,
-        path: 'test.txt',
-      });
-      textContent.push(`LibraryNoCloud:[${LibraryNoCloud.uri}]`);
+      const documents = await paths.documents();
+      textContent.push(`documents:[${documents}]`);
 
-      const External = await Filesystem.getUri({
-        directory: Directory.External,
-        path: 'test.txt',
-      });
-      textContent.push(`External:[${External.uri}]`);
-
-      const ExternalStorage = await Filesystem.getUri({
-        directory: Directory.ExternalStorage,
-        path: 'test.txt',
-      });
-      textContent.push(`ExternalStorage:[${ExternalStorage.uri}]`);
-
-      const ExternalCache = await Filesystem.getUri({
-        directory: Directory.ExternalCache,
-        path: 'test.txt',
-      });
-      textContent.push(`ExternalCache:[${ExternalCache.uri}]`);
-
-      const Temporary = await Filesystem.getUri({
-        directory: Directory.Temporary,
-        path: 'test.txt',
-      });
-      textContent.push(`Temporary:[${Temporary.uri}]`);
+      const home = await paths.home();
+      textContent.push(`home:[${home}]`);
 
       container.textContent = textContent.join('\n');
     } catch (e) {

@@ -1,7 +1,7 @@
-import { NodeFile } from '../../../libs/fs';
+import { ElectronFile, ElectronPaths } from '../../../libs/fs';
 import { fileHandle } from '../consts/file_handle.const';
 
-export async function readFileByNodeTarget(
+export async function readFileByElectronTarget(
   container: HTMLDivElement,
   input: HTMLInputElement,
   button: HTMLButtonElement,
@@ -12,7 +12,10 @@ export async function readFileByNodeTarget(
     const fileName = input.value;
 
     try {
-      const file = new NodeFile(fileName);
+      const paths = new ElectronPaths();
+      const defaultDir = await paths.documents();
+
+      const file = new ElectronFile(fileName, defaultDir);
 
       const content = await file.read();
       const handle = file.get();

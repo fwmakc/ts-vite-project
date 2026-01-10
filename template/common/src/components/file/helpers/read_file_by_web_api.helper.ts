@@ -1,4 +1,4 @@
-import { WebApiFile } from '../../../libs/fs';
+import { WebApiFile, WebApiPaths } from '../../../libs/fs';
 import { fileHandle } from '../consts/file_handle.const';
 
 export async function readFileByWebApi(
@@ -18,11 +18,15 @@ export async function readFileByWebApi(
     ];
 
     try {
-      const file = new WebApiFile();
+      const paths = new WebApiPaths();
+      const defaultDir = await paths.documents();
 
-      await file.openDialog(undefined, fileTypes);
+      const file = new WebApiFile(undefined, defaultDir);
+
+      const handle = await file.openDialog(fileTypes);
+      file.set(handle);
+
       const content = await file.read();
-      const handle = file.get();
 
       container.textContent = content || '';
       fileHandle.value = handle!;
