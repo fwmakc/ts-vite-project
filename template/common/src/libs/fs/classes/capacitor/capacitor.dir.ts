@@ -1,11 +1,11 @@
 import type { Dir } from '../../interfaces/dir.interface';
-import type { ListOptions } from '../../interfaces/list.interface';
+import type { ListItem, ListOptions } from '../../interfaces/list.interface';
 
 import { copyDir } from './dir/copy.dir';
 import { createDir } from './dir/create.dir';
+import { getInfoDir } from './dir/get_info.dir';
 import { removeDir } from './dir/remove.dir';
 import { renameDir } from './dir/rename.dir';
-import { sizeDir } from './dir/size.dir';
 
 export class CapacitorDir implements Dir<string, string> {
   currentDir?: string;
@@ -34,6 +34,10 @@ export class CapacitorDir implements Dir<string, string> {
     this.currentDir = newDirPath;
   }
 
+  async info(): Promise<ListItem> {
+    return await getInfoDir(this.currentDir!);
+  }
+
   async list(_options?: ListOptions): Promise<string[]> {
     return await [];
   }
@@ -46,10 +50,6 @@ export class CapacitorDir implements Dir<string, string> {
   async rename(newDirPath: string): Promise<void> {
     await renameDir(this.currentDir!, newDirPath);
     this.currentDir = newDirPath;
-  }
-
-  async size(): Promise<number> {
-    return await sizeDir(this.currentDir!);
   }
 
   async selectDialog(defaultDir?: string): Promise<void> {

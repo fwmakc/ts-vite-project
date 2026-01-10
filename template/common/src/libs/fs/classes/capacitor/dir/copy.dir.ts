@@ -1,4 +1,4 @@
-import { Filesystem, Directory } from '@capacitor/filesystem';
+import { Filesystem } from '@capacitor/filesystem';
 
 export async function copyDir(
   oldFilePath: string,
@@ -6,14 +6,14 @@ export async function copyDir(
 ): Promise<void> {
   await Filesystem.mkdir({
     path: newFilePath,
-    directory: Directory.Documents,
+    // directory: Directory.Documents,
     recursive: true,
   });
 
   // Получаем содержимое старой папки
   const contents = await Filesystem.readdir({
     path: oldFilePath,
-    directory: Directory.Documents,
+    // directory: Directory.Documents,
   });
 
   for (const item of contents.files) {
@@ -25,13 +25,13 @@ export async function copyDir(
     } else {
       const fileData = await Filesystem.readFile({
         path: oldItemPath,
-        directory: Directory.Documents,
+        // directory: Directory.Documents,
       });
 
       await Filesystem.writeFile({
         path: newItemPath,
         data: fileData.data,
-        directory: Directory.Documents,
+        // directory: Directory.Documents,
       });
     }
   }

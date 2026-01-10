@@ -9,10 +9,17 @@ export interface ListItem {
   name?: string;
   fileName?: string;
   fileExtension?: string;
+  path?: string;
+  fullPath?: string;
+
   meta?: string;
   type?: 'dir' | 'file' | 'symlink';
-  path?: string;
   size?: number;
-  modifiedAt?: Date;
+
   createdAt?: Date;
+  modifiedAt?: Date;
+  ctime?: number;
+  mtime?: number;
+
+  stats?: string;
 }

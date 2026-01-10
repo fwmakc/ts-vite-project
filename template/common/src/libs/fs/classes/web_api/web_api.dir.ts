@@ -1,7 +1,8 @@
 import type { Dir } from '../../interfaces/dir.interface';
-import type { ListOptions } from '../../interfaces/list.interface';
+import type { ListItem, ListOptions } from '../../interfaces/list.interface';
 
 import { selectDirDialog } from './dialog/select_dir.dialog';
+import { getInfoDir } from './dir/get_info.dir';
 
 export class WebApiDir implements Dir<
   FileSystemDirectoryHandle,
@@ -31,6 +32,10 @@ export class WebApiDir implements Dir<
     this.currentDir = newDir;
   }
 
+  async info(): Promise<ListItem> {
+    return await getInfoDir(this.currentDir);
+  }
+
   async list(_options?: ListOptions): Promise<FileSystemFileHandle[]> {
     return await [];
   }
@@ -41,10 +46,6 @@ export class WebApiDir implements Dir<
 
   async rename(newDir: FileSystemDirectoryHandle): Promise<void> {
     this.currentDir = newDir;
-  }
-
-  async size(): Promise<number> {
-    return 0;
   }
 
   async selectDialog(defaultDir?: FileSystemDirectoryHandle): Promise<void> {

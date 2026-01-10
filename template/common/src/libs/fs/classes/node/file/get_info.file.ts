@@ -16,6 +16,14 @@ export async function getInfoFile(fileName: string): Promise<ListItem> {
     type = 'symlink';
   }
 
+  let stats = '';
+
+  try {
+    stats = JSON.stringify(fileInfo);
+  } catch (e) {
+    console.log(e);
+  }
+
   return {
     path: fileName,
     size: fileInfo.size,
@@ -24,5 +32,10 @@ export async function getInfoFile(fileName: string): Promise<ListItem> {
 
     modifiedAt: fileInfo.mtime || undefined,
     createdAt: fileInfo.birthtime || undefined,
+
+    ctime: Number(fileInfo.birthtime),
+    mtime: Number(fileInfo.mtime),
+
+    stats,
   };
 }

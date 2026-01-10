@@ -15,7 +15,7 @@ export async function writeFileByCapacitorTarget(
 
     try {
       const paths = new CapacitorPaths();
-      const defaultDir = await paths.documents();
+      const defaultDir = await paths.home();
 
       const file = new CapacitorFile(fileName, defaultDir);
 

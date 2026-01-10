@@ -1,28 +1,34 @@
 import type { DefaultPaths } from '../../interfaces/default_paths.interface';
 
+import { selectDirDialog } from './dialog/select_dir.dialog';
+
 export class WebApiPaths implements DefaultPaths<FileSystemDirectoryHandle> {
+  directoryHandle?: FileSystemDirectoryHandle;
+
   async app(): Promise<FileSystemDirectoryHandle> {
-    const app = new FileSystemDirectoryHandle();
-    return await app.getDirectoryHandle('');
+    return await this.getHandle();
   }
 
   async cache(): Promise<FileSystemDirectoryHandle> {
-    const cache = new FileSystemDirectoryHandle();
-    return await cache.getDirectoryHandle('');
+    return await this.getHandle();
   }
 
   async data(): Promise<FileSystemDirectoryHandle> {
-    const data = new FileSystemDirectoryHandle();
-    return await data.getDirectoryHandle('');
+    return await this.getHandle();
   }
 
   async documents(): Promise<FileSystemDirectoryHandle> {
-    const documents = new FileSystemDirectoryHandle();
-    return await documents.getDirectoryHandle('documents');
+    return await this.getHandle();
   }
 
   async home(): Promise<FileSystemDirectoryHandle> {
-    const home = new FileSystemDirectoryHandle();
-    return await home.getDirectoryHandle('/');
+    return await this.getHandle();
+  }
+
+  async getHandle(): Promise<FileSystemDirectoryHandle> {
+    if (!this.directoryHandle) {
+      this.directoryHandle = await selectDirDialog();
+    }
+    return this.directoryHandle;
   }
 }

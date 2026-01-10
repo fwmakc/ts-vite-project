@@ -1,8 +1,7 @@
-import * as path from 'path';
+export const electronPathsAPI = async (): Promise<void> => {
+  const path = await import('path');
+  const { contextBridge, ipcRenderer } = await import('electron');
 
-import { contextBridge, ipcRenderer } from 'electron';
-
-export const electronPathsAPI = (): void => {
   contextBridge.exposeInMainWorld('electronPathsAPI', {
     app: async () => {
       return await ipcRenderer.invoke('get-path', 'assets');

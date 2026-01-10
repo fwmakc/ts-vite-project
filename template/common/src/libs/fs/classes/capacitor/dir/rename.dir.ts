@@ -1,4 +1,4 @@
-import { Filesystem, Directory } from '@capacitor/filesystem';
+import { Filesystem } from '@capacitor/filesystem';
 
 export async function renameDir(
   oldPath: string,
@@ -7,6 +7,6 @@ export async function renameDir(
   await Filesystem.rename({
     from: oldPath,
     to: newPath,
-    directory: Directory.Documents,
+    // directory: Directory.Documents,
   });
 }

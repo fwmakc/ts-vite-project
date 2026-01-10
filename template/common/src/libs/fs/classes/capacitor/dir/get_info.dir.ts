@@ -1,15 +1,12 @@
-import type { Directory } from '@capacitor/filesystem';
 import { Filesystem } from '@capacitor/filesystem';
 
 import type { ListItem } from '../../../interfaces/list.interface';
 
-export async function getInfoFile(
-  fileName: string,
-  directory?: Directory,
-): Promise<ListItem> {
+import { sizeDir } from './size.dir';
+
+export async function getInfoDir(directory: string): Promise<ListItem> {
   const fileInfo = await Filesystem.stat({
-    path: fileName,
-    directory,
+    path: directory,
   });
 
   let type: ListItem['type'];
@@ -20,6 +17,8 @@ export async function getInfoFile(
     type = 'dir';
   }
 
+  const size = await sizeDir(directory);
+
   let stats = '';
 
   try {
@@ -29,9 +28,11 @@ export async function getInfoFile(
   }
 
   return {
-    path: fileName,
+    name: directory,
+    path: directory,
     fullPath: fileInfo.uri,
-    size: fileInfo.size,
+    // size: fileInfo.size,
+    size,
 
     type,
 

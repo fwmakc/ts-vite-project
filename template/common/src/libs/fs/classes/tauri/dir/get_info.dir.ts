@@ -3,8 +3,10 @@ import { stat } from '@tauri-apps/plugin-fs';
 
 import type { ListItem } from '../../../interfaces/list.interface';
 
-export async function getInfoFile(fileName: string): Promise<ListItem> {
-  const fileInfo = await stat(fileName);
+import { sizeDir } from './size.dir';
+
+export async function getInfoDir(currentDir: string): Promise<ListItem> {
+  const fileInfo = await stat(currentDir);
 
   let type: ListItem['type'];
   if (fileInfo.isFile) {
@@ -17,9 +19,11 @@ export async function getInfoFile(fileName: string): Promise<ListItem> {
     type = 'symlink';
   }
 
-  const fileExtension = await extname(fileName);
-  const name = await basename(fileName);
-  const fullPath = await dirname(fileName);
+  const fileExtension = await extname(currentDir);
+  const name = await basename(currentDir);
+  const fullPath = await dirname(currentDir);
+
+  const size = await sizeDir(currentDir);
 
   let stats = '';
 
@@ -30,8 +34,9 @@ export async function getInfoFile(fileName: string): Promise<ListItem> {
   }
 
   return {
-    path: fileName,
-    size: fileInfo.size,
+    path: currentDir,
+    // size: fileInfo.size,
+    size,
 
     fileExtension,
     name,

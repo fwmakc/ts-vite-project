@@ -21,6 +21,14 @@ export async function getInfoFile(
     fileName = fileNames.join('.');
   }
 
+  let stats = '';
+
+  try {
+    stats = JSON.stringify(fileInfo);
+  } catch (e) {
+    console.log(e);
+  }
+
   return {
     name: fileInfo.name,
     fileName,
@@ -29,5 +37,7 @@ export async function getInfoFile(
     type: 'file',
     size: fileInfo.size,
     modifiedAt: new Date(fileInfo.lastModified),
+
+    stats,
   };
 }

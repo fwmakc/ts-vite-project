@@ -18,10 +18,12 @@ export async function readFileByWebApi(
     ];
 
     try {
-      const paths = new WebApiPaths();
-      const defaultDir = await paths.documents();
+      if (!fileHandle.dir) {
+        const paths = new WebApiPaths();
+        fileHandle.dir = await paths.documents();
+      }
 
-      const file = new WebApiFile(undefined, defaultDir);
+      const file = new WebApiFile(undefined, fileHandle.dir);
 
       const handle = await file.openDialog(fileTypes);
       file.set(handle);
@@ -29,9 +31,9 @@ export async function readFileByWebApi(
       const content = await file.read();
 
       container.textContent = content || '';
-      fileHandle.value = handle!;
+      fileHandle.file = handle!;
 
-      status.textContent = `Открытый файл: ${fileHandle.value?.name || ''}`;
+      status.textContent = `Открытый файл: ${fileHandle.file?.name || ''}`;
     } catch (e) {
       container.textContent = '';
       status.textContent = `Error: ${(e as Error)?.message || 'unknown'}`;

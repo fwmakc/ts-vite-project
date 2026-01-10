@@ -13,7 +13,7 @@ export async function readFileByCapacitorTarget(
 
     try {
       const paths = new CapacitorPaths();
-      const defaultDir = await paths.documents();
+      const defaultDir = await paths.home();
 
       const file = new CapacitorFile(fileName, defaultDir);
 

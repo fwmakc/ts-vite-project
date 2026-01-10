@@ -1,9 +1,11 @@
 import type { ListItem } from '../../../interfaces/list.interface';
 
-export async function getInfoFile(fileName: string): Promise<ListItem> {
+import { sizeDir } from './size.dir';
+
+export async function getInfoDir(currentDir: string): Promise<ListItem> {
   const { stat } = await import('fs/promises');
 
-  const fileInfo = await stat(fileName);
+  const fileInfo = await stat(currentDir);
 
   let type: ListItem['type'];
   if (fileInfo.isFile()) {
@@ -16,6 +18,8 @@ export async function getInfoFile(fileName: string): Promise<ListItem> {
     type = 'symlink';
   }
 
+  const size = await sizeDir(currentDir);
+
   let stats = '';
 
   try {
@@ -25,16 +29,14 @@ export async function getInfoFile(fileName: string): Promise<ListItem> {
   }
 
   return {
-    path: fileName,
-    size: fileInfo.size,
+    path: currentDir,
+    // size: fileInfo.size,
+    size,
 
     type,
 
     modifiedAt: fileInfo.mtime || undefined,
     createdAt: fileInfo.birthtime || undefined,
-
-    ctime: Number(fileInfo.birthtime),
-    mtime: Number(fileInfo.mtime),
 
     stats,
   };

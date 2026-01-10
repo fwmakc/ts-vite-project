@@ -1,9 +1,9 @@
-import { Filesystem, Directory } from '@capacitor/filesystem';
+import { Filesystem } from '@capacitor/filesystem';
 
 export async function sizeDir(dirPath: string): Promise<number> {
   const result = await Filesystem.readdir({
     path: dirPath,
-    directory: Directory.Documents,
+    // directory: Directory.Documents,
   });
 
   let totalSize = 0;
