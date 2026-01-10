@@ -7,21 +7,8 @@ export async function getInfoDir(
     return {};
   }
 
-  let stats = '';
-
-  try {
-    stats = JSON.stringify(dirHandle);
-  } catch (e) {
-    console.log(e);
-  }
-
   return {
     name: dirHandle.name,
-    path: '',
-    fullPath: '',
     type: 'dir',
-    size: 0,
-
-    stats,
   };
 }

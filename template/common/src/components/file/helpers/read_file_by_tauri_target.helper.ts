@@ -21,6 +21,10 @@ export async function readFileByTauriTarget(
       const handle = file.get();
 
       container.textContent = content || '';
+
+      const fileInfo = await file.info();
+      container.textContent += '\n\n' + fileInfo.stats;
+
       fileHandle.value = handle!;
     } catch (e) {
       container.textContent = `Error: ${(e as Error)?.message || 'unknown'}`;

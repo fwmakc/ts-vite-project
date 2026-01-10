@@ -31,6 +31,10 @@ export async function readFileByWebApi(
       const content = await file.read();
 
       container.textContent = content || '';
+
+      const fileInfo = await file.info();
+      container.textContent += '\n\n' + JSON.stringify(fileInfo);
+
       fileHandle.file = handle!;
 
       status.textContent = `Открытый файл: ${fileHandle.file?.name || ''}`;

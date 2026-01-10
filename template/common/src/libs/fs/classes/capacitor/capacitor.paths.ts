@@ -1,25 +1,70 @@
-import { Directory } from '@capacitor/filesystem';
+import { Directory, Filesystem } from '@capacitor/filesystem';
 
 import type { DefaultPaths } from '../../interfaces/default_paths.interface';
 
-export class CapacitorPaths implements DefaultPaths<Directory> {
-  async app(): Promise<Directory> {
-    return Directory.External;
+interface CapacitorDirType {
+  target: Directory;
+  uri: string;
+}
+
+export class CapacitorPaths implements DefaultPaths<CapacitorDirType> {
+  async app(): Promise<CapacitorDirType> {
+    const target = Directory.External;
+    const path = await Filesystem.getUri({
+      path: '',
+      directory: target,
+    });
+    return {
+      target,
+      uri: path.uri,
+    };
   }
 
-  async cache(): Promise<Directory> {
-    return Directory.Cache;
+  async cache(): Promise<CapacitorDirType> {
+    const target = Directory.Cache;
+    const path = await Filesystem.getUri({
+      path: '',
+      directory: target,
+    });
+    return {
+      target,
+      uri: path.uri,
+    };
   }
 
-  async data(): Promise<Directory> {
-    return Directory.Data;
+  async data(): Promise<CapacitorDirType> {
+    const target = Directory.Data;
+    const path = await Filesystem.getUri({
+      path: '',
+      directory: target,
+    });
+    return {
+      target,
+      uri: path.uri,
+    };
   }
 
-  async documents(): Promise<Directory> {
-    return Directory.Documents;
+  async documents(): Promise<CapacitorDirType> {
+    const target = Directory.Documents;
+    const path = await Filesystem.getUri({
+      path: '',
+      directory: target,
+    });
+    return {
+      target,
+      uri: path.uri,
+    };
   }
 
-  async home(): Promise<Directory> {
-    return Directory.ExternalStorage;
+  async home(): Promise<CapacitorDirType> {
+    const target = Directory.ExternalStorage;
+    const path = await Filesystem.getUri({
+      path: '',
+      directory: target,
+    });
+    return {
+      target,
+      uri: path.uri,
+    };
   }
 }

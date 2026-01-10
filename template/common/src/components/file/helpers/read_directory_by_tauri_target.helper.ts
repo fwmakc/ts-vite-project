@@ -1,4 +1,4 @@
-import { TauriPaths } from '../../../libs/fs';
+import { TauriDir, TauriPaths } from '../../../libs/fs';
 
 export async function readDirectoryByTauriTarget(
   container: HTMLDivElement,
@@ -26,6 +26,10 @@ export async function readDirectoryByTauriTarget(
 
       const home = await paths.home();
       textContent.push(`home:[${home}]`);
+
+      const dir = new TauriDir(home);
+      const dirInfo = await dir.info();
+      textContent.push(`dirInfo:[${dirInfo.stats}]`);
 
       container.textContent = textContent.join('\n');
     } catch (e) {

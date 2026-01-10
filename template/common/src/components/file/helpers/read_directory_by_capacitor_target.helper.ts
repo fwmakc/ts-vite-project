@@ -1,4 +1,4 @@
-import { CapacitorPaths } from '../../../libs/fs';
+import { CapacitorDir, CapacitorPaths } from '../../../libs/fs';
 
 export async function readDirectoryByCapacitorTarget(
   container: HTMLDivElement,
@@ -13,19 +13,23 @@ export async function readDirectoryByCapacitorTarget(
       const paths = new CapacitorPaths();
 
       const app = await paths.app();
-      textContent.push(`app:[${app}]`);
+      textContent.push(`app:[${app.uri}]`);
 
       const cache = await paths.cache();
-      textContent.push(`cache:[${cache}]`);
+      textContent.push(`cache:[${cache.uri}]`);
 
       const data = await paths.data();
-      textContent.push(`data:[${data}]`);
+      textContent.push(`data:[${data.uri}]`);
 
       const documents = await paths.documents();
-      textContent.push(`documents:[${documents}]`);
+      textContent.push(`documents:[${documents.uri}]`);
 
       const home = await paths.home();
-      textContent.push(`home:[${home}]`);
+      textContent.push(`home:[${home.uri}]`);
+
+      const dir = new CapacitorDir(home.uri);
+      const dirInfo = await dir.info();
+      textContent.push(`dirInfo:[${dirInfo.stats}]`);
 
       container.textContent = textContent.join('\n');
     } catch (e) {

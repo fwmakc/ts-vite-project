@@ -1,7 +1,7 @@
 import type { ListItem } from '../../../interfaces/list.interface';
 
 export async function getInfoFile(
-  fileHandle: FileSystemFileHandle | null,
+  fileHandle: FileSystemFileHandle,
 ): Promise<ListItem> {
   if (!fileHandle) {
     return {};
@@ -21,23 +21,16 @@ export async function getInfoFile(
     fileName = fileNames.join('.');
   }
 
-  let stats = '';
-
-  try {
-    stats = JSON.stringify(fileInfo);
-  } catch (e) {
-    console.log(e);
-  }
-
   return {
     name: fileInfo.name,
     fileName,
     fileExtension,
+
     meta: fileInfo.type,
     type: 'file',
     size: fileInfo.size,
-    modifiedAt: new Date(fileInfo.lastModified),
 
-    stats,
+    modifiedAt: new Date(fileInfo.lastModified),
+    mtime: fileInfo.lastModified,
   };
 }
