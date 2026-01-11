@@ -1,6 +1,6 @@
 export const electronPathsAPI = async (): Promise<void> => {
-  const path = await import('path');
   const { contextBridge, ipcRenderer } = await import('electron');
+  const path = await import('path');
 
   contextBridge.exposeInMainWorld('electronPathsAPI', {
     app: async () => {
@@ -24,5 +24,13 @@ export const electronPathsAPI = async (): Promise<void> => {
     home: async () => {
       return await ipcRenderer.invoke('get-path', 'home');
     },
+  });
+};
+
+export const electronPathsAPIHandle = async (): Promise<void> => {
+  const { app, ipcMain } = await import('electron');
+
+  ipcMain.handle('get-path', (_event, pathName) => {
+    return app.getPath(pathName);
   });
 };

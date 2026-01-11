@@ -1,8 +1,7 @@
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 
-// import { app, BrowserWindow, ipcMain } from 'electron';
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -131,12 +130,9 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 app.whenReady().then(() => {
-  // ipcMain.handle('get-path', (_event, pathName) => {
-  //   if (pathName === 'appPath') {
-  //     return app.getAppPath();
-  //   }
-  //   return app.getPath(pathName);
-  // });
+  ipcMain.handle('get-path', (_event, pathName) => {
+    return app.getPath(pathName);
+  });
 
   createWindow();
 

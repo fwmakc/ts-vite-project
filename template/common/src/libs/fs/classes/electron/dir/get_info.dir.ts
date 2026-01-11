@@ -5,9 +5,19 @@ import { sizeDir } from './size.dir';
 export async function getInfoDir(currentDir: string): Promise<ListItem> {
   const { stat } = await import('fs/promises');
 
-  const fileInfo = await stat(currentDir);
+  console.log('stat', currentDir);
+
+  let fileInfo: any = {};
+
+  try {
+    fileInfo = await stat(currentDir);
+    console.log('fileInfo', fileInfo);
+  } catch (e) {
+    console.log(e);
+  }
 
   let type: ListItem['type'];
+
   if (fileInfo.isFile()) {
     type = 'file';
   }
@@ -20,14 +30,6 @@ export async function getInfoDir(currentDir: string): Promise<ListItem> {
 
   const size = await sizeDir(currentDir);
 
-  let stats = '';
-
-  try {
-    stats = JSON.stringify(fileInfo);
-  } catch (e) {
-    console.log(e);
-  }
-
   return {
     path: currentDir,
     // size: fileInfo.size,
@@ -37,7 +39,5 @@ export async function getInfoDir(currentDir: string): Promise<ListItem> {
 
     modifiedAt: fileInfo.mtime || undefined,
     createdAt: fileInfo.birthtime || undefined,
-
-    stats,
   };
 }

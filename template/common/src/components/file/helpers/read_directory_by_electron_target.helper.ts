@@ -1,4 +1,5 @@
-import { ElectronDir, ElectronPaths } from '../../../libs/fs';
+// import { ElectronDir, ElectronPaths } from '../../../libs/fs';
+import { ElectronPaths } from '../../../libs/fs';
 
 export async function readDirectoryByElectronTarget(
   container: HTMLDivElement,
@@ -27,9 +28,10 @@ export async function readDirectoryByElectronTarget(
       const home = await paths.home();
       textContent.push(`home:[${home}]`);
 
-      const dir = new ElectronDir(home);
-      const dirInfo = await dir.info();
-      textContent.push(`dirInfo:[${dirInfo.stats}]`);
+      // const dir = new ElectronDir(app + '\\vk_swiftshader_icd.json');
+      // await dir.info();
+      // const dirInfo = await dir.info();
+      // textContent.push(`dirInfo:[${dirInfo.stats}]`);
 
       container.textContent = textContent.join('\n');
     } catch (e) {

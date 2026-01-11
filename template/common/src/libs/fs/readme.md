@@ -17,6 +17,22 @@
 
 Для **electron** есть отдельный дополнительный модуль **electronPathsAPI**, который нужно вызвать в **preload.js**.
 
+И обязательно добавить **electronPathsAPIHandle** в тело метода **app.whenReady**, перед созданием окна:
+
+```
+app.whenReady().then(() => {
+  ...
+
+  ipcMain.handle('get-path', (_event, pathName) => {
+    return app.getPath(pathName);
+  });
+
+  createWindow();
+
+  ...
+});
+```
+
 Для **capacitor** в файл **AndroidManifest.xml** по пути **build\capacitor\android\app\src\main** добавить строки:
 
 ```
