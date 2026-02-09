@@ -1,9 +1,10 @@
 import type { ILibraries } from '../interfaces/libraries.interface';
 import type { ILibrariesParams } from '../interfaces/libraries_params.interface';
 import { multiselect } from '../prompts/multiselect.prompt';
+import { packages } from '../consts/packages.const';
 
 export async function librariesPackage(): Promise<ILibraries> {
-  const options = ['electron', '  builder', '  forge', 'capacitor', 'tauri'];
+  const options = Object.keys(packages);
 
   const libraries = await multiselect(
     'Select extended project libraries',
@@ -11,89 +12,34 @@ export async function librariesPackage(): Promise<ILibraries> {
     true,
   );
 
-  const devDependencies: ILibrariesParams = {};
-  const dependencies: ILibrariesParams = {};
-  const scripts: ILibrariesParams = {};
   let main: string = '';
+  let dependencies: ILibrariesParams = {};
+  let devDependencies: ILibrariesParams = {};
+  let scripts: ILibrariesParams = {};
 
-  if (libraries.includes('capacitor')) {
-    scripts['capacitor:android'] = 'cap add android';
-    scripts['capacitor:ios'] = 'cap add ios';
-    scripts['capacitor:make'] =
-      'cap copy && cap sync && cap update && capacitor-assets generate --android --ios --assetPath public --androidProject build/capacitor/android --iosProject build/capacitor/ios/App';
-    scripts['capacitor:debug'] =
-      'cd build/capacitor/android && gradlew assembleDebug';
-    scripts['capacitor:release'] =
-      'cd build/capacitor/android && gradlew assembleRelease';
-    scripts['capacitor:compile'] =
-      'cross-env VITE_BUILD_TARGET=capacitor VITE_RUNTIME_PLATFORM=mobile npm run compile';
-    scripts['capacitor:dev'] =
-      'npm run capacitor:compile && npm run capacitor:make && npm run capacitor:debug';
-    scripts['capacitor:build'] =
-      'npm run capacitor:compile && npm run capacitor:make && npm run capacitor:release';
-
-    devDependencies['@capacitor/android'] = '^7.4.4';
-    devDependencies['@capacitor/assets'] = '^3.0.5';
-    devDependencies['@capacitor/cli'] = '^7.4.4';
-    devDependencies['@capacitor/core'] = '^7.4.4';
-    devDependencies['@capacitor/filesystem'] = '^8.0.0';
-    devDependencies['@capacitor/ios'] = '^7.4.4';
-  }
-
-  if (libraries.includes('electron')) {
-    main = 'electron/main.ts';
-
-    scripts['electron:compile'] =
-      'cross-env VITE_BUILD_TARGET=electron VITE_RUNTIME_PLATFORM=desktop npm run compile';
-    scripts['electron:preview'] = 'npm run electron:compile && electron .';
-
-    devDependencies['@types/electron-squirrel-startup'] = '^1.0.2';
-    devDependencies['electron'] = '^39.2.2';
-
-    dependencies['electron-squirrel-startup'] = '^1.0.1';
-
-    if (libraries.includes('builder')) {
-      scripts['electron:build'] =
-        'npm run electron:compile && electron-builder --config electron-builder.config.js';
-
-      devDependencies['electron-builder'] = '^26.0.12';
-      devDependencies['electron-builder-squirrel-windows'] = '^26.0.12';
+  for (const library of libraries) {
+    if (packages[library]?.main) {
+      main = packages[library]!.main;
     }
 
-    if (libraries.includes('forge')) {
-      scripts['electron:make'] =
-        'npm run electron:compile && electron-forge make';
-
-      devDependencies['@electron-forge/cli'] = '^7.10.2';
-      devDependencies['@electron-forge/maker-deb'] = '^7.10.2';
-      devDependencies['@electron-forge/maker-dmg'] = '^7.10.2';
-      devDependencies['@electron-forge/maker-rpm'] = '^7.10.2';
-      devDependencies['@electron-forge/maker-squirrel'] = '^7.10.2';
-      devDependencies['@electron-forge/maker-zip'] = '^7.10.2';
-      devDependencies['@electron-forge/plugin-auto-unpack-natives'] = '^7.10.2';
-      devDependencies['@electron-forge/plugin-fuses'] = '^7.10.2';
-      devDependencies['@electron/fuses'] = '^1.8.0';
+    if (packages[library]?.dependencies) {
+      dependencies = { ...dependencies, ...packages[library]!.dependencies };
     }
-  }
 
-  if (libraries.includes('tauri')) {
-    scripts['tauri:compile'] =
-      'cross-env VITE_BUILD_TARGET=tauri VITE_RUNTIME_PLATFORM=desktop npm run compile';
+    if (packages[library]?.devDependencies) {
+      devDependencies = { ...devDependencies, ...packages[library]!.devDependencies };
+    }
 
-    scripts['tauri:init'] = 'tauri init --force';
-    scripts['tauri:dev'] = 'tauri dev --config tauri.config.json';
-    scripts['tauri:build'] = 'tauri build --config tauri.config.json';
-
-    devDependencies['@tauri-apps/cli'] = '^2.9.5';
-    devDependencies['@tauri-apps/plugin-dialog'] = '~2';
-    devDependencies['@tauri-apps/plugin-fs'] = '~2';
+    if (packages[library]?.scripts) {
+      scripts = { ...scripts, ...packages[library]!.scripts };
+    }
   }
 
   return {
-    devDependencies,
-    dependencies,
-    scripts,
-    main,
     libraries,
+    main,
+    dependencies,
+    devDependencies,
+    scripts,
   };
 }

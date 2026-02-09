@@ -2,6 +2,7 @@ import path from 'path';
 
 import { copyFile } from '../helpers/copy_file.helper';
 import { copyRecursive } from '../helpers/copy_recursive.helper';
+import { packages } from '../consts/packages.const';
 
 export async function copyProject(
   sourceFolder: string,
@@ -11,36 +12,13 @@ export async function copyProject(
   // Копируем файлы из template
   copyRecursive(path.join(sourceFolder, 'template', 'common'), targetFolder);
 
-  if (libraries.includes('capacitor')) {
-    copyRecursive(
-      path.join(sourceFolder, 'template', 'capacitor'),
-      targetFolder,
-    );
-  }
-
-  if (libraries.includes('electron')) {
-    copyRecursive(
-      path.join(sourceFolder, 'template', 'electron'),
-      targetFolder,
-    );
-
-    if (libraries.includes('builder')) {
+  for (const library of libraries) {
+    if (packages[library]?.template) {
       copyRecursive(
-        path.join(sourceFolder, 'template', 'electron-builder'),
+        path.join(sourceFolder, 'template', packages[library]!.template),
         targetFolder,
       );
     }
-
-    if (libraries.includes('forge')) {
-      copyRecursive(
-        path.join(sourceFolder, 'template', 'electron-forge'),
-        targetFolder,
-      );
-    }
-  }
-
-  if (libraries.includes('tauri')) {
-    copyRecursive(path.join(sourceFolder, 'template', 'tauri'), targetFolder);
   }
 
   // Копируем остальные файлы

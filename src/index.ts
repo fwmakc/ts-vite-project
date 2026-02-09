@@ -34,13 +34,13 @@ async function main(): Promise<void> {
     await makeTargetFolder(projectFolder);
 
     // Копируем файлы проекта
-    await copyProject(sourceFolder, projectFolder, packageLibraries.libraries);
+    await copyProject(sourceFolder, projectFolder, packageLibraries.libraries!);
 
     // Обновляем package.json
     updatePackage(projectFolder, packageValues, packageLibraries);
 
     // Обновляем tauri.config.json
-    updateTauri(projectFolder, packageValues, packageLibraries.libraries);
+    updateTauri(projectFolder, packageValues, packageLibraries.libraries!);
 
     print(['✅ Project created successfully!']);
 
