@@ -33,7 +33,14 @@ export const packages: IPackagesLibraries = {
     },
   },
 
-  tailwind: {},
+  tailwind: {
+    template: 'tailwind',
+    devDependencies: {
+      autoprefixer: '^10.4.24',
+      postcss: '^8.5.6',
+      tailwindcss: '^4.1.18',
+    },
+  },
 
   electron: {
     template: 'electron',
