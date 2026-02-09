@@ -36,9 +36,9 @@ export const packages: IPackagesLibraries = {
   tailwind: {
     template: 'tailwind',
     devDependencies: {
+      '@tailwindcss/postcss': '^4.1.18',
       autoprefixer: '^10.4.24',
       postcss: '^8.5.6',
-      tailwindcss: '^4.1.18',
     },
   },
 
