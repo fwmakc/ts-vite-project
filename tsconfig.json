@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "lib": ["ES2022", "DOM", "Decorators"],
-    "types": ["node", "jest"],
+    "types": ["node"],
 
     "target": "ES2022",
     "module": "nodenext",
@@ -9,7 +9,11 @@
 
     "outDir": "./dist",
     "rootDir": "./src",
-    
+
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
     "strict": true,
     "declaration": true,
     "esModuleInterop": true,
@@ -22,7 +26,9 @@
     "removeComments": true,
     "strictNullChecks": true,
     "isolatedModules": true,
-    "noEmitOnError": true
+    "noEmitOnError": true,
+    "noImplicitAny": true,
+    "strictFunctionTypes": true
   },
   "include": [
     "src/**/*"
