@@ -5,7 +5,7 @@
 - TypeScript, Vite,
 - сборка под desktop с помощью Electron или Tauri,
 - сборка под mobile с помощью Capacitor,
-- автопроверки и форматирование ESLint, Prettier,
+- автопроверки и форматирование Biome, ESLint, Prettier,
 - автотесты Vitest,
 - модули ECMAScript (вместо CommonJS),
 - стандарт ES2022.

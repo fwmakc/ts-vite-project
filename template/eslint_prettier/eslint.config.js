@@ -122,10 +122,13 @@ export default [
   // Игнорируемые файлы
   {
     ignores: [
-      'node_modules/**',
-      'dist/**',
       'build/**',
       'coverage/**'
+      'dist/**',
+      'dist-ssr/**',
+      'node_modules/**',
+      'platforms/**',
+      'src-tauri/**',
     ],
   },
 ];

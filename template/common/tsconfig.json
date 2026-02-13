@@ -36,11 +36,12 @@
   ],
   "exclude": [
     "build",
+    "coverage",
     "dist",
     "dist-ssr",
+    "node_modules",
     "platforms",
     "src-tauri",
-    "node_modules",
     "**/*.case.ts",
     "**/*.test.ts",
     "**/*.spec.ts"

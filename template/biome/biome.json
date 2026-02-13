@@ -14,6 +14,9 @@
         "useConst": "error"
       },
       "complexity": {
+        "noUnusedVariables": "off"
+      },
+      "correctness": {
         "noUnusedVariables": {
           "level": "error",
           "options": {
@@ -21,10 +24,7 @@
             "varsIgnorePattern": "^_",
             "caughtErrorsIgnorePattern": "^_"
           }
-        }
-      },
-      "correctness": {
-        "noUnusedVariables": "error",
+        },
         "noExplicitAny": "warn"
       },
       "typescript": {
@@ -61,6 +61,7 @@
   "files": {
     "ignore": [
       "build/**",
+      "coverage/**",
       "dist/**",
       "dist-ssr/**",
       "platforms/**",
