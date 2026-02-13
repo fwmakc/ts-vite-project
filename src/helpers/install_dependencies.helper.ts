@@ -18,10 +18,12 @@ export async function installDependencies(targetFolder: string, runtime: IRuntim
     const { dependencies, devDependencies } = libraries;
 
     if (devDependencies?.length) {
+      console.log(`${addDev} ${devDependencies?.join(' ')}`);
       execSync(`${addDev} ${devDependencies?.join(' ')}`, { stdio: 'inherit' });
     }
 
     if (dependencies?.length) {
+      console.log(`${add} ${dependencies?.join(' ')}`);
       execSync(`${add} ${dependencies?.join(' ')}`, { stdio: 'inherit' });
     }  
 

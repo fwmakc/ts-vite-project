@@ -29,7 +29,7 @@ export const runtimes: IPackagesRuntimes = {
 
   'yarn': {
     run: 'yarn',
-    install: 'yarn add',
+    install: 'yarn install',
     add: 'yarn add',
     addDev: 'yarn add --dev',
     scripts: {
@@ -51,7 +51,7 @@ export const runtimes: IPackagesRuntimes = {
 
   deno: {
     run: 'deno task',
-    install: 'deno add',
+    install: 'deno install',
     add: 'deno add',
     addDev: 'deno add --dev',
     scripts: {
@@ -75,7 +75,7 @@ export const runtimes: IPackagesRuntimes = {
 
   bun: {
     run: 'bun',
-    install: 'bun add',
+    install: 'bun install',
     add: 'bun add',
     addDev: 'bun add -d',
     scripts: {
