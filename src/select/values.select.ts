@@ -3,7 +3,7 @@ import type { IPackage } from '../interfaces/package.interface';
 import { list } from '../prompts/list.prompt';
 import { question } from '../prompts/question.prompt';
 
-export async function valuesPackage(): Promise<IPackage> {
+export async function valuesSelect(): Promise<IPackage> {
   let {
     name,
     productName,

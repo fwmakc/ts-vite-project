@@ -6,9 +6,10 @@ import { installDependencies } from './helpers/install_dependencies.helper';
 import { makeTargetFolder } from './helpers/make_target_folder.helper';
 import { print } from './helpers/print.helper';
 import { updateTauri } from './helpers/update.tauri';
-import { librariesPackage } from './package/libraries.package';
 import { updatePackage } from './package/update.package';
-import { valuesPackage } from './package/values.package';
+import { librariesSelect } from './select/libraries.select';
+import { runtimeSelect } from './select/runtime.select';
+import { valuesSelect } from './select/values.select';
 
 async function main(): Promise<void> {
   print([
@@ -24,32 +25,33 @@ async function main(): Promise<void> {
   ]);
 
   try {
-    const packageValues = await valuesPackage();
-    const packageLibraries = await librariesPackage();
+    const values = await valuesSelect();
+    const runtime = await runtimeSelect();
+    const libraries = await librariesSelect(runtime);
 
-    const projectFolder = path.resolve(packageValues.name);
+    const projectFolder = path.resolve(values.name);
     const sourceFolder = path.resolve(__dirname, '..');
 
     // Проверяем и создаем каталог проекта
     await makeTargetFolder(projectFolder);
 
     // Копируем файлы проекта
-    await copyProject(sourceFolder, projectFolder, packageLibraries.libraries!);
+    await copyProject(sourceFolder, projectFolder, libraries.libraries!);
 
     // Обновляем package.json
-    updatePackage(projectFolder, packageValues, packageLibraries);
+    updatePackage(projectFolder, values, libraries);
 
     // Обновляем tauri.config.json
-    updateTauri(projectFolder, packageValues, packageLibraries.libraries!);
+    updateTauri(projectFolder, values, libraries.libraries!);
 
-    print(['✅ Project created successfully!']);
-
-    // Запрашиваем установку зависимостей
-    await installDependencies(projectFolder);
+    // Делаем установку зависимостей
+    await installDependencies(projectFolder, runtime, libraries);
 
     print([
+      '✅ Project created successfully!',
+      '',
       'Next steps:',
-      `📁 cd ${packageValues.name}`,
+      `📁 cd ${values.name}`,
       '📦 npm install',
       '⭐ npm run dev',
       '',

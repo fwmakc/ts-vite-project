@@ -7,7 +7,7 @@ import type { IPackage } from '../interfaces/package.interface';
 
 export function updatePackage(
   targetDir: string,
-  fields: IPackage,
+  values: IPackage,
   libraries: ILibraries,
 ): void {
   const packageJsonPath = path.join(targetDir, 'package.json');
@@ -16,26 +16,23 @@ export function updatePackage(
     error(`File not found: ${packageJsonPath}`, null);
   }
 
-  const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
+  let packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
 
-  // Обновляем только указанные поля
-  packageJson.name = fields.name;
-
-  if (fields.version) packageJson.version = fields.version;
-  if (fields.productName) packageJson.productName = fields.productName;
-  if (fields.description) packageJson.description = fields.description;
-  if (fields.author) packageJson.author = fields.author;
-  if (fields.repository) packageJson.repository = fields.repository;
-  if (fields.bugs) packageJson.bugs = fields.bugs;
-  if (fields.homepage) packageJson.homepage = fields.homepage;
-
-  if (libraries.main) packageJson.main = libraries.main;
-
-  if (libraries.scripts)
-    packageJson.scripts = {
+  packageJson = {
+    ...packageJson,
+    ...values,
+    main: libraries.main,
+    scripts: {
       ...packageJson.scripts,
       ...libraries.scripts,
-    };
+    },
+  }
+
+  try {
+    writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+  } catch (err) {
+    error('Error write package.json', err);
+  }
 
   if (libraries.devDependencies)
     packageJson.devDependencies = {
@@ -48,10 +45,4 @@ export function updatePackage(
       ...packageJson.dependencies,
       ...libraries.dependencies,
     };
-
-  try {
-    writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
-  } catch (err) {
-    error('Error write package.json', err);
-  }
 }

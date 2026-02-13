@@ -10,9 +10,9 @@ export const packages: IPackagesLibraries = {
     scripts: {
       lint: 'biome check --write .',
     },
-    devDependencies: {
-      '@biomejs/biome': '^2.3.14',
-    },
+    devDependencies: [
+      '@biomejs/biome',
+    ],
   },
 
   'eslint + prettier': {
@@ -20,71 +20,71 @@ export const packages: IPackagesLibraries = {
     scripts: {
       lint: 'eslint . --fix',
     },
-    devDependencies: {
-      '@eslint/js': '^9.39.1',
-      '@typescript-eslint/eslint-plugin': '^8.47.0',
-      '@typescript-eslint/parser': '^8.47.0',
-      'eslint': '^9.39.1',
-      'eslint-config-prettier': '^10.1.8',
-      'eslint-plugin-import': '^2.32.0',
-      'eslint-plugin-node': '^11.1.0',
-      'eslint-plugin-prettier': '^5.5.4',
-      'prettier': '^3.6.2',
-    },
+    devDependencies: [
+      '@eslint/js',
+      '@typescript-eslint/eslint-plugin',
+      '@typescript-eslint/parser',
+      'eslint',
+      'eslint-config-prettier',
+      'eslint-plugin-import',
+      'eslint-plugin-node',
+      'eslint-plugin-prettier',
+      'prettier',
+    ],
   },
 
   tailwind: {
     template: 'tailwind',
-    devDependencies: {
-      '@tailwindcss/postcss': '^4.1.18',
-      autoprefixer: '^10.4.24',
-      postcss: '^8.5.6',
-    },
+    devDependencies: [
+      '@tailwindcss/postcss',
+      'autoprefixer',
+      'postcss',
+    ],
   },
 
   electron: {
     template: 'electron',
     main: 'electron/main.ts',
     scripts: {
-      'electron:compile': 'cross-env VITE_BUILD_TARGET=electron VITE_RUNTIME_PLATFORM=desktop npm run compile',
-      'electron:preview': 'npm run electron:compile && electron .',
+      'electron:compile': 'cross-env VITE_BUILD_TARGET=electron VITE_RUNTIME_PLATFORM=desktop {runtime:run} compile',
+      'electron:preview': '{runtime:run} electron:compile && electron .',
     },
-    devDependencies: {
-      '@types/electron-squirrel-startup': '^1.0.2',
-      'electron': '^39.2.2',
-    },
-    dependencies: {
-      'electron-squirrel-startup': '^1.0.1',
-    },
+    devDependencies: [
+      '@types/electron-squirrel-startup',
+      'electron',
+    ],
+    dependencies: [
+      'electron-squirrel-startup',
+    ],
   },
 
   '- builder': {
     template: 'electron-builder',
     scripts: {
-      'electron:build': 'npm run electron:compile && electron-builder --config electron-builder.config.js',
+      'electron:build': '{runtime:run} electron:compile && electron-builder --config electron-builder.config.js',
     },
-    devDependencies: {
-      'electron-builder': '^26.0.12',
-      'electron-builder-squirrel-windows': '^26.0.12',
-    },
+    devDependencies: [
+      'electron-builder',
+      'electron-builder-squirrel-windows',
+    ],
   },
 
   '- forge': {
     template: 'electron-forge',
     scripts: {
-      'electron:make': 'npm run electron:compile && electron-forge make',
+      'electron:make': '{runtime:run} electron:compile && electron-forge make',
     },
-    devDependencies: {
-      '@electron-forge/cli': '^7.10.2',
-      '@electron-forge/maker-deb': '^7.10.2',
-      '@electron-forge/maker-dmg': '^7.10.2',
-      '@electron-forge/maker-rpm': '^7.10.2',
-      '@electron-forge/maker-squirrel': '^7.10.2',
-      '@electron-forge/maker-zip': '^7.10.2',
-      '@electron-forge/plugin-auto-unpack-natives': '^7.10.2',
-      '@electron-forge/plugin-fuses': '^7.10.2',
-      '@electron/fuses': '^1.8.0',
-    },
+    devDependencies: [
+      '@electron-forge/cli',
+      '@electron-forge/maker-deb',
+      '@electron-forge/maker-dmg',
+      '@electron-forge/maker-rpm',
+      '@electron-forge/maker-squirrel',
+      '@electron-forge/maker-zip',
+      '@electron-forge/plugin-auto-unpack-natives',
+      '@electron-forge/plugin-fuses',
+      '@electron/fuses',
+    ],
   },
 
   capacitor: {
@@ -95,32 +95,32 @@ export const packages: IPackagesLibraries = {
       'capacitor:make': 'cap copy && cap sync && cap update && capacitor-assets generate --android --ios --assetPath public --androidProject build/capacitor/android --iosProject build/capacitor/ios/App',
       'capacitor:debug': 'cd build/capacitor/android && gradlew assembleDebug',
       'capacitor:release': 'cd build/capacitor/android && gradlew assembleRelease',
-      'capacitor:compile': 'cross-env VITE_BUILD_TARGET=capacitor VITE_RUNTIME_PLATFORM=mobile npm run compile',
-      'capacitor:dev': 'npm run capacitor:compile && npm run capacitor:make && npm run capacitor:debug',
-      'capacitor:build': 'npm run capacitor:compile && npm run capacitor:make && npm run capacitor:release',
+      'capacitor:compile': 'cross-env VITE_BUILD_TARGET=capacitor VITE_RUNTIME_PLATFORM=mobile {runtime:run} compile',
+      'capacitor:dev': '{runtime:run} capacitor:compile && {runtime:run} capacitor:make && {runtime:run} capacitor:debug',
+      'capacitor:build': '{runtime:run} capacitor:compile && {runtime:run} capacitor:make && {runtime:run} capacitor:release',
     },
-    devDependencies: {
-      '@capacitor/android': '^7.4.4',
-      '@capacitor/assets': '^3.0.5',
-      '@capacitor/cli': '^7.4.4',
-      '@capacitor/core': '^7.4.4',
-      '@capacitor/filesystem': '^8.0.0',
-      '@capacitor/ios': '^7.4.4',
-    },
+    devDependencies: [
+      '@capacitor/android',
+      '@capacitor/assets',
+      '@capacitor/cli',
+      '@capacitor/core',
+      '@capacitor/filesystem',
+      '@capacitor/ios',
+    ],
   },
 
   tauri: {
     template: 'tauri',
     scripts: {
-      'tauri:compile': 'cross-env VITE_BUILD_TARGET=tauri VITE_RUNTIME_PLATFORM=desktop npm run compile',
+      'tauri:compile': 'cross-env VITE_BUILD_TARGET=tauri VITE_RUNTIME_PLATFORM=desktop {runtime:run} compile',
       'tauri:init': 'tauri init --force',
       'tauri:dev': 'tauri dev --config tauri.config.json',
       'tauri:build': 'tauri build --config tauri.config.json',
     },
-    devDependencies: {
-      '@tauri-apps/cli': '^2.9.5',
-      '@tauri-apps/plugin-dialog': '~2',
-      '@tauri-apps/plugin-fs': '~2',
-    },
+    devDependencies: [
+      '@tauri-apps/cli',
+      '@tauri-apps/plugin-dialog',
+      '@tauri-apps/plugin-fs',
+    ],
   },
 };

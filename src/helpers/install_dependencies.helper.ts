@@ -1,42 +1,30 @@
 import { execSync } from 'child_process';
 
-import { detectPackageManagers } from '../helpers/detect_package_managers.helper';
 import { error } from '../helpers/error.helper';
 import { print } from '../helpers/print.helper';
-import { confirm } from '../prompts/confirm.prompt';
-import { select } from '../prompts/select.prompt';
+import { ILibraries } from '../interfaces/libraries.interface';
+import { IRuntime } from '../interfaces/runtime.interface';
 
-export async function installDependencies(targetFolder: string): Promise<void> {
-  const executeSteps = await confirm('Install dependencies?', true);
-
-  if (!executeSteps) {
-    return;
-  }
-
+export async function installDependencies(targetFolder: string, runtime: IRuntime, libraries: ILibraries): Promise<void> {
   try {
-    // 1. Переходим в директорию проекта
     process.chdir(targetFolder);
+    
+    const { install, add, addDev } = runtime;
 
-    // 2. Автоматическое определение или выбор менеджера пакетов
-    const packageManagers: string[] = detectPackageManagers();
+    print(['📦 Installing dependencies...']);
 
-    let selectedPackageManager = packageManagers[0];
+    execSync(`${install}`, { stdio: 'inherit' });
 
-    if (packageManagers.length > 1) {
-      const packageManagerAnswer = await select(
-        'Package manager',
-        packageManagers,
-      );
+    const { dependencies, devDependencies } = libraries;
 
-      selectedPackageManager = packageManagerAnswer;
+    if (devDependencies?.length) {
+      execSync(`${addDev} ${devDependencies?.join(' ')}`, { stdio: 'inherit' });
     }
 
-    // 3. Устанавливаем зависимости
-    print([
-      `📦 Using package manager: ${selectedPackageManager}`,
-      '📦 Installing dependencies...',
-    ]);
-    execSync(`${selectedPackageManager} install`, { stdio: 'inherit' });
+    if (dependencies?.length) {
+      execSync(`${add} ${dependencies?.join(' ')}`, { stdio: 'inherit' });
+    }  
+
     print(['✅ Dependencies installed']);
   } catch (err) {
     error('Error executing next steps', err);
