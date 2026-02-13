@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
     "lib": ["ES2022", "DOM", "Decorators"],
-    "types": ["node"],
+    "types": ["node", "jest"],
 
     "target": "ES2022",
     "module": "nodenext",
     "moduleResolution": "nodenext",
 
     "outDir": "./dist",
-    "rootDir": "./",
+    "rootDir": "./src",
     
     "strict": true,
     "declaration": true,
@@ -28,7 +28,6 @@
     "src/**/*"
   ],
   "exclude": [
-    "build",
     "dist",
     "node_modules",
     "**/*.case.ts",

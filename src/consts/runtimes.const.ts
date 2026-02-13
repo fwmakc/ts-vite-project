@@ -1,11 +1,11 @@
-import { IRuntime } from '../interfaces/runtime.interface';
+import type { IRuntime } from '../interfaces/runtime.interface';
 
 export interface IPackagesRuntimes {
   [key: string]: IRuntime;
 }
 
 export const runtimes: IPackagesRuntimes = {
-  'npm': {
+  npm: {
     run: 'npm run',
     install: 'npm install',
     add: 'npm install',
@@ -15,19 +15,14 @@ export const runtimes: IPackagesRuntimes = {
       build: 'npm run lint && npm run test && npm run compile',
       compile: 'tsc && vite build --config vite/config.prod.js',
       preview: 'vite preview',
-      lint: 'echo \'linter skipped\'',
+      lint: "echo 'linter skipped'",
       test: 'vitest run --config ./vitest.config.js',
     },
-    devDependencies: [
-      '@types/node',
-      'ts-node',
-    ],
-    types: [
-      'node',
-    ],
+    devDependencies: ['@types/node', 'ts-node'],
+    types: ['node'],
   },
 
-  'yarn': {
+  yarn: {
     run: 'yarn',
     install: 'yarn install',
     add: 'yarn add',
@@ -37,16 +32,11 @@ export const runtimes: IPackagesRuntimes = {
       build: 'npm run lint && npm run test && npm run compile',
       compile: 'tsc && vite build --config vite/config.prod.js',
       preview: 'vite preview',
-      lint: 'echo \'linter skipped\'',
+      lint: "echo 'linter skipped'",
       test: 'vitest run --config ./vitest.config.js',
     },
-    devDependencies: [
-      '@types/node',
-      'ts-node',
-    ],
-    types: [
-      'node',
-    ],
+    devDependencies: ['@types/node', 'ts-node'],
+    types: ['node'],
   },
 
   deno: {
@@ -57,20 +47,14 @@ export const runtimes: IPackagesRuntimes = {
     scripts: {
       dev: 'deno run -A npm:vite --config vite/config.dev.js',
       build: 'deno task lint && deno task test && deno task compile',
-      compile: 'deno check src/**/*.ts && deno run -A npm:vite build --config vite/config.prod.js',
+      compile:
+        'deno check src/**/*.ts && deno run -A npm:vite build --config vite/config.prod.js',
       preview: 'deno run -A npm:vite preview',
-      lint: 'echo \'linter skipped\'',
+      lint: "echo 'linter skipped'",
       test: 'deno run -A npm:vitest run --config ./vitest.config.js',
     },
-    devDependencies: [
-      '@types/node',
-      'ts-node',
-    ],
-    types: [
-      'npm:@types/node',
-      'deno.window',
-      'deno.ns',
-    ],
+    devDependencies: ['@types/node', 'ts-node'],
+    types: ['npm:@types/node', 'deno.window', 'deno.ns'],
   },
 
   bun: {
@@ -83,17 +67,10 @@ export const runtimes: IPackagesRuntimes = {
       build: 'bun run lint && bun run test && bun run compile',
       compile: 'tsc && bun x --bun vite build --config vite/config.prod.js',
       preview: 'bun x --bun vite preview',
-      lint: 'echo \'linter skipped\'',
+      lint: "echo 'linter skipped'",
       test: 'bun x vitest run --config ./vitest.config.js',
     },
-    devDependencies: [
-      '@types/node',
-      '@types/bun',
-      'ts-node',
-    ],
-    types: [
-      'node',
-      'bun',
-    ],
+    devDependencies: ['@types/node', '@types/bun', 'ts-node'],
+    types: ['node', 'bun'],
   },
 };

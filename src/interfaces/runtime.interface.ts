@@ -1,4 +1,4 @@
-import { ILibrariesParams } from './libraries_params.interface';
+import type { ILibrariesParams } from './libraries_params.interface';
 
 export interface IRuntime {
   run: string;

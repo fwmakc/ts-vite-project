@@ -32,6 +32,7 @@
   "bin": {
     "create-ts-vite-project": "index.js"
   },
+  "type": "module",
   "main": "dist/index.min.js",
   "scripts": {
     "dev": "ts-node src/index.ts",

@@ -10,9 +10,7 @@ export const packages: IPackagesLibraries = {
     scripts: {
       lint: 'biome check --write .',
     },
-    devDependencies: [
-      '@biomejs/biome',
-    ],
+    devDependencies: ['@biomejs/biome'],
   },
 
   'eslint + prettier': {
@@ -35,38 +33,28 @@ export const packages: IPackagesLibraries = {
 
   tailwind: {
     template: 'tailwind',
-    devDependencies: [
-      '@tailwindcss/postcss',
-      'autoprefixer',
-      'postcss',
-    ],
+    devDependencies: ['@tailwindcss/postcss', 'autoprefixer', 'postcss'],
   },
 
   electron: {
     template: 'electron',
     main: 'electron/main.ts',
     scripts: {
-      'electron:compile': 'cross-env VITE_BUILD_TARGET=electron VITE_RUNTIME_PLATFORM=desktop {runtime:run} compile',
+      'electron:compile':
+        'cross-env VITE_BUILD_TARGET=electron VITE_RUNTIME_PLATFORM=desktop {runtime:run} compile',
       'electron:preview': '{runtime:run} electron:compile && electron .',
     },
-    devDependencies: [
-      '@types/electron-squirrel-startup',
-      'electron',
-    ],
-    dependencies: [
-      'electron-squirrel-startup',
-    ],
+    devDependencies: ['@types/electron-squirrel-startup', 'electron'],
+    dependencies: ['electron-squirrel-startup'],
   },
 
   '- builder': {
     template: 'electron-builder',
     scripts: {
-      'electron:build': '{runtime:run} electron:compile && electron-builder --config electron-builder.config.js',
+      'electron:build':
+        '{runtime:run} electron:compile && electron-builder --config electron-builder.config.js',
     },
-    devDependencies: [
-      'electron-builder',
-      'electron-builder-squirrel-windows',
-    ],
+    devDependencies: ['electron-builder', 'electron-builder-squirrel-windows'],
   },
 
   '- forge': {
@@ -92,12 +80,17 @@ export const packages: IPackagesLibraries = {
     scripts: {
       'capacitor:android': 'cap add android',
       'capacitor:ios': 'cap add ios',
-      'capacitor:make': 'cap copy && cap sync && cap update && capacitor-assets generate --android --ios --assetPath public --androidProject build/capacitor/android --iosProject build/capacitor/ios/App',
+      'capacitor:make':
+        'cap copy && cap sync && cap update && capacitor-assets generate --android --ios --assetPath public --androidProject build/capacitor/android --iosProject build/capacitor/ios/App',
       'capacitor:debug': 'cd build/capacitor/android && gradlew assembleDebug',
-      'capacitor:release': 'cd build/capacitor/android && gradlew assembleRelease',
-      'capacitor:compile': 'cross-env VITE_BUILD_TARGET=capacitor VITE_RUNTIME_PLATFORM=mobile {runtime:run} compile',
-      'capacitor:dev': '{runtime:run} capacitor:compile && {runtime:run} capacitor:make && {runtime:run} capacitor:debug',
-      'capacitor:build': '{runtime:run} capacitor:compile && {runtime:run} capacitor:make && {runtime:run} capacitor:release',
+      'capacitor:release':
+        'cd build/capacitor/android && gradlew assembleRelease',
+      'capacitor:compile':
+        'cross-env VITE_BUILD_TARGET=capacitor VITE_RUNTIME_PLATFORM=mobile {runtime:run} compile',
+      'capacitor:dev':
+        '{runtime:run} capacitor:compile && {runtime:run} capacitor:make && {runtime:run} capacitor:debug',
+      'capacitor:build':
+        '{runtime:run} capacitor:compile && {runtime:run} capacitor:make && {runtime:run} capacitor:release',
     },
     devDependencies: [
       '@capacitor/android',
@@ -112,7 +105,8 @@ export const packages: IPackagesLibraries = {
   tauri: {
     template: 'tauri',
     scripts: {
-      'tauri:compile': 'cross-env VITE_BUILD_TARGET=tauri VITE_RUNTIME_PLATFORM=desktop {runtime:run} compile',
+      'tauri:compile':
+        'cross-env VITE_BUILD_TARGET=tauri VITE_RUNTIME_PLATFORM=desktop {runtime:run} compile',
       'tauri:init': 'tauri init --force',
       'tauri:dev': 'tauri dev --config tauri.config.json',
       'tauri:build': 'tauri build --config tauri.config.json',

@@ -26,7 +26,7 @@ export function updatePackage(
       ...packageJson.scripts,
       ...libraries.scripts,
     },
-  }
+  };
 
   try {
     writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));

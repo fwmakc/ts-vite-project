@@ -1,8 +1,8 @@
 import path from 'path';
 
+import { packages } from '../consts/packages.const';
 import { copyFile } from '../helpers/copy_file.helper';
 import { copyRecursive } from '../helpers/copy_recursive.helper';
-import { packages } from '../consts/packages.const';
 
 export async function copyProject(
   sourceFolder: string,
@@ -15,7 +15,7 @@ export async function copyProject(
   for (const library of libraries) {
     if (packages[library]?.template) {
       copyRecursive(
-        path.join(sourceFolder, 'template', packages[library]!.template),
+        path.join(sourceFolder, 'template', packages[library].template),
         targetFolder,
       );
     }
