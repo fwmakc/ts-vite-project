@@ -33,6 +33,9 @@
     "create-ts-vite-project": "index.js"
   },
   "main": "dist/index.min.js",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "ts-node src/index.ts",
     "build": "npm run lint && npm run compile",

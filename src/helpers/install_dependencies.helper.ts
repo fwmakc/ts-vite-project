@@ -21,16 +21,16 @@ export async function installDependencies(
 
     const { dependencies, devDependencies } = libraries;
 
-    if (devDependencies?.length) {
-      const devDependenciesCommand = `${addDev} ${devDependencies?.join(' ')}`;
-      print([`📦 ${devDependenciesCommand}`]);
-      execSync(`${devDependenciesCommand}`, { stdio: 'inherit' });
-    }
-
     if (dependencies?.length) {
       const dependenciesCommand = `${add} ${dependencies?.join(' ')}`;
       print([`📦 ${dependenciesCommand}`]);
       execSync(`${dependenciesCommand}`, { stdio: 'inherit' });
+    }
+
+    if (devDependencies?.length) {
+      const devDependenciesCommand = `${addDev} ${devDependencies?.join(' ')}`;
+      print([`📦 ${devDependenciesCommand}`]);
+      execSync(`${devDependenciesCommand}`, { stdio: 'inherit' });
     }
 
     print(['✅ Dependencies installed']);

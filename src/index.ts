@@ -36,13 +36,17 @@ async function main(): Promise<void> {
     await makeTargetFolder(projectFolder);
 
     // Копируем файлы проекта
-    await copyProject(sourceFolder, projectFolder, libraries.libraries);
+    await copyProject(
+      sourceFolder,
+      projectFolder,
+      libraries.libraries as string[],
+    );
 
     // Обновляем package.json
     updatePackage(projectFolder, values, libraries);
 
     // Обновляем tauri.config.json
-    updateTauri(projectFolder, values, libraries.libraries);
+    updateTauri(projectFolder, values, libraries.libraries as string[]);
 
     // Делаем установку зависимостей
     await installDependencies(projectFolder, runtime, libraries);
