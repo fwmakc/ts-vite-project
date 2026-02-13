@@ -76,13 +76,13 @@ export default [
       '@typescript-eslint/no-empty-function': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
-        { 
+        {
           argsIgnorePattern: '^_',
           varsIgnorePattern: '^_',
           caughtErrorsIgnorePattern: '^_',
           ignoreRestSiblings: true,
           args: 'all',
-        }
+        },
       ],
     },
   },
@@ -123,7 +123,7 @@ export default [
   {
     ignores: [
       'build/**',
-      'coverage/**'
+      'coverage/**',
       'dist/**',
       'dist-ssr/**',
       'node_modules/**',
