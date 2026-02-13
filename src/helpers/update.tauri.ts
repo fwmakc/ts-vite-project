@@ -5,11 +5,7 @@ import { error } from '../helpers/error.helper';
 import type { IPackage } from '../interfaces/package.interface';
 import type { IPackageAuthor } from '../interfaces/package_author.interface';
 
-export function updateTauri(
-  targetDir: string,
-  fields: IPackage,
-  libraries: string[],
-): void {
+export function updateTauri(targetDir: string, fields: IPackage, libraries: string[]): void {
   const tauriConfigPath = path.join(targetDir, 'tauri.config.json');
 
   if (!libraries.includes('tauri') || !existsSync(tauriConfigPath)) {
@@ -22,9 +18,7 @@ export function updateTauri(
   tauriConfig.productName = fields.productName;
   tauriConfig.version = fields.version;
 
-  const author = String(
-    (fields.author as IPackageAuthor)?.name || fields.author || '',
-  )
+  const author = String((fields.author as IPackageAuthor)?.name || fields.author || '')
     .replaceAll(' ', '')
     .replace(/[\W_]+/giu, '-');
   const name = String(fields.name || '').replace(/[\W_]+/giu, '-');

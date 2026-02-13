@@ -2,10 +2,7 @@ import prompts from 'prompts';
 
 import { onState } from './on_state.prompt';
 
-export async function select(
-  message: string,
-  options: string[],
-): Promise<string> {
+export async function select(message: string, options: string[]): Promise<string> {
   const choices = options.map(i => ({
     title: i,
     value: i.trim().toLowerCase(),

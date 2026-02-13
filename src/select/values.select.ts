@@ -4,28 +4,15 @@ import { list } from '../prompts/list.prompt';
 import { question } from '../prompts/question.prompt';
 
 export async function valuesSelect(): Promise<IPackage> {
-  let {
-    name,
-    productName,
-    description,
-    version,
-    author,
-    repository,
-    bugs,
-    homepage,
-  } = defaults;
+  let { name, productName, description, version, author, repository, bugs, homepage } = defaults;
 
-  productName = (
-    await question('Title / product name (required)', productName, true)
-  ).trim();
+  productName = (await question('Title / product name (required)', productName, true)).trim();
 
   name = productName.toLowerCase().replace(/[\W_]+/giu, '-');
   name = (await question('Project / name (required)', name, true)).trim();
   name = name.replaceAll(' ', '').replace(/[^\w._-]+/giu, '-');
 
-  description = (
-    await question('Description (required)', description, true)
-  ).trim();
+  description = (await question('Description (required)', description, true)).trim();
 
   const userInputVersion = await list('Version', version);
 
@@ -37,16 +24,12 @@ export async function valuesSelect(): Promise<IPackage> {
 
   author = {};
 
-  author.name = (
-    await question('Author / vendor / git (required)', '', true)
-  ).trim();
+  author.name = (await question('Author / vendor / git (required)', '', true)).trim();
   author.email = (await question('Email (required)', '', true)).trim();
 
   repository = {};
 
-  const repoAuthor = author.name
-    .replaceAll(' ', '')
-    .replace(/[^\w._-]+/giu, '-');
+  const repoAuthor = author.name.replaceAll(' ', '').replace(/[^\w._-]+/giu, '-');
   const defaultInputUrl = `https://github.com/${repoAuthor}/${name}.git`;
   const url = (await question('Repository url', defaultInputUrl)).trim();
 

@@ -5,11 +5,7 @@ import type { IRuntime } from '../interfaces/runtime.interface';
 import { multiselect } from '../prompts/multiselect.prompt';
 
 export async function librariesSelect(runtime: IRuntime): Promise<ILibraries> {
-  const libraries = await multiselect(
-    'Select extended project libraries',
-    Object.keys(packages),
-    true,
-  );
+  const libraries = await multiselect('Select extended project libraries', Object.keys(packages), true);
 
   let main: string = '';
   let dependencies: string[] = [];
@@ -40,10 +36,7 @@ export async function librariesSelect(runtime: IRuntime): Promise<ILibraries> {
     }
 
     if (packages[library]?.devDependencies?.length) {
-      devDependencies = [
-        ...devDependencies,
-        ...packages[library].devDependencies,
-      ];
+      devDependencies = [...devDependencies, ...packages[library].devDependencies];
     }
 
     if (packages[library]?.scripts) {

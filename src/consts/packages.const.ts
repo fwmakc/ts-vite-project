@@ -40,8 +40,7 @@ export const packages: IPackagesLibraries = {
     template: 'electron',
     main: 'electron/main.ts',
     scripts: {
-      'electron:compile':
-        'cross-env VITE_BUILD_TARGET=electron VITE_RUNTIME_PLATFORM=desktop {runtime:run} compile',
+      'electron:compile': 'cross-env VITE_BUILD_TARGET=electron VITE_RUNTIME_PLATFORM=desktop {runtime:run} compile',
       'electron:preview': '{runtime:run} electron:compile && electron .',
     },
     devDependencies: ['@types/electron-squirrel-startup', 'electron'],
@@ -51,8 +50,7 @@ export const packages: IPackagesLibraries = {
   '- builder': {
     template: 'electron-builder',
     scripts: {
-      'electron:build':
-        '{runtime:run} electron:compile && electron-builder --config electron-builder.config.js',
+      'electron:build': '{runtime:run} electron:compile && electron-builder --config electron-builder.config.js',
     },
     devDependencies: ['electron-builder', 'electron-builder-squirrel-windows'],
   },
@@ -83,10 +81,8 @@ export const packages: IPackagesLibraries = {
       'capacitor:make':
         'cap copy && cap sync && cap update && capacitor-assets generate --android --ios --assetPath public --androidProject build/capacitor/android --iosProject build/capacitor/ios/App',
       'capacitor:debug': 'cd build/capacitor/android && gradlew assembleDebug',
-      'capacitor:release':
-        'cd build/capacitor/android && gradlew assembleRelease',
-      'capacitor:compile':
-        'cross-env VITE_BUILD_TARGET=capacitor VITE_RUNTIME_PLATFORM=mobile {runtime:run} compile',
+      'capacitor:release': 'cd build/capacitor/android && gradlew assembleRelease',
+      'capacitor:compile': 'cross-env VITE_BUILD_TARGET=capacitor VITE_RUNTIME_PLATFORM=mobile {runtime:run} compile',
       'capacitor:dev':
         '{runtime:run} capacitor:compile && {runtime:run} capacitor:make && {runtime:run} capacitor:debug',
       'capacitor:build':
@@ -105,16 +101,11 @@ export const packages: IPackagesLibraries = {
   tauri: {
     template: 'tauri',
     scripts: {
-      'tauri:compile':
-        'cross-env VITE_BUILD_TARGET=tauri VITE_RUNTIME_PLATFORM=desktop {runtime:run} compile',
+      'tauri:compile': 'cross-env VITE_BUILD_TARGET=tauri VITE_RUNTIME_PLATFORM=desktop {runtime:run} compile',
       'tauri:init': 'tauri init --force',
       'tauri:dev': 'tauri dev --config tauri.config.json',
       'tauri:build': 'tauri build --config tauri.config.json',
     },
-    devDependencies: [
-      '@tauri-apps/cli',
-      '@tauri-apps/plugin-dialog',
-      '@tauri-apps/plugin-fs',
-    ],
+    devDependencies: ['@tauri-apps/cli', '@tauri-apps/plugin-dialog', '@tauri-apps/plugin-fs'],
   },
 };

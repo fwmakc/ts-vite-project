@@ -7,10 +7,7 @@ import { confirm } from '../prompts/confirm.prompt';
 export async function makeTargetFolder(targetDir: string): Promise<void> {
   // Проверяем, существует ли директория
   if (!isDirectoryEmpty(targetDir)) {
-    const overwrite = await confirm(
-      `Directory "${targetDir}" already exists. Overwrite?`,
-      false,
-    );
+    const overwrite = await confirm(`Directory "${targetDir}" already exists. Overwrite?`, false);
 
     if (!overwrite) {
       error('Operation cancelled', null);

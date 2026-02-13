@@ -6,8 +6,9 @@ export default {
   useTabs: false,
   trailingComma: 'all',
   bracketSpacing: true,
+  printWidth: 120,
   arrowParens: 'avoid',
   quoteProps: 'as-needed',
   proseWrap: 'never',
-  endOfLine: 'auto'
-}
+  endOfLine: 'auto',
+};

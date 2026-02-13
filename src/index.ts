@@ -36,11 +36,7 @@ async function main(): Promise<void> {
     await makeTargetFolder(projectFolder);
 
     // Копируем файлы проекта
-    await copyProject(
-      sourceFolder,
-      projectFolder,
-      libraries.libraries as string[],
-    );
+    await copyProject(sourceFolder, projectFolder, libraries.libraries as string[]);
 
     // Обновляем package.json
     updatePackage(projectFolder, values, libraries);

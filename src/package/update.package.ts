@@ -5,11 +5,7 @@ import { error } from '../helpers/error.helper';
 import type { ILibraries } from '../interfaces/libraries.interface';
 import type { IPackage } from '../interfaces/package.interface';
 
-export function updatePackage(
-  targetDir: string,
-  values: IPackage,
-  libraries: ILibraries,
-): void {
+export function updatePackage(targetDir: string, values: IPackage, libraries: ILibraries): void {
   const packageJsonPath = path.join(targetDir, 'package.json');
 
   if (!existsSync(packageJsonPath)) {

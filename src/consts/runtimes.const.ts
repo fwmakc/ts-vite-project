@@ -47,8 +47,7 @@ export const runtimes: IPackagesRuntimes = {
     scripts: {
       dev: 'deno run -A npm:vite --config vite/config.dev.js',
       build: 'deno task lint && deno task test && deno task compile',
-      compile:
-        'deno check src/**/*.ts && deno run -A npm:vite build --config vite/config.prod.js',
+      compile: 'deno check src/**/*.ts && deno run -A npm:vite build --config vite/config.prod.js',
       preview: 'deno run -A npm:vite preview',
       lint: "echo 'linter skipped'",
       test: 'deno run -A npm:vitest run --config ./vitest.config.js',
