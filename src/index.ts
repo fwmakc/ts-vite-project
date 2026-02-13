@@ -52,8 +52,7 @@ async function main(): Promise<void> {
       '',
       'Next steps:',
       `📁 cd ${values.name}`,
-      '📦 npm install',
-      '⭐ npm run dev',
+      `⭐ ${runtime.run} dev`,
       '',
       'Happy coding! 👋',
     ]);
