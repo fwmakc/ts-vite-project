@@ -1,9 +1,10 @@
 import { execSync } from 'child_process';
 
-import { error } from '../helpers/error.helper';
-import { print } from '../helpers/print.helper';
 import type { ILibraries } from '../interfaces/libraries.interface';
 import type { IRuntime } from '../interfaces/runtime.interface';
+
+import { error } from './error.helper';
+import { print } from './print.helper';
 
 export async function installDependencies(
   targetFolder: string,

@@ -1,9 +1,8 @@
-type BuildTargetType = 'capacitor' | 'electron' | 'tauri';
+type BuildTargetType = 'capacitor' | 'electron' | 'tauri' | 'web';
 type RuntimePlatformType = 'desktop' | 'mobile';
 
 const BUILD_TARGET: BuildTargetType = import.meta.env.VITE_BUILD_TARGET;
-const RUNTIME_PLATFORM: RuntimePlatformType = import.meta.env
-  .VITE_RUNTIME_PLATFORM;
+const RUNTIME_PLATFORM: RuntimePlatformType = import.meta.env.VITE_RUNTIME_PLATFORM;
 
 export const APP = {
   isCapacitor: BUILD_TARGET === 'capacitor',

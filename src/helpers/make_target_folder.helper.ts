@@ -1,8 +1,9 @@
 import { mkdirSync, rmSync } from 'fs';
 
-import { error } from '../helpers/error.helper';
-import { isDirectoryEmpty } from '../helpers/is_directory_empty.helper';
 import { confirm } from '../prompts/confirm.prompt';
+
+import { error } from './error.helper';
+import { isDirectoryEmpty } from './is_directory_empty.helper';
 
 export async function makeTargetFolder(targetDir: string): Promise<void> {
   // Проверяем, существует ли директория

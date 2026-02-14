@@ -1,9 +1,10 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import path from 'path';
 
-import { error } from '../helpers/error.helper';
 import type { IPackage } from '../interfaces/package.interface';
 import type { IPackageAuthor } from '../interfaces/package_author.interface';
+
+import { error } from './error.helper';
 
 export function updateTauri(targetDir: string, fields: IPackage, libraries: string[]): void {
   const tauriConfigPath = path.join(targetDir, 'tauri.config.json');

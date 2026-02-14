@@ -44,14 +44,7 @@ export default [
       'import/order': [
         'error',
         {
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-          ],
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
           'newlines-between': 'always',
           alphabetize: {
             order: 'asc',
@@ -121,14 +114,6 @@ export default [
 
   // Игнорируемые файлы
   {
-    ignores: [
-      'build/**',
-      'coverage/**',
-      'dist/**',
-      'dist-ssr/**',
-      'node_modules/**',
-      'platforms/**',
-      'src-tauri/**',
-    ],
+    ignores: ['build/**', 'coverage/**', 'dist/**', 'dist-ssr/**', 'node_modules/**', 'platforms/**', 'src-tauri/**'],
   },
 ];

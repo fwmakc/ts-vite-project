@@ -1,9 +1,10 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import path from 'path';
 
-import { error } from '../helpers/error.helper';
 import type { ILibraries } from '../interfaces/libraries.interface';
 import type { IPackage } from '../interfaces/package.interface';
+
+import { error } from './error.helper';
 
 export function updatePackage(targetDir: string, values: IPackage, libraries: ILibraries): void {
   const packageJsonPath = path.join(targetDir, 'package.json');
@@ -29,16 +30,4 @@ export function updatePackage(targetDir: string, values: IPackage, libraries: IL
   } catch (err) {
     error('Error write package.json', err);
   }
-
-  if (libraries.devDependencies)
-    packageJson.devDependencies = {
-      ...packageJson.devDependencies,
-      ...libraries.devDependencies,
-    };
-
-  if (libraries.dependencies)
-    packageJson.dependencies = {
-      ...packageJson.dependencies,
-      ...libraries.dependencies,
-    };
 }

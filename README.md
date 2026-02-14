@@ -10,6 +10,10 @@
 - модули ECMAScript (вместо CommonJS),
 - стандарт ES2022.
 
+[![npm version](https://badge.fury.io/js/create-ts-vite-project.svg)](https://www.npmjs.com/package/create-ts-vite-project)
+[![Build Status](https://github.com/fwmakc/ts-vite-project/actions/workflows/ci.yml/badge.svg)](https://github.com/fwmakc/ts-vite-project/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 # Быстрый запуск
 
 Выполняем

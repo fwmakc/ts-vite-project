@@ -44,14 +44,7 @@ export default [
       'import/order': [
         'error',
         {
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-          ],
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
           'newlines-between': 'always',
           alphabetize: {
             order: 'asc',
@@ -76,13 +69,13 @@ export default [
       '@typescript-eslint/no-empty-function': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
-        { 
+        {
           argsIgnorePattern: '^_',
           varsIgnorePattern: '^_',
           caughtErrorsIgnorePattern: '^_',
           ignoreRestSiblings: true,
           args: 'all',
-        }
+        },
       ],
     },
   },
@@ -121,9 +114,6 @@ export default [
 
   // Игнорируемые файлы
   {
-    ignores: [
-      'dist/**',
-      'node_modules/**',
-    ],
+    ignores: ['dist/**', 'node_modules/**'],
   },
 ];

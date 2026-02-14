@@ -1,8 +1,9 @@
 import path from 'path';
 
 import { packages } from '../consts/packages.const';
-import { copyFile } from '../helpers/copy_file.helper';
-import { copyRecursive } from '../helpers/copy_recursive.helper';
+
+import { copyFile } from './copy_file.helper';
+import { copyRecursive } from './copy_recursive.helper';
 
 export async function copyProject(sourceFolder: string, targetFolder: string, libraries: string[]): Promise<void> {
   // Копируем файлы из template

@@ -5,7 +5,26 @@
   "description": "Template for projects based typescript, vite, vitest, eslint, prettier, electron, tauri",
   "license": "MIT",
   "keywords": [
-    "typescript", "electron", "tauri", "vite", "desktop", "windows", "win32", "mac", "web", "android", "ios", "create", "template", "easy", "lint", "test", "testing", "eslint", "prettier", "vitest"
+    "typescript",
+    "electron",
+    "tauri",
+    "vite",
+    "desktop",
+    "windows",
+    "win32",
+    "mac",
+    "web",
+    "android",
+    "ios",
+    "create",
+    "template",
+    "easy",
+    "lint",
+    "test",
+    "testing",
+    "eslint",
+    "prettier",
+    "vitest"
   ],
   "author": {
     "name": "Maxim Nikonov",
@@ -60,6 +79,5 @@
     "prompts": "^2.4.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
-  },
-  "dependencies": {}
+  }
 }
