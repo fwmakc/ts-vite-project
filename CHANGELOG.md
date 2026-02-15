@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/fwmakc/ts-vite-project/compare/v1.0.5...v1.0.6) (2026-02-15)
+
+
+### Bug Fixes
+
+* test release ([7df5832](https://github.com/fwmakc/ts-vite-project/commit/7df5832108b44653c4257059c1c728b10177bde2))
+
 ## [1.0.5](https://github.com/fwmakc/ts-vite-project/compare/v1.0.4...v1.0.5) (2026-02-15)
 
 
