@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/fwmakc/ts-vite-project/compare/v1.0.2...v1.0.3) (2026-02-15)
+
+
+### Bug Fixes
+
+* test release without 2fa ([bdcfb2c](https://github.com/fwmakc/ts-vite-project/commit/bdcfb2cc0d67054f1c03a9da8f3fdf33226abd5d))
+
 ## [1.0.2](https://github.com/fwmakc/ts-vite-project/compare/v1.0.1...v1.0.2) (2026-02-15)
 
 
