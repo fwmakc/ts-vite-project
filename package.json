@@ -1,6 +1,6 @@
 {
   "name": "create-ts-vite-project",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "productName": "TS Vite Project Template Creator",
   "description": "Template for projects based typescript, vite, vitest, eslint, prettier, electron, tauri",
   "license": "MIT",

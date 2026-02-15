@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/fwmakc/ts-vite-project/compare/v1.0.7...v1.0.8) (2026-02-15)
+
+
+### Bug Fixes
+
+* use granular npm token ([f7a0a5a](https://github.com/fwmakc/ts-vite-project/commit/f7a0a5af0ed6dbd14c36db7067e2cf9960ddd4e9))
+
 ## [1.0.7](https://github.com/fwmakc/ts-vite-project/compare/v1.0.6...v1.0.7) (2026-02-15)
 
 
