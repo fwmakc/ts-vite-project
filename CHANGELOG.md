@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/fwmakc/ts-vite-project/compare/v1.0.1...v1.0.2) (2026-02-15)
+
+
+### Bug Fixes
+
+* release config ([2f0990f](https://github.com/fwmakc/ts-vite-project/commit/2f0990fc538880a9677fd2643f9a94c9c19086eb))
+
 # История изменений
 
 Формат основан на [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/),
