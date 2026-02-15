@@ -45,12 +45,6 @@ export default {
       },
     ],
     [
-      '@semantic-release/npm',
-      {
-        npmPublish: true,
-      },
-    ],
-    [
       '@semantic-release/github',
       {
         assets: [{ path: 'dist/**/*.*' }, { path: 'CHANGELOG.md' }],

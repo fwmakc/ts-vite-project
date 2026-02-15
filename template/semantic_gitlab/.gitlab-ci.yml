@@ -1,0 +1,22 @@
+image: node:22
+
+stages:
+  - release
+
+release:
+  stage: release
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - .npm/
+  before_script:
+    - npm ci --cache .npm --prefer-offline
+  script:
+    - npm run build
+    - npx semantic-release
+  variables:
+    GITLAB_TOKEN: $GL_TOKEN

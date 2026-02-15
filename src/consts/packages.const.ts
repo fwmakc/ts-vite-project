@@ -36,6 +36,30 @@ export const packages: IPackagesLibraries = {
     devDependencies: ['@tailwindcss/postcss', 'autoprefixer', 'postcss'],
   },
 
+  semantic: {
+    template: 'semantic',
+    scripts: {
+      release: 'semantic-release',
+    },
+    devDependencies: [
+      '@semantic-release/changelog',
+      '@semantic-release/commit-analyzer',
+      '@semantic-release/git',
+      '@semantic-release/npm',
+      '@semantic-release/release-notes-generator',
+    ],
+  },
+
+  '- github': {
+    template: 'semantic_github',
+    devDependencies: ['@semantic-release/github'],
+  },
+
+  '- gitlab': {
+    template: 'semantic_gitlab',
+    devDependencies: ['@semantic-release/gitlab'],
+  },
+
   electron: {
     template: 'electron',
     main: 'electron/main.ts',
