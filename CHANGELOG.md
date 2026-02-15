@@ -1,24 +1,12 @@
-## [1.0.4](https://github.com/fwmakc/ts-vite-project/compare/v1.0.3...v1.0.4) (2026-02-15)
-
+## [0.8.1-0.8.2] (2026-02-15)
 
 ### Bug Fixes
 
 * rename release config to mjs ([28cee6b](https://github.com/fwmakc/ts-vite-project/commit/28cee6bef6fb6409da1731c173c1372c04475d85))
-
-## [1.0.3](https://github.com/fwmakc/ts-vite-project/compare/v1.0.2...v1.0.3) (2026-02-15)
-
-
-### Bug Fixes
-
 * changelog.md ([b8cec0b](https://github.com/fwmakc/ts-vite-project/commit/b8cec0b9db9b936e82e167641e29263bf1d8df36))
-
-## [1.0.2](https://github.com/fwmakc/ts-vite-project/compare/v1.0.1...v1.0.2) (2026-02-15)
-
-### Bug Fixes
-
 * release config ([2f0990f](https://github.com/fwmakc/ts-vite-project/commit/2f0990fc538880a9677fd2643f9a94c9c19086eb))
 
-## [0.8.0] - 2026-02-15
+## [0.8.0] (2026-02-15)
 
 ### Added
 - Поддержка Biome (форматтер + линтер)
