@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/fwmakc/ts-vite-project/compare/v1.0.3...v1.0.4) (2026-02-15)
+
+
+### Bug Fixes
+
+* rename release config to mjs ([28cee6b](https://github.com/fwmakc/ts-vite-project/commit/28cee6bef6fb6409da1731c173c1372c04475d85))
+
 ## [1.0.3](https://github.com/fwmakc/ts-vite-project/compare/v1.0.2...v1.0.3) (2026-02-15)
 
 
