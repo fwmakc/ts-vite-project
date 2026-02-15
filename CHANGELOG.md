@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/fwmakc/ts-vite-project/compare/v1.0.8...v1.0.9) (2026-02-15)
+
+
+### Bug Fixes
+
+* add auto versioning into github or gitlab ([e7dda0d](https://github.com/fwmakc/ts-vite-project/commit/e7dda0d35c3897a2ec4f5454ddff51963f4bf24c))
+
 ## [1.0.1-1.0.8] (2026-02-15)
 
 ### Bug Fixes
