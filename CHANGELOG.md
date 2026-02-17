@@ -1,3 +1,10 @@
+## [1.0.10](https://github.com/fwmakc/ts-vite-project/compare/v1.0.9...v1.0.10) (2026-02-17)
+
+
+### Bug Fixes
+
+* common files to ts vite template and add console project as ts template ([1591bc9](https://github.com/fwmakc/ts-vite-project/commit/1591bc9e41a7f5de40e84f6b3e69def190162e44))
+
 ## [1.0.9](https://github.com/fwmakc/ts-vite-project/compare/v1.0.8...v1.0.9) (2026-02-15)
 
 
