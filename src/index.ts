@@ -1,5 +1,6 @@
 import path from 'path';
 
+import { backupProject } from './helpers/backup_project.helper';
 import { copyProject } from './helpers/copy_project.helper';
 import { error } from './helpers/error.helper';
 import { installDependencies } from './helpers/install_dependencies.helper';
@@ -13,7 +14,7 @@ import { valuesSelect } from './select/values.select';
 
 async function main(): Promise<void> {
   print([
-    '🚀 Creating TypeScript + Vite Project',
+    '🚀 Creating TypeScript Project',
     '(will be installed in project name folder)',
     '',
     '⚠️  keys:',
@@ -34,6 +35,9 @@ async function main(): Promise<void> {
 
     // Проверяем и создаем каталог проекта
     await makeTargetFolder(projectFolder);
+
+    // Бэкапим существующие файлы проекта
+    await backupProject(projectFolder);
 
     // Копируем файлы проекта
     await copyProject(sourceFolder, projectFolder, libraries.libraries as string[]);

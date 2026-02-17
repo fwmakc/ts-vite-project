@@ -5,6 +5,28 @@ export interface IPackagesLibraries {
 }
 
 export const packages: IPackagesLibraries = {
+  'ts console app': {
+    template: 'ts',
+    scripts: {
+      dev: 'ts-node src/index.ts',
+      build: '{runtime:run} lint && {runtime:run} test && {runtime:run} compile && {runtime:run} minify',
+      compile: 'tsc',
+      minify: 'esbuild src/index.ts --bundle --platform=node --target=node18 --outfile=dist/index.min.js --minify',
+      start: 'node dist/index.js',
+      lint: 'eslint . --fix',
+      test: 'jest --config ./jest.config.js',
+    },
+    devDependencies: ['@types/jest', 'esbuild', 'globals', 'jest', 'ts-jest'],
+  },
+
+  'ts + vite app': {
+    template: 'ts_vite',
+    main: 'dist/index.js',
+    types: 'dist/index.d.ts',
+    scripts: {},
+    devDependencies: [],
+  },
+
   biome: {
     template: 'biome',
     scripts: {

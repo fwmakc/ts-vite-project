@@ -7,8 +7,6 @@ import { copyRecursive } from './copy_recursive.helper';
 
 export async function copyProject(sourceFolder: string, targetFolder: string, libraries: string[]): Promise<void> {
   // Копируем файлы из template
-  copyRecursive(path.join(sourceFolder, 'template', 'common'), targetFolder);
-
   for (const library of libraries) {
     if (packages[library]?.template) {
       copyRecursive(path.join(sourceFolder, 'template', packages[library].template), targetFolder);

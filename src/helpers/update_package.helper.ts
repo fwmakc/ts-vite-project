@@ -19,6 +19,7 @@ export function updatePackage(targetDir: string, values: IPackage, libraries: IL
     ...packageJson,
     ...values,
     main: libraries.main,
+    types: libraries.types,
     scripts: {
       ...packageJson.scripts,
       ...libraries.scripts,
