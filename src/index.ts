@@ -3,12 +3,14 @@ import path from 'path';
 import { backupProject } from './helpers/backup_project.helper';
 import { copyProject } from './helpers/copy_project.helper';
 import { error } from './helpers/error.helper';
+import { gitSetup } from './helpers/git_setup.helper';
 import { installDependencies } from './helpers/install_dependencies.helper';
 import { makeTargetFolder } from './helpers/make_target_folder.helper';
 import { print } from './helpers/print.helper';
 import { updatePackage } from './helpers/update_package.helper';
 import { updatePort } from './helpers/update_port.helper';
 import { updateTauri } from './helpers/update_tauri.helper';
+import { gitSelect } from './select/git.select';
 import { librariesSelect } from './select/libraries.select';
 import { portSelect } from './select/port.select';
 import { runtimeSelect } from './select/runtime.select';
@@ -56,6 +58,22 @@ async function main(): Promise<void> {
 
     // Делаем установку зависимостей
     await installDependencies(projectFolder, runtime, libraries);
+
+    // Настраиваем git и синхронизируем с репозиторием (отбрасываем префикс git+ из package.json)
+    const repositoryUrl = (typeof values.repository === 'string' ? values.repository : values.repository?.url)?.replace(
+      /^git\+/,
+      '',
+    );
+
+    if (repositoryUrl) {
+      const syncGit = await gitSelect(repositoryUrl);
+
+      if (syncGit) {
+        const author = typeof values.author === 'string' ? { name: values.author } : values.author;
+
+        await gitSetup(projectFolder, repositoryUrl, author);
+      }
+    }
 
     print([
       '✅ Project created successfully!',
