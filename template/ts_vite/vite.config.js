@@ -2,10 +2,9 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(({ command }) => ({
   base: './',
-  target: 'node18',
-  logLevel: 'warning',
   build: {
-    outdir: 'dist',
+    outDir: 'dist',
+    target: 'node18',
     minify: 'terser',
     terserOptions: {
       compress: {
@@ -16,15 +15,15 @@ export default defineConfig(({ command }) => ({
         comments: false,
       },
     },
+    ...(command === 'build'
+      ? {
+          rollupOptions: {
+            external: ['fs', 'fs/promises', 'path', 'os'],
+          },
+        }
+      : {}),
   },
   server: {
     port: 8080,
   },
-  ...(command === 'build'
-    ? {
-        rollupOptions: {
-          external: ['fs', 'fs/promises', 'path', 'os'],
-        },
-      }
-    : {}),
 }));
