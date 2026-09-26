@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/fwmakc/ts-vite-project/compare/v1.0.10...v1.1.0) (2026-09-26)
+
+
+### Bug Fixes
+
+* remove silent logLevel and fix ignored build config keys in vite template ([c893c31](https://github.com/fwmakc/ts-vite-project/commit/c893c3198516f25fe8aa85779ac8912ae9eab7d9))
+
+
+### Features
+
+* ask dev server port and ignore engines mismatch on install ([53b4c1a](https://github.com/fwmakc/ts-vite-project/commit/53b4c1aea2ba462f8c080765bb2c1e96209b78ee))
+* init git and sync project with remote repository ([e6dbce2](https://github.com/fwmakc/ts-vite-project/commit/e6dbce2e0340886477924a9fecad7c26ee3444ff))
+
 ## [1.0.10](https://github.com/fwmakc/ts-vite-project/compare/v1.0.9...v1.0.10) (2026-02-17)
 
 
