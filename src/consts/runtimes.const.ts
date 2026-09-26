@@ -7,9 +7,9 @@ export interface IPackagesRuntimes {
 export const runtimes: IPackagesRuntimes = {
   npm: {
     run: 'npm run',
-    install: 'npm install',
-    add: 'npm install',
-    addDev: 'npm install -D',
+    install: 'npm install --force',
+    add: 'npm install --force',
+    addDev: 'npm install -D --force',
     scripts: {
       dev: 'vite',
       build: 'npm run lint && npm run test && npm run compile',
@@ -24,9 +24,9 @@ export const runtimes: IPackagesRuntimes = {
 
   yarn: {
     run: 'yarn',
-    install: 'yarn install',
-    add: 'yarn add',
-    addDev: 'yarn add --dev',
+    install: 'yarn install --ignore-engines',
+    add: 'yarn add --ignore-engines',
+    addDev: 'yarn add --dev --ignore-engines',
     scripts: {
       dev: 'vite',
       build: 'npm run lint && npm run test && npm run compile',

@@ -7,8 +7,10 @@ import { installDependencies } from './helpers/install_dependencies.helper';
 import { makeTargetFolder } from './helpers/make_target_folder.helper';
 import { print } from './helpers/print.helper';
 import { updatePackage } from './helpers/update_package.helper';
+import { updatePort } from './helpers/update_port.helper';
 import { updateTauri } from './helpers/update_tauri.helper';
 import { librariesSelect } from './select/libraries.select';
+import { portSelect } from './select/port.select';
 import { runtimeSelect } from './select/runtime.select';
 import { valuesSelect } from './select/values.select';
 
@@ -29,6 +31,7 @@ async function main(): Promise<void> {
     const values = await valuesSelect();
     const runtime = await runtimeSelect();
     const libraries = await librariesSelect(runtime);
+    const port = await portSelect(libraries.libraries as string[]);
 
     const projectFolder = path.resolve(values.name);
     const sourceFolder = path.resolve(__dirname, '..');
@@ -47,6 +50,9 @@ async function main(): Promise<void> {
 
     // Обновляем tauri.config.json
     updateTauri(projectFolder, values, libraries.libraries as string[]);
+
+    // Обновляем порт dev-сервера
+    updatePort(projectFolder, port, libraries.libraries as string[]);
 
     // Делаем установку зависимостей
     await installDependencies(projectFolder, runtime, libraries);
