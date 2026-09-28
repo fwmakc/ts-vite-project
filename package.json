@@ -57,10 +57,11 @@
   },
   "scripts": {
     "dev": "ts-node src/index.ts",
-    "build": "npm run lint && npm run compile",
+    "build": "npm run lint && npm run test && npm run compile",
     "compile": "esbuild src/index.ts --bundle --platform=node --target=node18 --outfile=dist/index.min.js --minify",
     "start": "node dist/index.min.js",
     "lint": "eslint . --fix",
+    "test": "vitest run --config ./vitest.config.js",
     "release": "semantic-release"
   },
   "devDependencies": {
@@ -86,6 +87,7 @@
     "prompts": "^2.4.2",
     "semantic-release": "^25.0.9",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.2"
   }
 }
