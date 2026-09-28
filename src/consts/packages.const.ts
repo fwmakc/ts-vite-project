@@ -14,9 +14,9 @@ export const packages: IPackagesLibraries = {
       minify: 'esbuild src/index.ts --bundle --platform=node --target=node18 --outfile=dist/index.min.js --minify',
       start: 'node dist/index.js',
       lint: 'eslint . --fix',
-      test: 'jest --config ./jest.config.js',
+      test: 'vitest run --config ./vitest.config.js',
     },
-    devDependencies: ['@types/jest', 'esbuild', 'globals', 'jest', 'ts-jest'],
+    devDependencies: ['esbuild', 'globals', 'vitest'],
   },
 
   'ts + vite app': {
@@ -49,6 +49,7 @@ export const packages: IPackagesLibraries = {
       'eslint-plugin-import',
       'eslint-plugin-node',
       'eslint-plugin-prettier',
+      'globals',
       'prettier',
     ],
   },

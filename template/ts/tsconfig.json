@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "lib": ["ES2022", "DOM", "Decorators"],
-    "types": ["node", "jest"],
+    "lib": ["ES2022", "Decorators"],
+    "types": ["node", "vitest/globals"],
 
     "target": "ES2022",
     "module": "nodenext",
