@@ -4,7 +4,6 @@ import { CapacitorPaths } from './classes/capacitor/capacitor.paths';
 import { ElectronDir } from './classes/electron/electron.dir';
 import { ElectronFile } from './classes/electron/electron.file';
 import { ElectronPaths } from './classes/electron/electron.paths';
-import { electronPathsAPI } from './classes/electron/electron.paths.api';
 import { NodeDir } from './classes/node/node.dir';
 import { NodeFile } from './classes/node/node.file';
 import { NodePaths } from './classes/node/node.paths';
@@ -41,5 +40,4 @@ export {
   File,
   FileTypes,
   ListItem,
-  electronPathsAPI,
 };
