@@ -1,3 +1,17 @@
+# [1.2.0](https://github.com/fwmakc/ts-vite-project/compare/v1.1.0...v1.2.0) (2026-09-28)
+
+
+### Bug Fixes
+
+* guard undefined capture group in git remote branch detection ([69f3207](https://github.com/fwmakc/ts-vite-project/commit/69f3207ceecefe677bfcf6eee3c5a169f96f2d8f))
+* **template:** drop electron preload duplicate from renderer libs ([fa688bc](https://github.com/fwmakc/ts-vite-project/commit/fa688bc1b99dc4a2025a23aa439b19fd8b4d2065))
+
+
+### Features
+
+* **console:** replace jest with vitest in console template ([d7649b4](https://github.com/fwmakc/ts-vite-project/commit/d7649b49b0a1cfc3891eb5441fb8bedfebc3ac93))
+* select application type before add-ons and resolve dependencies ([e5394c3](https://github.com/fwmakc/ts-vite-project/commit/e5394c325442a3b15234380397c8c22888b5311b))
+
 # [1.1.0](https://github.com/fwmakc/ts-vite-project/compare/v1.0.10...v1.1.0) (2026-09-26)
 
 
