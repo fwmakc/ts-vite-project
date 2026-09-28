@@ -18,7 +18,7 @@ export const runtimes: IPackagesRuntimes = {
       lint: "echo 'linter skipped'",
       test: 'vitest run --config ./vitest.config.js',
     },
-    devDependencies: ['@types/node', 'ts-node'],
+    devDependencies: ['@types/node', 'tsx'],
     types: ['node'],
   },
 
@@ -35,7 +35,7 @@ export const runtimes: IPackagesRuntimes = {
       lint: "echo 'linter skipped'",
       test: 'vitest run --config ./vitest.config.js',
     },
-    devDependencies: ['@types/node', 'ts-node'],
+    devDependencies: ['@types/node', 'tsx'],
     types: ['node'],
   },
 
@@ -52,7 +52,7 @@ export const runtimes: IPackagesRuntimes = {
       lint: "echo 'linter skipped'",
       test: 'deno run -A npm:vitest run --config ./vitest.config.js',
     },
-    devDependencies: ['@types/node', 'ts-node'],
+    devDependencies: ['@types/node', 'tsx'],
     types: ['npm:@types/node', 'deno.window', 'deno.ns'],
   },
 
@@ -69,7 +69,7 @@ export const runtimes: IPackagesRuntimes = {
       lint: "echo 'linter skipped'",
       test: 'bun x vitest run --config ./vitest.config.js',
     },
-    devDependencies: ['@types/node', '@types/bun', 'ts-node'],
+    devDependencies: ['@types/node', '@types/bun', 'tsx'],
     types: ['node', 'bun'],
   },
 };

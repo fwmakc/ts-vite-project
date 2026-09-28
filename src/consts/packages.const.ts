@@ -9,7 +9,7 @@ export const packages: IPackagesLibraries = {
     template: 'ts',
     main: 'dist/index.js',
     scripts: {
-      dev: 'ts-node src/index.ts',
+      dev: 'tsx src/index.ts',
       build: '{runtime:run} lint && {runtime:run} test && {runtime:run} compile && {runtime:run} minify',
       compile: 'tsc',
       minify: 'esbuild src/index.ts --bundle --platform=node --target=node18 --outfile=dist/index.min.js --minify',

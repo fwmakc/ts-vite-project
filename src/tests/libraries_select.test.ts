@@ -97,7 +97,7 @@ describe('librariesSelect', () => {
     const consoleResult = await librariesSelect(runtimes.npm, 'ts console app');
     const viteResult = await librariesSelect(runtimes.npm, 'ts + vite app');
 
-    expect(consoleResult.scripts?.dev).toBe('ts-node src/index.ts');
+    expect(consoleResult.scripts?.dev).toBe('tsx src/index.ts');
     expect(viteResult.scripts?.dev).toBe('vite');
   });
 
@@ -139,7 +139,8 @@ describe('librariesSelect', () => {
     expect(devDependencies).not.toContain('cross-env');
     expect(devDependencies).toContain('typescript');
     expect(devDependencies).toContain('vitest');
-    expect(devDependencies).toContain('ts-node');
+    expect(devDependencies).toContain('tsx');
+    expect(devDependencies).not.toContain('ts-node');
   });
 
   it('vite тянет браузерные devDependencies и пакеты адаптеров', async () => {

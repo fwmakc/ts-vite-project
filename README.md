@@ -67,7 +67,7 @@ yarn preview
 Стек консольного шаблона:
 
 - TypeScript (ES2022, module nodenext),
-- `dev` — запуск через ts-node без компиляции,
+- `dev` — запуск через tsx без компиляции,
 - `compile` — компиляция `tsc` в `dist/` (+ декларации `.d.ts`),
 - `minify` — сборка самодостаточного минифицированного бандла через esbuild (`dist/index.min.js`, platform=node, target=node18),
 - `start` — запуск скомпилированного `dist/index.js`,
