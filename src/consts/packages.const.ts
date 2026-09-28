@@ -7,6 +7,7 @@ export interface IPackagesLibraries {
 export const packages: IPackagesLibraries = {
   'ts console app': {
     template: 'ts',
+    main: 'dist/index.js',
     scripts: {
       dev: 'ts-node src/index.ts',
       build: '{runtime:run} lint && {runtime:run} test && {runtime:run} compile && {runtime:run} minify',
@@ -24,7 +25,7 @@ export const packages: IPackagesLibraries = {
     main: 'dist/index.js',
     types: 'dist/index.d.ts',
     scripts: {},
-    devDependencies: [],
+    devDependencies: ['@capacitor/filesystem', '@tauri-apps/api', '@tauri-apps/plugin-dialog', '@tauri-apps/plugin-fs'],
   },
 
   biome: {
@@ -56,6 +57,7 @@ export const packages: IPackagesLibraries = {
 
   tailwind: {
     template: 'tailwind',
+    bases: ['ts + vite app'],
     devDependencies: ['@tailwindcss/postcss', 'autoprefixer', 'postcss'],
   },
 
@@ -75,16 +77,19 @@ export const packages: IPackagesLibraries = {
 
   '- github': {
     template: 'semantic_github',
+    requires: ['semantic'],
     devDependencies: ['@semantic-release/github'],
   },
 
   '- gitlab': {
     template: 'semantic_gitlab',
+    requires: ['semantic'],
     devDependencies: ['@semantic-release/gitlab'],
   },
 
   electron: {
     template: 'electron',
+    bases: ['ts + vite app'],
     main: 'electron/main.ts',
     scripts: {
       'electron:compile': 'cross-env VITE_BUILD_TARGET=electron VITE_RUNTIME_PLATFORM=desktop {runtime:run} compile',
@@ -96,6 +101,8 @@ export const packages: IPackagesLibraries = {
 
   '- builder': {
     template: 'electron-builder',
+    bases: ['ts + vite app'],
+    requires: ['electron'],
     scripts: {
       'electron:build': '{runtime:run} electron:compile && electron-builder --config electron-builder.config.js',
     },
@@ -104,6 +111,8 @@ export const packages: IPackagesLibraries = {
 
   '- forge': {
     template: 'electron-forge',
+    bases: ['ts + vite app'],
+    requires: ['electron'],
     scripts: {
       'electron:make': '{runtime:run} electron:compile && electron-forge make',
     },
@@ -122,6 +131,7 @@ export const packages: IPackagesLibraries = {
 
   capacitor: {
     template: 'capacitor',
+    bases: ['ts + vite app'],
     scripts: {
       'capacitor:android': 'cap add android',
       'capacitor:ios': 'cap add ios',
@@ -147,6 +157,7 @@ export const packages: IPackagesLibraries = {
 
   tauri: {
     template: 'tauri',
+    bases: ['ts + vite app'],
     scripts: {
       'tauri:compile': 'cross-env VITE_BUILD_TARGET=tauri VITE_RUNTIME_PLATFORM=desktop {runtime:run} compile',
       'tauri:init': 'tauri init --force',

@@ -5,6 +5,8 @@ export interface ILibraries {
   template?: string;
   main?: string;
   types?: string;
+  bases?: string[];
+  requires?: string[];
   dependencies?: string[];
   devDependencies?: string[];
   scripts?: ILibrariesParams;

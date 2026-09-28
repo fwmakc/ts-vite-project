@@ -10,6 +10,7 @@ import { print } from './helpers/print.helper';
 import { updatePackage } from './helpers/update_package.helper';
 import { updatePort } from './helpers/update_port.helper';
 import { updateTauri } from './helpers/update_tauri.helper';
+import { appTypeSelect } from './select/app_type.select';
 import { gitSelect } from './select/git.select';
 import { librariesSelect } from './select/libraries.select';
 import { portSelect } from './select/port.select';
@@ -31,8 +32,9 @@ async function main(): Promise<void> {
 
   try {
     const values = await valuesSelect();
+    const appType = await appTypeSelect();
     const runtime = await runtimeSelect();
-    const libraries = await librariesSelect(runtime);
+    const libraries = await librariesSelect(runtime, appType);
     const port = await portSelect(libraries.libraries as string[]);
 
     const projectFolder = path.resolve(values.name);
