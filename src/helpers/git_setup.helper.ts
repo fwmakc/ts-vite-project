@@ -85,7 +85,7 @@ export async function gitSetup(projectFolder: string, url: string, author: IPack
     const match = symref.match(/ref:\s*refs\/heads\/(\S+)/);
 
     if (match) {
-      remoteBranch = match[1];
+      remoteBranch = match[1] ?? '';
     }
   } catch (_err) {
     print(['⚠️  Remote repository not found or not accessible.', `If it does not exist, create it first: ${url}`]);
