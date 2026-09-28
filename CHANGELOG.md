@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/fwmakc/ts-vite-project/compare/v1.2.0...v1.2.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* **console:** replace unmaintained ts-node with tsx ([68e1d7e](https://github.com/fwmakc/ts-vite-project/commit/68e1d7e901af319014d563a3bcc46f91e44ca47b))
+
 # [1.2.0](https://github.com/fwmakc/ts-vite-project/compare/v1.1.0...v1.2.0) (2026-09-28)
 
 
